@@ -1,5 +1,5 @@
+import ClientTestimonials from "@/components/ClientTestimonials";
 import ExperienceSection from "@/components/ExperienceSection";
-import FooterAndSpeakers from "@/components/FooterAndSpeakers";
 import HeroSection from "@/components/HeroSection";
 import HighlightedTrips from "@/components/HighlightedTrips";
 import InThePress from "@/components/InThePress";
@@ -15,7 +15,7 @@ export default function Index() {
             <HighlightedTrips />
             <WhoSection />
             <InThePress />
-            <FooterAndSpeakers />
+            <ClientTestimonials />
         </>
     );
 }

@@ -1,330 +1,110 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 
-if (
-    typeof document !== "undefined" &&
-    !document.head.querySelector('[href*="Tenor"]')
-) {
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href =
-        "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Tenor+Sans&display=swap";
-    document.head.appendChild(link);
-}
-
-interface Trip {
-    id: number;
-    imageSrc: string;
-    imageAlt: string;
-    dateRange: string;
-    title: string;
-    duration: string;
-}
-
-interface HighlightedTripsProps {
-    trips?: Trip[];
-}
-
-const DEFAULT_TRIPS: Trip[] = [
+const TRIPS = [
     {
         id: 1,
         imageSrc:
-            "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80",
-        imageAlt: "Himalayan hotel room with warm lighting",
-        dateRange: "April 8 – 25",
-        title: "Himalayan Stillness",
-        duration: "9 Nights / 10 Days",
+            "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&q=80",
+        title: "Golden Triangle & Bequest Rajasthan",
+        duration: "10 DAYS TOURS",
     },
     {
         id: 2,
         imageSrc:
-            "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=800&q=80",
-        imageAlt: "Ocean view suite with blue sofa",
-        dateRange: "Jun 8 – 25",
-        title: "Coastal Serenity",
-        duration: "6 Nights / 7 Days",
+            "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=400&q=80",
+        title: "The Temple Run",
+        duration: "17 DAYS TOURS",
     },
     {
         id: 3,
         imageSrc:
-            "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80",
-        imageAlt: "Luxury mountain villa bedroom",
-        dateRange: "4 Adults | 2 Children Below 7",
-        title: "Alpine Retreat",
-        duration: "6 Nights / 7 Days",
-    },
-    {
-        id: 4,
-        imageSrc:
-            "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&q=80",
-        imageAlt: "Desert resort at sunset",
-        dateRange: "Sep 10 – 20",
-        title: "Desert Wandering",
-        duration: "9 Nights / 10 Days",
-    },
-    {
-        id: 5,
-        imageSrc:
-            "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&q=80",
-        imageAlt: "Jungle villa with infinity pool",
-        dateRange: "Nov 1 – 12",
-        title: "Jungle Immersion",
-        duration: "10 Nights / 11 Days",
+            "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=400&q=80",
+        title: "The Hangover From The Past",
+        duration: "12 DAYS TOURS",
     },
 ];
 
-const ArrowLeft: React.FC = () => (
-    <svg viewBox="0 0 40 40" width="100%" height="100%" fill="currentColor">
-        <polygon points="30,4 10,20 30,36" />
-    </svg>
-);
-const ArrowRight: React.FC = () => (
-    <svg viewBox="0 0 40 40" width="100%" height="100%" fill="currentColor">
-        <polygon points="10,4 30,20 10,36" />
-    </svg>
-);
-
-const HighlightedTrips: React.FC<HighlightedTripsProps> = ({
-    trips = DEFAULT_TRIPS,
-}) => {
-    const [startIndex, setStartIndex] = useState<number>(0);
-    const VISIBLE = 3;
-
-    const canPrev = startIndex > 0;
-    const canNext = startIndex + VISIBLE < trips.length;
-
-    const handlePrev = (): void => {
-        if (canPrev) setStartIndex((i) => i - 1);
-    };
-    const handleNext = (): void => {
-        if (canNext) setStartIndex((i) => i + 1);
-    };
-
-    const visibleTrips = trips.slice(startIndex, startIndex + VISIBLE);
-
+const HighlightedTrips: React.FC = () => {
     return (
-        <>
-            <style>{`
-        .ht-section {
-          background-color: #e1d5cc; 
-          padding: clamp(1.5rem, 3vw, 2.5rem) 0;
-          overflow: hidden;
-        }
-        .ht-heading {
-        font-family: 'Cormorant Garamond', serif;
-        font-size: clamp(2.2rem, 5vw, 3.8rem);
-        color: #1a2e22;   
-        letter-spacing: -0.02em;   
-        font-weight: 800;
-        text-align: center;
-        line-height: 1.1;
-        margin: 0 0 clamp(1rem, 2.5vw, 1.8rem);
-        animation: ht-fadeUp 0.8s ease both;
-        }
+        <section className="bg-[#D3C5BB] py-8 md:py-16 px-4 md:px-20">
+            {/* Sarlavha - Mobile-da ham markazda va ixcham */}
+            <h2 className="text-4xl md:text-8xl text-[#1a2e22] text-center mb-8 md:mb-12 font-serif leading-tight">
+                Highlighted
+                <br />
+                Trips
+            </h2>
 
-        /* ── Slider wrapper ── */
-        .ht-slider-wrap {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 0;
-          padding: 0 clamp(0.5rem, 3vw, 2rem);
-          position: relative;
-        }
+            {/* Oq karta qismi */}
+            <div className="bg-[#FDF6E9] p-3 md:p-8 rounded-sm max-w-6xl mx-auto relative shadow-sm">
+                <p className="text-[#6F4E37] text-xs md:text-xl mb-4 md:mb-6 font-serif">
+                    Top Selling Tours
+                </p>
 
-        /* ── Arrow buttons ── */
-        .ht-arrow {
-          flex-shrink: 0;
-          width: clamp(44px, 6vw, 72px);
-          height: clamp(44px, 6vw, 72px);
-          color: #111111;
-          cursor: pointer;
-          background: none;
-          border: none;
-          padding: 0;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          transition: opacity 0.2s, transform 0.15s;
-          z-index: 2;
-        }
-        .ht-arrow:disabled {
-          opacity: 0.18;
-          cursor: default;
-        }
-        .ht-arrow:not(:disabled):hover {
-          transform: scale(1.1);
-        }
-
-        /* ── Cards grid ── */
-        .ht-cards {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: clamp(1rem, 2.5vw, 2rem);
-          flex: 1;
-          max-width: 1100px;
-        }
-
-        /* ── Individual card ── */
-        .ht-card {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          opacity: 0;
-          animation: ht-fadeUp 0.6s ease forwards;
-        }
-
-        /* ── Square image ── */
-        .ht-img-wrap {
-          width: 100%;
-          aspect-ratio: 1 / 1;
-          overflow: hidden;
-          border-radius: 4px;
-          box-shadow: 0 8px 32px rgba(0,0,0,0.12);
-          margin-bottom: 0.8rem;
-        }
-        .ht-img-wrap img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          display: block;
-          transition: transform 0.5s ease;
-        }
-        .ht-img-wrap:hover img {
-          transform: scale(1.05);
-        }
-
-        /* ── Card text ── */
-        .ht-date {
-          font-family: 'Inter', 'Tenor Sans', sans-serif;
-          font-size: clamp(0.6rem, 1.1vw, 0.7rem);
-          font-weight: 300;
-          letter-spacing: 0.2em;
-          text-transform: uppercase;
-          color: #5a5248;
-          text-align: center;
-          margin-bottom: 0.2rem;
-        }
-        .ht-title {
-          font-family: 'Cormorant Garamond', serif;
-          font-size: clamp(1.2rem, 2.4vw, 1.75rem);
-          font-weight: 600;
-          color: #1a2e22;
-          text-align: center;
-          line-height: 1.2;
-          margin-bottom: 0.3rem;
-        }
-        .ht-duration {
-          font-family: 'Cormorant Garamond', serif;
-          font-size: clamp(0.78rem, 1.4vw, 0.9rem);
-          font-weight: 400;
-          font-style: italic;
-          color: #5a5248;
-          text-align: center;
-        }
-
-        /* ── Dot indicators ── */
-        .ht-dots {
-          display: flex;
-          justify-content: center;
-          gap: 0.5rem;
-          margin-top: clamp(1rem, 2vw, 1.5rem);
-        }
-        .ht-dot {
-          width: 7px;
-          height: 7px;
-          border-radius: 50%;
-          background: #bbb4aa;
-          transition: background 0.25s, transform 0.25s;
-          cursor: pointer;
-          border: none;
-          padding: 0;
-        }
-        .ht-dot.active {
-          background: #1a2e22;
-          transform: scale(1.3);
-        }
-
-        /* ── Mobile ── */
-        @media (max-width: 640px) {
-          .ht-cards {
-            grid-template-columns: 1fr;
-            max-width: 320px;
-          }
-          .ht-arrow { width: 36px; height: 36px; }
-        }
-
-        /* ── Keyframes ── */
-        @keyframes ht-fadeUp {
-          from { opacity: 0; transform: translateY(18px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
-      `}</style>
-
-            <section className="ht-section">
-                <h2 className="ht-heading">Highlighted Trips</h2>
-
-                <div className="ht-slider-wrap">
-                    <button
-                        className="ht-arrow"
-                        onClick={handlePrev}
-                        disabled={!canPrev}
-                        aria-label="Previous trips"
-                        type="button"
-                    >
-                        <ArrowLeft />
+                {/* 3 ta karta har doim bir qatorda (Mobile-da ham) */}
+                <div className="grid grid-cols-3 gap-1 md:gap-4 relative">
+                    {/* Chap o'q */}
+                    <button className="absolute left-[-10px] md:left-[-20px] top-1/2 -translate-y-1/2 bg-[#8B6914] text-white w-5 h-5 md:w-8 md:h-8 rounded-full flex items-center justify-center z-10 opacity-70">
+                        <span className="text-[8px] md:text-xs">❮</span>
                     </button>
 
-                    <div className="ht-cards">
-                        {visibleTrips.map((trip, index) => (
-                            <div
-                                key={trip.id}
-                                className="ht-card"
-                                style={{ animationDelay: `${index * 0.1}s` }}
-                            >
-                                <div className="ht-img-wrap">
-                                    <img
-                                        src={trip.imageSrc}
-                                        alt={trip.imageAlt}
-                                        loading="lazy"
-                                    />
-                                </div>
-                                <p className="ht-date">{trip.dateRange}</p>
-                                <h3 className="ht-title">{trip.title}</h3>
-                                <p className="ht-duration">{trip.duration}</p>
-                            </div>
-                        ))}
-                    </div>
-
-                    <button
-                        className="ht-arrow"
-                        onClick={handleNext}
-                        disabled={!canNext}
-                        aria-label="Next trips"
-                        type="button"
-                    >
-                        <ArrowRight />
-                    </button>
-                </div>
-
-                <div className="ht-dots" role="tablist" aria-label="Trip pages">
-                    {Array.from({ length: trips.length - VISIBLE + 1 }).map(
-                        (_, i) => (
-                            <button
-                                key={i}
-                                className={`ht-dot${startIndex === i ? " active" : ""}`}
-                                onClick={() => setStartIndex(i)}
-                                aria-label={`Go to page ${i + 1}`}
-                                aria-selected={startIndex === i}
-                                role="tab"
-                                type="button"
+                    {TRIPS.map((trip) => (
+                        <div
+                            key={trip.id}
+                            className="relative aspect-[3/4] overflow-hidden rounded-sm"
+                        >
+                            <img
+                                src={trip.imageSrc}
+                                alt={trip.title}
+                                className="w-full h-full object-cover"
                             />
-                        ),
-                    )}
+                            <div className="absolute inset-0 bg-black/30 flex flex-col justify-end p-1 md:p-4 text-white">
+                                <h3 className="text-[6px] md:text-lg font-serif leading-tight mb-0.5 md:mb-1">
+                                    {trip.title}
+                                </h3>
+                                <p className="text-[5px] md:text-xs opacity-90 uppercase tracking-tighter md:tracking-widest">
+                                    {trip.duration}
+                                </p>
+                            </div>
+                        </div>
+                    ))}
+
+                    {/* O'ng o'q */}
+                    <button className="absolute right-[-10px] md:right-[-20px] top-1/2 -translate-y-1/2 bg-[#8B6914] text-white w-5 h-5 md:w-8 md:h-8 rounded-full flex items-center justify-center z-10 opacity-70">
+                        <span className="text-[8px] md:text-xs">❯</span>
+                    </button>
                 </div>
-            </section>
-        </>
+            </div>
+
+            {/* Pastki matnli qism - Mobile-da ham proporsional kichik */}
+            <div className="mt-10 md:mt-16 flex flex-col items-center space-y-8 md:space-y-12">
+                <div className="text-center">
+                    <h4 className="text-xl md:text-5xl text-[#1a2e22] font-serif">
+                        Himalayan Stillness
+                    </h4>
+                    <p className="text-[#6F4E37] italic text-sm md:text-2xl mt-1 md:mt-2 font-serif font-light text-center">
+                        9 Nights / 10 Days
+                    </p>
+                </div>
+                <div className="text-center">
+                    <h4 className="text-xl md:text-5xl text-[#1a2e22] font-serif">
+                        South India
+                    </h4>
+                    <p className="text-[#6F4E37] italic text-sm md:text-2xl mt-1 md:mt-2 font-serif font-light text-center">
+                        6 Nights / 7 Days
+                    </p>
+                </div>
+                <div className="text-center">
+                    <h4 className="text-xl md:text-5xl text-[#1a2e22] font-serif">
+                        Chardham on two wheels
+                    </h4>
+                    <p className="text-[#6F4E37] italic text-sm md:text-2xl mt-1 md:mt-2 font-serif font-light text-center">
+                        6 Nights / 7 Days
+                    </p>
+                </div>
+            </div>
+        </section>
     );
 };
 

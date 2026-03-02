@@ -1,52 +1,51 @@
 import React from "react";
 
-// ── Google Fonts injection (idempotent) ───────────────────────────────────────
-if (typeof document !== "undefined" && !document.head.querySelector('[href*="Playfair"]')) {
-  const link = document.createElement("link");
-  link.rel = "stylesheet";
-  link.href =
-    "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant+Garamond:wght@300;400;500&display=swap";
-  document.head.appendChild(link);
+if (
+    typeof document !== "undefined" &&
+    !document.head.querySelector('[href*="Playfair"]')
+) {
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href =
+        "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant+Garamond:wght@300;400;500&display=swap";
+    document.head.appendChild(link);
 }
 
-// ── Types ─────────────────────────────────────────────────────────────────────
 interface LuxuryItem {
-  id: number;
-  text: string;
+    id: number;
+    text: string;
 }
 
 interface PhilosophySectionProps {
-  /** Override the tagline quote if needed */
-  tagline?: string;
-  /** Override luxury list items */
-  luxuryItems?: LuxuryItem[];
-  /** Override footer text */
-  footerText?: string;
+    tagline?: string;
+    luxuryItems?: LuxuryItem[];
+    footerText?: string;
 }
 
-// ── Static data ───────────────────────────────────────────────────────────────
 const DEFAULT_TAGLINE =
-  "\u201cTravel that transforms \u2013 curated journeys for leaders, entrepreneurs, elite professionals & seniors seeking meaning.";
+    "\u201cTravel that transforms \u2013 curated journeys for leaders, entrepreneurs, elite professionals & seniors seeking meaning.";
 
 const DEFAULT_LUXURY_ITEMS: LuxuryItem[] = [
-  { id: 1, text: "TIME TO SLOW DOWN" },
-  { id: 2, text: "SPACE TO THINK CLEARLY" },
-  { id: 3, text: "ACCESS TO TRUSTED PRACTITIONERS" },
-  { id: 4, text: "ETHICAL PARTNERSHIPS" },
-  { id: 5, text: "EXPERIENCES THAT STAY WITH YOU LONG AFTER YOU RETURN HOME" },
+    { id: 1, text: "TIME TO SLOW DOWN" },
+    { id: 2, text: "SPACE TO THINK CLEARLY" },
+    { id: 3, text: "ACCESS TO TRUSTED PRACTITIONERS" },
+    { id: 4, text: "ETHICAL PARTNERSHIPS" },
+    {
+        id: 5,
+        text: "EXPERIENCES THAT STAY WITH YOU LONG AFTER YOU RETURN HOME",
+    },
 ];
 
 const DEFAULT_FOOTER = "WE DESIGN JOURNEYS THAT PROTECT THESE VALUES.";
 
-// ── Component ─────────────────────────────────────────────────────────────────
 const PhilosophySection: React.FC<PhilosophySectionProps> = ({
-  tagline = DEFAULT_TAGLINE,
-  luxuryItems = DEFAULT_LUXURY_ITEMS,
-  footerText = DEFAULT_FOOTER,
+    tagline = DEFAULT_TAGLINE,
+    luxuryItems = DEFAULT_LUXURY_ITEMS,
+    footerText = DEFAULT_FOOTER,
 }) => {
-  return (
-    <>
-      <style>{`
+    return (
+        <>
+            <style>{`
         /* ── Keyframes ── */
         @keyframes ps-fadeUp {
           from { opacity: 0; transform: translateY(24px); }
@@ -179,45 +178,75 @@ const PhilosophySection: React.FC<PhilosophySectionProps> = ({
         }
       `}</style>
 
-      {/* ── Tagline Band ── */}
-      <div className="ps-tagline-band">
-        <p className="ps-tagline">{tagline}</p>
-      </div>
+            {/* ── Tagline Band ── */}
+            <div className="ps-tagline-band">
+                <p className="ps-tagline">{tagline}</p>
+            </div>
 
-      {/* ── Philosophy Band ── */}
-      <div className="ps-philosophy-band">
+            <div className="ps-philosophy-band">
+                <div className="ps-section-header">
+                    <span className="ps-label-white">Our Philosophy</span>
+                    <span className="ps-label-gold">Luxury As Intention</span>
+                </div>
 
-        {/* Header row */}
-        <div className="ps-section-header">
-          <span className="ps-label-white">Our Philosophy</span>
-          <span className="ps-label-gold">Luxury As Intention</span>
-        </div>
+                <div className="ps-divider" />
 
-        {/* Divider */}
-        <div className="ps-divider" />
+                <p className="ps-list-intro">To us, luxury means:</p>
 
-        {/* List intro */}
-        <p className="ps-list-intro">To us, luxury means:</p>
+                <ul className="ps-luxury-list">
+                    {luxuryItems.map((item, index) => (
+                        <li
+                            key={item.id}
+                            className="ps-luxury-item"
+                            style={{
+                                animationDelay: `${0.45 + index * 0.1}s`,
+                                fontFamily: "'Cormorant Garamond', serif",
+                                fontSize: "clamp(0.9rem, 1.8vw, 1.35rem)",
+                                letterSpacing: "0.15em",
+                                textTransform: "uppercase",
+                                display: "flex",
+                                alignItems: "center",
+                                gap: "1.2rem",
+                                color: "#d6cfc4",
+                                marginBottom: "1rem",
+                            }}
+                        >
+                            <span
+                                className="ps-bullet"
+                                style={{
+                                    width: "6px",
+                                    height: "6px",
+                                    borderRadius: "50%",
+                                    backgroundColor: "#d6cfc4",
+                                    flexShrink: 0,
+                                }}
+                                aria-hidden="true"
+                            />
+                            {item.text}
+                        </li>
+                    ))}
+                </ul>
 
-        {/* Luxury items */}
-        <ul className="ps-luxury-list">
-          {luxuryItems.map((item, index) => (
-            <li
-              key={item.id}
-              className="ps-luxury-item"
-              style={{ animationDelay: `${0.45 + index * 0.1}s` }}
-            >
-              <span className="ps-bullet" aria-hidden="true" />
-              {item.text}
-            </li>
-          ))}
-        </ul>
-
-        {/* Footer text */}
-        <p className="ps-footer-text">{footerText}</p>
-      </div>
-    </>
-  );
+                <p
+                    className="ps-footer-text"
+                    style={{
+                        fontFamily: "'Cormorant Garamond', serif",
+                        fontSize: "clamp(1.1rem, 2.5vw, 1.8rem)",
+                        fontWeight: "400",
+                        letterSpacing: "0.2em",
+                        textTransform: "uppercase",
+                        color: "#b89a67",
+                        textAlign: "left",
+                        borderTop: "1px solid rgba(184, 154, 103, 0.3)",
+                        paddingTop: "2.5rem",
+                        marginTop: "2rem",
+                    }}
+                >
+                    {footerText}
+                </p>
+            </div>
+        </>
+    );
 };
 
 export default PhilosophySection;

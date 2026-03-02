@@ -112,7 +112,7 @@ const WhoSection: React.FC<WhoSectionProps> = ({
           font-family: 'Cormorant Garamond', serif;
           font-size: clamp(2rem, 4.5vw, 3.4rem);
           font-weight: 500;
-          color: #1A2E22;
+          color: #00634d;
           line-height: 1.18;
           margin: 0 0 clamp(1.5rem, 3vw, 2.5rem);
           animation: ws-fadeUp 0.8s ease both;
