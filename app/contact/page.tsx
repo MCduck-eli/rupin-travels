@@ -54,7 +54,7 @@ export default function ContactSection() {
 
                         {/* Email Address */}
                         <div className="flex flex-col md:flex-row md:items-start gap-2 md:gap-16">
-                            <h3 className="font-serif text-xl italic text-[#A08E85] underline min-w-[150px]">
+                            <h3 className="font-serif text-xl italic text-[#A08E85] underline min-w-37.5">
                                 Email Address
                             </h3>
                             <p className="text-[#2D2D2D] text-lg font-medium">
@@ -64,7 +64,7 @@ export default function ContactSection() {
 
                         {/* Phone Number */}
                         <div className="flex flex-col md:flex-row md:items-start gap-2 md:gap-16">
-                            <h3 className="font-serif text-xl italic text-[#A08E85] underline min-w-[150px]">
+                            <h3 className="font-serif text-xl italic text-[#A08E85] underline min-w-37.5">
                                 Phone Number
                             </h3>
                             <p className="text-[#2D2D2D] text-lg font-medium">
