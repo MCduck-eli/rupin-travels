@@ -1,16 +1,17 @@
 import dbConnect from "@/lib/mongo.db";
 import Trip from "@/models/trip";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
+// GET funksiyasi
 export async function GET(
-    request: Request,
-    { params }: { params: { id: string } },
+    request: NextRequest,
+    { params }: { params: Promise<{ id: string }> }, // Params endi Promise deb e'lon qilindi
 ) {
     try {
         await dbConnect();
 
-        const resolvedParams = await params;
-        const id = resolvedParams.id;
+        // 1. Paramsni await orqali kutib olamiz
+        const { id } = await params;
 
         if (!id) {
             return NextResponse.json(
@@ -39,13 +40,14 @@ export async function GET(
     }
 }
 
+// PUT funksiyasi
 export async function PUT(
-    request: Request,
-    { params }: { params: { id: string } },
+    request: NextRequest,
+    { params }: { params: Promise<{ id: string }> }, // Bu yerda ham Promise
 ) {
     try {
         await dbConnect();
-        const { id } = await params;
+        const { id } = await params; // To'g'ri await qilish
         const body = await request.json();
         const updatedTrip = await Trip.findByIdAndUpdate(id, body, {
             new: true,
@@ -60,12 +62,12 @@ export async function PUT(
 }
 
 export async function DELETE(
-    request: Request,
-    { params }: { params: { id: string } },
+    request: NextRequest,
+    { params }: { params: Promise<{ id: string }> },
 ) {
     try {
         await dbConnect();
-        const { id } = await params;
+        const { id } = await params; // To'g'ri await qilish
         await Trip.findByIdAndDelete(id);
         return NextResponse.json({ success: true, message: "O'chirildi" });
     } catch (error: any) {
