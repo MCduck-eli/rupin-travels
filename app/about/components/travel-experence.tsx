@@ -1,5 +1,6 @@
 "use client";
 
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 const maskReveal = {
@@ -34,7 +35,41 @@ const fadeScale = {
 };
 
 export default function TravelLandingPage() {
-    const lines = ["Welcome to your", "luxurious home", "away from home"];
+    // Dinamik state
+    const [data, setData] = useState({
+        title: "Welcome to your luxurious home away from home",
+        description:
+            "Write a paragraph that talks about your brand or property here...",
+        topImage:
+            "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80",
+        bottomImage:
+            "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80",
+    });
+
+    useEffect(() => {
+        // API'dan ma'lumotni olish
+        fetch("/api/about-settings")
+            .then((res) => res.json())
+            .then((resData) => {
+                if (resData && !resData.error) {
+                    setData({
+                        title: resData.title || data.title,
+                        description: resData.description || data.description,
+                        topImage: resData.topImage || data.topImage,
+                        bottomImage: resData.bottomImage || data.bottomImage,
+                    });
+                }
+            })
+            .catch((err) => console.error("Error loading about data:", err));
+    }, []);
+
+    // Sarlavhani qatorlarga bo'lish (animatsiya uchun)
+    const titleLines = data.title.split(/(?<=[.?!])\s+|(?<=\w)\s+(?=\w{10,})/);
+    // Yoki oddiyroq: title'ni qismlarga bo'lish
+    const lines =
+        data.title.length > 30
+            ? [data.title.substring(0, 20), data.title.substring(20)]
+            : [data.title];
 
     return (
         <section className="bg-[#F5F2ED] min-h-screen px-6 py-12 md:px-16 md:py-16 lg:px-24">
@@ -42,34 +77,29 @@ export default function TravelLandingPage() {
                 <div className="mb-12 grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-16">
                     <div className="flex flex-col gap-6">
                         <h1 className="font-serif text-4xl leading-[1.15] text-[#4A2C1A] md:text-5xl lg:text-[3rem]">
-                            {lines.map((line, i) => (
-                                <span key={i} className="block overflow-hidden">
-                                    <motion.span
-                                        className="block"
-                                        custom={i}
-                                        initial="hidden"
-                                        animate="visible"
-                                        // @ts-ignore
-                                        variants={maskReveal}
-                                    >
-                                        {line}
-                                    </motion.span>
-                                </span>
-                            ))}
+                            {/* Dinamik Title */}
+                            <span className="block overflow-hidden">
+                                <motion.span
+                                    className="block"
+                                    initial="hidden"
+                                    animate="visible"
+                                    // @ts-ignore
+                                    variants={maskReveal}
+                                    custom={0}
+                                >
+                                    {data.title}
+                                </motion.span>
+                            </span>
                         </h1>
                         <motion.p
                             initial="hidden"
                             animate="visible"
                             // @ts-ignore
                             variants={fadeUp}
-                            className="max-w-md text-sm leading-relaxed text-[#2D2D2D]/60 md:text-base"
+                            className="max-w-md text-sm leading-relaxed text-[#2D2D2D]/60 md:text-base whitespace-pre-line"
                         >
-                            Write a paragraph that talks about your brand or
-                            property here. Convince your prospective clients to
-                            choose you and your offerings by highlighting the
-                            qualities that set you apart from the competition.
-                            Your audience is already on your website, so push a
-                            little bit harder to seal the deal!
+                            {/* Dinamik Description */}
+                            {data.description}
                         </motion.p>
                     </div>
 
@@ -80,10 +110,11 @@ export default function TravelLandingPage() {
                         variants={fadeScale}
                         className="overflow-hidden flex justify-center"
                     >
+                        {/* Dinamik Top Image */}
                         <img
-                            src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80"
-                            alt="Luxury pool"
-                            className="w-full max-w-100 max-h-112.5 object-cover rounded-sm shadow-md"
+                            src={data.topImage}
+                            alt="Luxury about"
+                            className="w-full max-w-100 h-[300px] md:h-[450px] object-cover rounded-sm shadow-md"
                         />
                     </motion.div>
                 </div>
@@ -99,9 +130,9 @@ export default function TravelLandingPage() {
                     <div className="border border-[#4A2C1A]/20 p-2">
                         <div className="border border-[#4A2C1A]/10 p-1 overflow-hidden">
                             <img
-                                src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80"
-                                alt="Palm trees"
-                                className="w-full h-auto max-h-[400px] object-cover"
+                                src={data.bottomImage}
+                                alt="Scenic view"
+                                className="w-full h-auto max-h-125 object-cover"
                             />
                         </div>
                     </div>

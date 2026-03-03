@@ -92,16 +92,24 @@ const TripForm: React.FC<TripFormProps> = ({ initialData, onSubmit }) => {
                             className="border p-2 rounded-md text-[#004D3C] outline-[#004D3C]"
                         />
                     </div>
+
+                    {/* URL SLUG - FAQAT O'QISH UCHUN */}
                     <div className="flex flex-col gap-1">
-                        <label className="text-sm font-medium text-[#004D3C]">
+                        <label className="text-sm font-medium text-[#004D3C] flex justify-between">
                             URL Slug
+                            <span className="text-[10px] text-orange-600 font-normal italic">
+                                Permanent Identifier
+                            </span>
                         </label>
                         <input
-                            {...register("slug", { required: true })}
-                            className="border p-2 rounded-md text-[#004D3C] outline-[#004D3C]"
+                            {...register("slug")}
+                            readOnly
+                            className="border p-2 rounded-md bg-gray-50 text-gray-500 cursor-not-allowed outline-none border-gray-200"
+                            title="This field is permanent and cannot be changed."
                         />
                     </div>
                 </div>
+
                 <div className="flex flex-col gap-1">
                     <label className="text-sm font-medium text-[#004D3C]">
                         Hero Description (Short)
@@ -112,6 +120,7 @@ const TripForm: React.FC<TripFormProps> = ({ initialData, onSubmit }) => {
                         className="border p-2 rounded-md outline-[#004D3C] text-[#004D3C]"
                     />
                 </div>
+
                 <div className="flex flex-col gap-1">
                     <label className="text-sm font-medium text-[#004D3C]">
                         Main Section Description (Long)
@@ -184,12 +193,12 @@ const TripForm: React.FC<TripFormProps> = ({ initialData, onSubmit }) => {
                             <input
                                 {...register(`gallery.${index}.label` as const)}
                                 placeholder="Label (e.g. Day 1)"
-                                className="text-xs border p-2 rounded outline-[#004D3C]"
+                                className="text-xs text-black border p-2 rounded outline-[#004D3C]"
                             />
                             <input
                                 {...register(`gallery.${index}.title` as const)}
                                 placeholder="Title (e.g. Sunset)"
-                                className="text-xs border p-2 rounded font-semibold outline-[#004D3C]"
+                                className="text-xs border text-black p-2 rounded font-semibold outline-[#004D3C]"
                             />
                             <input
                                 type="hidden"

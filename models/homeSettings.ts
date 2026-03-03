@@ -1,41 +1,50 @@
-import mongoose, { Schema, Document, Model } from "mongoose";
+import mongoose, { Schema, Document } from "mongoose";
+
+export interface IHighlightedTrip {
+    title: string;
+    duration: string;
+    subtitle: string;
+    nights: string;
+    imageUrl: string;
+}
 
 export interface IHomeSettings extends Document {
+    heroVideoUrl: string;
     heroTitle: string;
     heroSubtitle: string;
-    heroVideo: string;
-
-    // Philosophy qismi uchun yangi maydonlar
-    philosophyTagline: string; // BU YERGA QOSHING
+    philosophyTagline: string;
     philosophyTitle: string;
     philosophyContent: string;
-
-    experienceTitle: string;
-    experienceContent: string;
-    experienceImage: string;
-
-    whoTitle: string;
-    whoContent: string;
-    whoImage: string;
-
-    footerQuote: string;
+    tripsSectionTitle: string;
+    tripsSectionSubtitle: string;
+    highlightedTrips: IHighlightedTrip[];
 }
 
 const HomeSettingsSchema: Schema = new Schema(
     {
-        heroTitle: { type: String, default: "Welcome to Our Journey" },
-        heroSubtitle: { type: String, default: "Experience the world" },
-        heroVideo: { type: String, default: "" },
-
+        heroVideoUrl: { type: String, default: "" },
+        heroTitle: { type: String, default: "Rupin Travels" },
+        heroSubtitle: {
+            type: String,
+            default: "Travel designed to change how you feel",
+        },
         philosophyTagline: { type: String, default: "" },
         philosophyTitle: { type: String, default: "" },
         philosophyContent: { type: String, default: "" },
+        tripsSectionTitle: { type: String, default: "Highlighted Trips" },
+        tripsSectionSubtitle: { type: String, default: "Top Selling Tours" },
+        highlightedTrips: [
+            {
+                title: { type: String, default: "" },
+                duration: { type: String, default: "" },
+                subtitle: { type: String, default: "" },
+                nights: { type: String, default: "" },
+                imageUrl: { type: String, default: "" },
+            },
+        ],
     },
     { timestamps: true },
 );
 
-const HomeSettings: Model<IHomeSettings> =
-    mongoose.models.HomeSettings ||
+export default mongoose.models.HomeSettings ||
     mongoose.model<IHomeSettings>("HomeSettings", HomeSettingsSchema);
-
-export default HomeSettings;

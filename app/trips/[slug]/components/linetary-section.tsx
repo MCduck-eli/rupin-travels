@@ -4,15 +4,33 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface DayItineraryProps {
-    itinerary: { title: string; content: string; image?: string }[];
+    itinerary?: { title: string; content: string; image?: string }[];
 }
+
+// DEFAULT MA'LUMOTLAR - Admin panel bo'sh bo'lsa bular chiqadi
+const DEFAULT_ITINERARY = [
+    {
+        title: "Ancient City Exploration",
+        content:
+            "Spend the day wandering through labyrinthine streets, visiting turquoise-domed madrasas and vibrant silk markets. Our expert guides will reveal the hidden stories behind the thousand-year-old walls.",
+        image: "https://images.unsplash.com/photo-1580191947416-62d35a55e71d?w=800&q=80",
+    },
+    {
+        title: "The Golden Journey Continues",
+        content:
+            "A scenic drive through changing landscapes leads us to our next destination. Along the way, we'll visit a local artisan's workshop to see the intricate process of traditional pottery and weaving.",
+        image: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800&q=80",
+    },
+];
 
 export default function DayItineraryComponent({
     itinerary,
 }: DayItineraryProps) {
     const [activeDay, setActiveDay] = useState(0);
 
-    if (!itinerary || itinerary.length === 0) return null;
+    // Agar prop bo'sh bo'lsa, DEFAULT_ITINERARY ishlatiladi
+    const displayItinerary =
+        itinerary && itinerary.length > 0 ? itinerary : DEFAULT_ITINERARY;
 
     return (
         <section className="bg-[#F5F2ED] py-12 px-6 md:px-16 lg:px-24 min-h-150 flex flex-col items-center">
@@ -23,8 +41,9 @@ export default function DayItineraryComponent({
                     </h2>
                 </div>
 
+                {/* Kunlarni tanlash tugmalari */}
                 <div className="flex flex-wrap justify-center gap-2 md:gap-3 mb-12">
-                    {itinerary.map((_, index) => (
+                    {displayItinerary.map((_, index) => (
                         <button
                             key={index}
                             onClick={() => setActiveDay(index)}
@@ -53,10 +72,10 @@ export default function DayItineraryComponent({
                                 <div className="border border-[#4A2C1A]/10 p-2 bg-white shadow-sm">
                                     <img
                                         src={
-                                            itinerary[activeDay].image ||
+                                            displayItinerary[activeDay].image ||
                                             "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&q=80"
                                         }
-                                        alt={itinerary[activeDay].title}
+                                        alt={displayItinerary[activeDay].title}
                                         className="w-full h-80 object-cover grayscale hover:grayscale-0 transition-all duration-700 ease-in-out"
                                     />
                                 </div>
@@ -67,10 +86,10 @@ export default function DayItineraryComponent({
                                     Daily Experience
                                 </span>
                                 <h3 className="font-serif text-3xl md:text-4xl text-[#2D2D2D] mb-6 leading-tight">
-                                    {itinerary[activeDay].title}
+                                    {displayItinerary[activeDay].title}
                                 </h3>
                                 <p className="text-[#2D2D2D]/60 text-sm md:text-base leading-relaxed max-w-md mx-auto md:mx-0 font-light">
-                                    {itinerary[activeDay].content}
+                                    {displayItinerary[activeDay].content}
                                 </p>
                                 <div className="mt-8 h-px w-24 bg-[#D4B94E] mx-auto md:mx-0" />
                             </div>

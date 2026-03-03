@@ -4,6 +4,11 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { Edit, Trash2, Plus, ExternalLink, PlaneTakeoff } from "lucide-react";
 import { ITrip } from "@/types/trip";
+import EditHomeButton from "../home/components/edit-home";
+import EditTestimonialsButton from "../home/components/edit-testimonials";
+import EditAboutButton from "../home/components/edit-about";
+// 1. Yangi Contact tugmasini import qilamiz
+import EditContactButton from "../home/components/edit-contact";
 
 export default function AdminTripsList() {
     const [trips, setTrips] = useState<ITrip[]>([]);
@@ -54,12 +59,22 @@ export default function AdminTripsList() {
                         Manage your boutique travel experiences
                     </p>
                 </div>
-                <Link
-                    href="/admin/trips/new"
-                    className="bg-[#004D3C] text-white px-6 py-3 rounded-xl flex items-center gap-2 hover:bg-[#003d30] transition-all shadow-lg"
-                >
-                    <Plus size={20} /> Create New Trip
-                </Link>
+
+                {/* Tugmalar qatori */}
+                <div className="flex items-center gap-3">
+                    <EditHomeButton />
+                    <EditTestimonialsButton />
+                    <EditAboutButton />
+                    {/* 2. Contact tugmasini shu yerga joylashtirdik */}
+                    <EditContactButton />
+
+                    <Link
+                        href="/admin/trips/new"
+                        className="bg-[#004D3C] text-white px-6 py-3 rounded-xl flex items-center gap-2 hover:bg-[#003d30] transition-all shadow-lg ml-2"
+                    >
+                        <Plus size={20} /> Create New Trip
+                    </Link>
+                </div>
             </div>
 
             <div className="grid grid-cols-1 gap-4">

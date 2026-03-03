@@ -52,7 +52,7 @@ const HomeForm = () => {
                 </h3>
                 <div className="space-y-2">
                     <label className="text-sm font-medium text-gray-700">
-                        Hero Video (Faqat video o'zgaradi)
+                        Hero Video (Only the video changes.)
                     </label>
                     <UploadDropzone
                         endpoint="imageUploader"
@@ -62,7 +62,7 @@ const HomeForm = () => {
                     />
                     {heroVideo && (
                         <p className="text-xs text-green-600">
-                            Video yuklangan: {heroVideo}
+                            Video uploaded: {heroVideo}
                         </p>
                     )}
                 </div>
@@ -182,7 +182,7 @@ const HomeForm = () => {
                             </label>
                             <input
                                 {...register("whoTitle")}
-                                className="border p-2 rounded-md outline-[#004D3C]"
+                                className="border text-black p-2 rounded-md outline-[#004D3C]"
                             />
                         </div>
                         <div className="flex flex-col gap-1">
@@ -204,7 +204,8 @@ const HomeForm = () => {
                     type="submit"
                     className="flex items-center gap-2 bg-[#004D3C] text-white px-10 py-3 rounded-lg font-medium hover:bg-[#003d30] shadow-lg transition-all"
                 >
-                    <Save size={20} /> Home Sahifasini Saqlash
+                    <Save size={20} />
+                    Save Home Page
                 </button>
             </div>
         </form>

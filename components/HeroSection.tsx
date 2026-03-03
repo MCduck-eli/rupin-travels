@@ -1,101 +1,124 @@
 "use client";
 
 import Link from "next/link";
-import React, { useRef } from "react";
-
-if (
-    typeof document !== "undefined" &&
-    !document.head.querySelector('[href*="Playfair"]')
-) {
-    const fontLink = document.createElement("link");
-    fontLink.rel = "stylesheet";
-    fontLink.href =
-        "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:wght@300;400&family=Bodoni+Moda:ital,wght@0,400;0,700;1,400&display=swap";
-    document.head.appendChild(fontLink);
-}
+import React, { useRef, useEffect, useState } from "react";
 
 interface HeroSectionProps {
     videoSrc?: string;
+    title?: string;
+    subtitle?: string;
     posterSrc?: string;
     onLearnMore?: () => void;
 }
 
 const HeroSection: React.FC<HeroSectionProps> = ({
-    videoSrc,
+    videoSrc: initialVideo,
+    title: initialTitle,
+    subtitle: initialSubtitle,
     posterSrc,
     onLearnMore,
 }) => {
     const videoRef = useRef<HTMLVideoElement>(null);
 
+    // Admin paneldan keladigan dinamik ma'lumotlar uchun state
+    const [dynamicData, setDynamicData] = useState({
+        title: initialTitle,
+        subtitle: initialSubtitle,
+        videoSrc: initialVideo,
+    });
+
+    // Har safar sahifa yuklanganda yoki yangilanganda bazadan oxirgi ma'lumotni oladi
+    useEffect(() => {
+        const loadSettings = async () => {
+            try {
+                const res = await fetch("/api/home-settings");
+                const data = await res.json();
+                if (data) {
+                    setDynamicData({
+                        title: data.heroTitle || initialTitle,
+                        subtitle: data.heroSubtitle || initialSubtitle,
+                        videoSrc: data.heroVideo || initialVideo,
+                    });
+                }
+            } catch (err) {
+                console.error("Hero settings loading error:", err);
+            }
+        };
+        loadSettings();
+    }, [initialTitle, initialSubtitle, initialVideo]);
+
     return (
         <>
             <style>{`
-        @keyframes fadeUp {
-          from { opacity: 0; transform: translateY(28px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes scaleIn {
-          from { opacity: 0; transform: scale(0.88); }
-          to   { opacity: 1; transform: scale(1); }
-        }
+                @keyframes fadeUp {
+                  from { opacity: 0; transform: translateY(28px); }
+                  to   { opacity: 1; transform: translateY(0); }
+                }
+                @keyframes scaleIn {
+                  from { opacity: 0; transform: scale(0.88); }
+                  to   { opacity: 1; transform: scale(1); }
+                }
 
-        .rp-title {
-          font-family: 'Playfair Display', serif;
-          font-size: clamp(3rem, 7vw, 5.5rem);
-          font-weight: 600;
-          color: #c9a84c;
-          line-height: 1.08;
-          text-shadow: 0 4px 15px rgba(0, 0, 0, 0.7); 
-          animation: fadeUp 1s ease both;
-          animation-delay: 0.2s;
-        }
+                .rp-title {
+                  font-family: 'Playfair Display', serif;
+                  font-size: clamp(2.5rem, 7vw, 5.5rem);
+                  font-weight: 600;
+                  color: #c9a84c;
+                  line-height: 1.08;
+                  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.7); 
+                  animation: fadeUp 1s ease both;
+                  animation-delay: 0.2s;
+                  text-align: center;
+                  word-break: break-word; /* Uzun matnlar sig'ishi uchun */
+                }
 
-        .rp-subtitle {
-          font-family: 'Bodoni Moda', serif;
-          font-style: italic;
-          font-size: clamp(1.15rem, 2.8vw, 1.7rem);
-          font-weight: 400;
-          color: #ffffff;
-          text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6); 
-          max-width: 680px;
-          line-height: 1.45;
-          animation: fadeUp 1s ease both;
-          animation-delay: 0.45s;
-        }
+                .rp-subtitle {
+                  font-family: 'Bodoni Moda', serif;
+                  font-style: italic;
+                  font-size: clamp(1rem, 2.5vw, 1.5rem);
+                  font-weight: 400;
+                  color: #ffffff;
+                  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6); 
+                  max-width: 800px;
+                  line-height: 1.45;
+                  animation: fadeUp 1s ease both;
+                  animation-delay: 0.45s;
+                  text-align: center;
+                }
 
-        .rp-btn {
-          font-family: 'Cormorant Garamond', serif;
-          font-size: 0.78rem;
-          letter-spacing: 0.22em;
-          text-transform: uppercase;
-          color: #ffffff;
-          background: transparent;
-          border: 1.5px solid rgba(255,255,255,0.75);
-          padding: 0.85rem 2.4rem;
-          border-radius: 3px;
-          cursor: pointer;
-          transition: background 0.25s, border-color 0.25s, color 0.25s;
-          animation: fadeUp 1s ease both;
-          animation-delay: 0.7s;
-          text-decoration: none;
-          display: inline-block;
-        }
-        .rp-btn:hover {
-          background: rgba(255,255,255,0.15);
-          border-color: #ffffff;
-        }
+                .rp-btn {
+                  font-family: 'Cormorant Garamond', serif;
+                  font-size: 0.78rem;
+                  letter-spacing: 0.22em;
+                  text-transform: uppercase;
+                  color: #ffffff;
+                  background: transparent;
+                  border: 1.5px solid rgba(255,255,255,0.75);
+                  padding: 0.85rem 2.4rem;
+                  border-radius: 3px;
+                  cursor: pointer;
+                  transition: background 0.25s, border-color 0.25s, color 0.25s;
+                  animation: fadeUp 1s ease both;
+                  animation-delay: 0.7s;
+                  text-decoration: none;
+                  display: inline-block;
+                }
+                .rp-btn:hover {
+                  background: rgba(255,255,255,0.15);
+                  border-color: #ffffff;
+                }
 
-        @media (max-width: 850px) {
-          .hero-container { min-height: 45vh !important; }
-        }
-      `}</style>
+                @media (max-width: 850px) {
+                  .hero-container { min-height: 50vh !important; }
+                }
+            `}</style>
 
             <section
                 className="hero-container"
                 style={{
                     position: "relative",
                     width: "100%",
-                    minHeight: "51vh",
+                    minHeight: "60vh",
                     overflow: "hidden",
                     display: "flex",
                     flexDirection: "column",
@@ -103,11 +126,11 @@ const HeroSection: React.FC<HeroSectionProps> = ({
                     justifyContent: "center",
                 }}
             >
-                {videoSrc ? (
+                {dynamicData.videoSrc ? (
                     <video
-                        key={videoSrc}
+                        key={dynamicData.videoSrc}
                         ref={videoRef}
-                        src={videoSrc}
+                        src={dynamicData.videoSrc}
                         poster={posterSrc}
                         autoPlay
                         muted
@@ -150,9 +173,10 @@ const HeroSection: React.FC<HeroSectionProps> = ({
                         display: "flex",
                         flexDirection: "column",
                         alignItems: "center",
-                        textAlign: "center",
                         padding: "2rem 1.5rem",
                         gap: "1.6rem",
+                        width: "100%",
+                        maxWidth: "1200px",
                     }}
                 >
                     <div style={{ animation: "scaleIn 0.8s ease both" }}>
@@ -169,16 +193,17 @@ const HeroSection: React.FC<HeroSectionProps> = ({
                             />
                         </svg>
                     </div>
-                    <h1 className="rp-title">Rupin Travels</h1>
-                    <p className="rp-subtitle">
-                        Travel designed to change how you feel
-                    </p>
+
+                    {/* Dinamik matnlar endi bu yerda */}
+                    <h1 className="rp-title">{dynamicData.title}</h1>
+                    <p className="rp-subtitle">{dynamicData.subtitle}</p>
+
                     <Link
                         href="#experiences"
                         className="rp-btn"
                         onClick={onLearnMore}
                     >
-                        Learn More
+                        LEARN MORE
                     </Link>
                 </div>
             </section>
