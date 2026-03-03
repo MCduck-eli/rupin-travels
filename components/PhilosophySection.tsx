@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 
 if (
@@ -11,239 +13,120 @@ if (
     document.head.appendChild(link);
 }
 
-interface LuxuryItem {
-    id: number;
-    text: string;
-}
-
 interface PhilosophySectionProps {
     tagline?: string;
-    luxuryItems?: LuxuryItem[];
-    footerText?: string;
+    title?: string;
+    content?: string;
 }
 
 const DEFAULT_TAGLINE =
     "\u201cTravel that transforms \u2013 curated journeys for leaders, entrepreneurs, elite professionals & seniors seeking meaning.";
 
-const DEFAULT_LUXURY_ITEMS: LuxuryItem[] = [
-    { id: 1, text: "TIME TO SLOW DOWN" },
-    { id: 2, text: "SPACE TO THINK CLEARLY" },
-    { id: 3, text: "ACCESS TO TRUSTED PRACTITIONERS" },
-    { id: 4, text: "ETHICAL PARTNERSHIPS" },
-    {
-        id: 5,
-        text: "EXPERIENCES THAT STAY WITH YOU LONG AFTER YOU RETURN HOME",
-    },
-];
-
-const DEFAULT_FOOTER = "WE DESIGN JOURNEYS THAT PROTECT THESE VALUES.";
-
 const PhilosophySection: React.FC<PhilosophySectionProps> = ({
-    tagline = DEFAULT_TAGLINE,
-    luxuryItems = DEFAULT_LUXURY_ITEMS,
-    footerText = DEFAULT_FOOTER,
+    tagline,
+    title,
+    content,
 }) => {
     return (
         <>
             <style>{`
-        /* ── Keyframes ── */
-        @keyframes ps-fadeUp {
-          from { opacity: 0; transform: translateY(24px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes ps-fadeIn {
-          from { opacity: 0; }
-          to   { opacity: 1; }
-        }
-        @keyframes ps-lineGrow {
-          from { width: 0; }
-          to   { width: 48px; }
-        }
-
-        /* ── Tagline band ── */
         .ps-tagline-band {
-          background: linear-gradient(175deg, #f7f4ef 0%, #eae5dc 60%, #6b5e4e 100%);
-          padding: clamp(3rem, 7vw, 5.5rem) clamp(1.5rem, 8vw, 8rem);
+          background-color: #F8F6F2;
+          padding: 4rem 1.5rem;
           text-align: center;
         }
         .ps-tagline {
           font-family: 'Playfair Display', serif;
-          font-size: clamp(1.5rem, 3.6vw, 2.85rem);
-          font-weight: 600;
+          font-size: clamp(1.4rem, 3vw, 2.2rem);
+          font-weight: 500;
           color: #1a1510;
-          line-height: 1.38;
-          max-width: 900px;
+          line-height: 1.3;
+          max-width: 850px;
           margin: 0 auto;
-          animation: ps-fadeUp 1s ease both;
         }
 
-        /* ── Philosophy band ── */
         .ps-philosophy-band {
           background-color: #3d3530;
-          padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 8vw, 7rem);
+          padding: 3.5rem 1.5rem;
         }
 
-        /* ── Section header ── */
-        .ps-section-header {
-          display: flex;
-          flex-wrap: wrap;
-          align-items: baseline;
-          gap: 0.55rem;
-          margin-bottom: 2.4rem;
-          animation: ps-fadeUp 0.9s ease both;
-          animation-delay: 0.15s;
+        .ps-container {
+          max-width: 800px;
+          margin: 0 auto;
         }
-        .ps-label-white {
-          font-family: 'Cormorant Garamond', serif;
-          font-size: clamp(0.7rem, 1.4vw, 0.82rem);
-          font-weight: 400;
-          letter-spacing: 0.26em;
-          text-transform: uppercase;
-          color: #c5bfb5;
+
+        .ps-section-header {
+          margin-bottom: 1.2rem;
         }
         .ps-label-gold {
           font-family: 'Cormorant Garamond', serif;
-          font-size: clamp(0.7rem, 1.4vw, 0.82rem);
-          font-weight: 500;
-          letter-spacing: 0.26em;
-          text-transform: uppercase;
-          color: #D4A843;
-        }
-
-        /* ── Divider ── */
-        .ps-divider {
-          height: 1px;
-          background: linear-gradient(to right, #D4A843 0%, transparent 80%);
-          margin-bottom: 2.4rem;
-          animation: ps-fadeIn 0.8s ease both;
-          animation-delay: 0.3s;
-        }
-
-        /* ── List intro ── */
-        .ps-list-intro {
-          font-family: 'Cormorant Garamond', serif;
-          font-size: clamp(0.68rem, 1.3vw, 0.78rem);
-          font-weight: 400;
+          font-size: 0.85rem;
           letter-spacing: 0.2em;
           text-transform: uppercase;
-          color: #b0a899;
-          margin-bottom: 1.1rem;
-          animation: ps-fadeUp 0.9s ease both;
-          animation-delay: 0.35s;
+          color: #D4A843;
+          display: block;
+          margin-bottom: 0.3rem;
+        }
+        .ps-title-white {
+          font-family: 'Playfair Display', serif;
+          font-size: 2rem;
+          color: #ffffff;
         }
 
-        /* ── List ── */
-        .ps-luxury-list {
-          list-style: none;
-          padding: 0;
-          margin: 0 0 3.5rem;
-          display: flex;
-          flex-direction: column;
-          gap: 0.72rem;
+        .ps-divider {
+          height: 1px;
+          background: rgba(212, 168, 67, 0.3);
+          margin: 1.5rem 0;
         }
+
         .ps-luxury-item {
-          display: flex;
-          align-items: center;
-          gap: 0.9rem;
           font-family: 'Cormorant Garamond', serif;
-          font-size: clamp(0.7rem, 1.4vw, 0.82rem);
-          font-weight: 400;
-          letter-spacing: 0.18em;
-          text-transform: uppercase;
+          font-size: 1.2rem;
           color: #d6cfc4;
-          opacity: 0;
-          animation: ps-fadeUp 0.7s ease forwards;
-        }
-        .ps-bullet {
-          width: 5px;
-          height: 5px;
-          border-radius: 50%;
-          background-color: #D4A843;
-          flex-shrink: 0;
+          line-height: 1.6;
+          white-space: pre-line;
         }
 
-        /* ── Footer text ── */
         .ps-footer-text {
           font-family: 'Cormorant Garamond', serif;
-          font-size: clamp(0.72rem, 1.5vw, 0.88rem);
-          font-weight: 500;
-          letter-spacing: 0.26em;
+          font-size: 1.1rem;
+          letter-spacing: 0.1em;
           text-transform: uppercase;
-          color: #D4A843;
-          text-align: center;
-          padding-top: 2.5rem;
-          border-top: 1px solid rgba(212,168,67,0.25);
-          animation: ps-fadeIn 1s ease both;
-          animation-delay: 0.9s;
+          color: #b89a67;
+          border-top: 1px solid rgba(184, 154, 103, 0.2);
+          padding-top: 1.5rem;
         }
       `}</style>
 
-            {/* ── Tagline Band ── */}
             <div className="ps-tagline-band">
-                <p className="ps-tagline">{tagline}</p>
+                <p className="ps-tagline">{tagline || DEFAULT_TAGLINE}</p>
             </div>
 
             <div className="ps-philosophy-band">
-                <div className="ps-section-header">
-                    <span className="ps-label-white">Our Philosophy</span>
-                    <span className="ps-label-gold">Luxury As Intention</span>
+                <div className="ps-container">
+                    <div className="ps-section-header">
+                        <span className="ps-label-gold">Our Philosophy</span>
+                        <h2 className="ps-title-white">
+                            {title || "Luxury As Intention"}
+                        </h2>
+                    </div>
+
+                    <div className="ps-divider" />
+
+                    <div className="ps-luxury-item">
+                        {content ||
+                            `To us, luxury means:
+                        • Time to slow down
+                        • Space to think clearly
+                        • Access to trusted practitioners
+                        • Ethical partnerships
+                        • Experiences that stay with you long after you return home`}
+                    </div>
+
+                    <p className="ps-footer-text">
+                        We design journeys that protect these values.
+                    </p>
                 </div>
-
-                <div className="ps-divider" />
-
-                <p className="ps-list-intro">To us, luxury means:</p>
-
-                <ul className="ps-luxury-list">
-                    {luxuryItems.map((item, index) => (
-                        <li
-                            key={item.id}
-                            className="ps-luxury-item"
-                            style={{
-                                animationDelay: `${0.45 + index * 0.1}s`,
-                                fontFamily: "'Cormorant Garamond', serif",
-                                fontSize: "clamp(0.9rem, 1.8vw, 1.35rem)",
-                                letterSpacing: "0.15em",
-                                textTransform: "uppercase",
-                                display: "flex",
-                                alignItems: "center",
-                                gap: "1.2rem",
-                                color: "#d6cfc4",
-                                marginBottom: "1rem",
-                            }}
-                        >
-                            <span
-                                className="ps-bullet"
-                                style={{
-                                    width: "6px",
-                                    height: "6px",
-                                    borderRadius: "50%",
-                                    backgroundColor: "#d6cfc4",
-                                    flexShrink: 0,
-                                }}
-                                aria-hidden="true"
-                            />
-                            {item.text}
-                        </li>
-                    ))}
-                </ul>
-
-                <p
-                    className="ps-footer-text"
-                    style={{
-                        fontFamily: "'Cormorant Garamond', serif",
-                        fontSize: "clamp(1.1rem, 2.5vw, 1.8rem)",
-                        fontWeight: "400",
-                        letterSpacing: "0.2em",
-                        textTransform: "uppercase",
-                        color: "#b89a67",
-                        textAlign: "left",
-                        borderTop: "1px solid rgba(184, 154, 103, 0.3)",
-                        paddingTop: "2.5rem",
-                        marginTop: "2rem",
-                    }}
-                >
-                    {footerText}
-                </p>
             </div>
         </>
     );

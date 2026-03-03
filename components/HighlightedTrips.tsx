@@ -1,107 +1,160 @@
 "use client";
 
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
+import useEmblaCarousel from "embla-carousel-react";
+import Autoplay from "embla-carousel-autoplay";
 
-const TRIPS = [
-    {
-        id: 1,
-        imageSrc:
-            "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&q=80",
-        title: "Golden Triangle & Bequest Rajasthan",
-        duration: "10 DAYS TOURS",
-    },
-    {
-        id: 2,
-        imageSrc:
-            "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=400&q=80",
-        title: "The Temple Run",
-        duration: "17 DAYS TOURS",
-    },
-    {
-        id: 3,
-        imageSrc:
-            "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=400&q=80",
-        title: "The Hangover From The Past",
-        duration: "12 DAYS TOURS",
-    },
-];
+interface Trip {
+    _id: string;
+    title: string;
+    duration: string;
+    subtitle: string;
+    nights: string;
+    images: string[];
+}
 
 const HighlightedTrips: React.FC = () => {
+    const [trips, setTrips] = useState<Trip[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchTrips = async () => {
+            try {
+                const res = await fetch("/api/trips");
+                const data = await res.json();
+
+                // API-dan kelayotgan ma'lumotni massiv ekanligini tekshirish
+                const fetchedTrips = Array.isArray(data)
+                    ? data
+                    : data?.trips || [];
+                setTrips(fetchedTrips);
+            } catch (err) {
+                console.error("Trips fetch error:", err);
+                setTrips([]);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchTrips();
+    }, []);
+
+    const [emblaRef, emblaApi] = useEmblaCarousel(
+        { loop: trips.length > 3, align: "start" },
+        [Autoplay({ delay: 4000, stopOnInteraction: false })],
+    );
+
+    const scrollPrev = useCallback(() => {
+        if (emblaApi) emblaApi.scrollPrev();
+    }, [emblaApi]);
+
+    const scrollNext = useCallback(() => {
+        if (emblaApi) emblaApi.scrollNext();
+    }, [emblaApi]);
+
+    // 1. Yuklanish jarayoni (Oq ekran bo'lmasligi uchun)
+    if (loading) {
+        return (
+            <div className="bg-[#efede7] py-20 text-center font-serif text-xl">
+                Loading journeys...
+            </div>
+        );
+    }
+
+    // 2. Agar bazada birorta ham Trip yo'q bo'lsa
+    if (trips.length === 0) {
+        return (
+            <div className="bg-[#efede7] py-20 text-center font-serif text-xl text-gray-600">
+                No trips available. Please add trips in the admin panel.
+            </div>
+        );
+    }
+
     return (
-        <section className="bg-[#D3C5BB] py-8 md:py-16 px-4 md:px-20">
-            {/* Sarlavha - Mobile-da ham markazda va ixcham */}
-            <h2 className="text-4xl md:text-8xl text-[#1a2e22] text-center mb-8 md:mb-12 font-serif leading-tight">
-                Highlighted
-                <br />
-                Trips
-            </h2>
+        <section className="bg-[#efede7] py-12 md:py-20 px-4">
+            <div className="max-w-7xl mx-auto">
+                <h2 className="text-5xl md:text-[100px] text-[#0D2B1D] text-center mb-10 md:mb-16 font-serif leading-[0.9] tracking-tight">
+                    Highlighted Trips
+                </h2>
 
-            {/* Oq karta qismi */}
-            <div className="bg-[#FDF6E9] p-3 md:p-8 rounded-sm max-w-6xl mx-auto relative shadow-sm">
-                <p className="text-[#6F4E37] text-xs md:text-xl mb-4 md:mb-6 font-serif">
-                    Top Selling Tours
-                </p>
+                <div className="bg-[#FAF7F2] p-4 md:p-12 rounded-sm relative shadow-sm">
+                    <h3 className="text-[#2D2D2D] text-2xl md:text-4xl mb-6 md:mb-10 font-serif font-light">
+                        Top Selling Tours
+                    </h3>
 
-                {/* 3 ta karta har doim bir qatorda (Mobile-da ham) */}
-                <div className="grid grid-cols-3 gap-1 md:gap-4 relative">
-                    {/* Chap o'q */}
-                    <button className="absolute left-[-10px] md:left-[-20px] top-1/2 -translate-y-1/2 bg-[#8B6914] text-white w-5 h-5 md:w-8 md:h-8 rounded-full flex items-center justify-center z-10 opacity-70">
-                        <span className="text-[8px] md:text-xs">❮</span>
-                    </button>
-
-                    {TRIPS.map((trip) => (
-                        <div
-                            key={trip.id}
-                            className="relative aspect-[3/4] overflow-hidden rounded-sm"
+                    <div className="relative group/arrows">
+                        {/* Navigatsiya tugmalari */}
+                        <button
+                            onClick={scrollPrev}
+                            className="absolute -left-3 md:-left-15 top-[40%] -translate-y-1/2 bg-[#B59461] text-white w-10 h-10 md:w-14 md:h-14 rounded-full flex items-center justify-center z-20 hover:bg-[#967a4f] transition-all shadow-lg active:scale-90"
                         >
-                            <img
-                                src={trip.imageSrc}
-                                alt={trip.title}
-                                className="w-full h-full object-cover"
-                            />
-                            <div className="absolute inset-0 bg-black/30 flex flex-col justify-end p-1 md:p-4 text-white">
-                                <h3 className="text-[6px] md:text-lg font-serif leading-tight mb-0.5 md:mb-1">
-                                    {trip.title}
-                                </h3>
-                                <p className="text-[5px] md:text-xs opacity-90 uppercase tracking-tighter md:tracking-widest">
-                                    {trip.duration}
-                                </p>
+                            <span>❮</span>
+                        </button>
+
+                        <button
+                            onClick={scrollNext}
+                            className="absolute -right-3 md:-right-15 top-[40%] -translate-y-1/2 bg-[#B59461] text-white w-10 h-10 md:w-14 md:h-14 rounded-full flex items-center justify-center z-20 hover:bg-[#967a4f] transition-all shadow-lg active:scale-90"
+                        >
+                            <span>❯</span>
+                        </button>
+
+                        <div
+                            className="overflow-hidden cursor-grab active:cursor-grabbing px-2"
+                            ref={emblaRef}
+                        >
+                            <div className="flex -ml-4">
+                                {trips.map((trip) => (
+                                    <div
+                                        key={trip._id}
+                                        className="flex-[0_0_100%] min-w-0 md:flex-[0_0_33.33%] pl-4 group"
+                                    >
+                                        <div className="relative aspect-10/13 overflow-hidden rounded-3xl mb-6 shadow-md transition-all duration-500 group-hover:shadow-xl">
+                                            <img
+                                                src={
+                                                    trip.images?.[0] ||
+                                                    "/placeholder-trip.jpg"
+                                                }
+                                                alt={trip.title}
+                                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                            />
+
+                                            <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-6 text-white">
+                                                <h4 className="text-xl md:text-2xl font-serif leading-tight mb-2 transform transition-transform duration-500 group-hover:-translate-y-1">
+                                                    {trip.title}
+                                                </h4>
+                                                <p className="text-xs md:text-sm font-sans tracking-[0.2em] opacity-80 uppercase font-bold">
+                                                    {trip.duration}
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div className="text-center hidden md:block">
+                                            <h5 className="text-[#0D2B1D] text-2xl lg:text-3xl font-serif mb-1">
+                                                {trip.subtitle}
+                                            </h5>
+                                            <p className="text-[#6F4E37] italic text-lg font-serif opacity-80">
+                                                {trip.nights}
+                                            </p>
+                                        </div>
+                                    </div>
+                                ))}
                             </div>
                         </div>
+                    </div>
+                </div>
+
+                <div className="mt-16 space-y-12 md:hidden">
+                    <div className="h-px bg-[#0D2B1D]/10 w-full mb-8" />
+                    {trips.map((trip) => (
+                        <div key={`mobile-${trip._id}`} className="text-center">
+                            <h4 className="text-3xl text-[#0D2B1D] font-serif mb-2 uppercase tracking-tight">
+                                {trip.subtitle}
+                            </h4>
+                            <p className="text-[#6F4E37] italic text-xl font-serif">
+                                {trip.nights}
+                            </p>
+                        </div>
                     ))}
-
-                    {/* O'ng o'q */}
-                    <button className="absolute right-[-10px] md:right-[-20px] top-1/2 -translate-y-1/2 bg-[#8B6914] text-white w-5 h-5 md:w-8 md:h-8 rounded-full flex items-center justify-center z-10 opacity-70">
-                        <span className="text-[8px] md:text-xs">❯</span>
-                    </button>
-                </div>
-            </div>
-
-            {/* Pastki matnli qism - Mobile-da ham proporsional kichik */}
-            <div className="mt-10 md:mt-16 flex flex-col items-center space-y-8 md:space-y-12">
-                <div className="text-center">
-                    <h4 className="text-xl md:text-5xl text-[#1a2e22] font-serif">
-                        Himalayan Stillness
-                    </h4>
-                    <p className="text-[#6F4E37] italic text-sm md:text-2xl mt-1 md:mt-2 font-serif font-light text-center">
-                        9 Nights / 10 Days
-                    </p>
-                </div>
-                <div className="text-center">
-                    <h4 className="text-xl md:text-5xl text-[#1a2e22] font-serif">
-                        South India
-                    </h4>
-                    <p className="text-[#6F4E37] italic text-sm md:text-2xl mt-1 md:mt-2 font-serif font-light text-center">
-                        6 Nights / 7 Days
-                    </p>
-                </div>
-                <div className="text-center">
-                    <h4 className="text-xl md:text-5xl text-[#1a2e22] font-serif">
-                        Chardham on two wheels
-                    </h4>
-                    <p className="text-[#6F4E37] italic text-sm md:text-2xl mt-1 md:mt-2 font-serif font-light text-center">
-                        6 Nights / 7 Days
-                    </p>
                 </div>
             </div>
         </section>

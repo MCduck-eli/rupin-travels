@@ -86,7 +86,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
         }
 
         @media (max-width: 850px) {
-          .hero-container { min-height: 55vh !important; }
+          .hero-container { min-height: 45vh !important; }
         }
       `}</style>
 
@@ -95,7 +95,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
                 style={{
                     position: "relative",
                     width: "100%",
-                    minHeight: "85vh",
+                    minHeight: "51vh",
                     overflow: "hidden",
                     display: "flex",
                     flexDirection: "column",
@@ -105,6 +105,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
             >
                 {videoSrc ? (
                     <video
+                        key={videoSrc}
                         ref={videoRef}
                         src={videoSrc}
                         poster={posterSrc}
