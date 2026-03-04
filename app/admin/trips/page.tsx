@@ -7,7 +7,6 @@ import { ITrip } from "@/types/trip";
 import EditHomeButton from "../home/components/edit-home";
 import EditTestimonialsButton from "../home/components/edit-testimonials";
 import EditAboutButton from "../home/components/edit-about";
-// 1. Yangi Contact tugmasini import qilamiz
 import EditContactButton from "../home/components/edit-contact";
 
 export default function AdminTripsList() {
@@ -22,7 +21,7 @@ export default function AdminTripsList() {
                 setTrips(data.data);
             }
         } catch (error) {
-            console.error("Xatolik:", error);
+            console.error("Error:", error);
         } finally {
             setLoading(false);
         }
@@ -33,7 +32,7 @@ export default function AdminTripsList() {
     }, []);
 
     const handleDelete = async (id: string) => {
-        if (confirm("Haqiqatdan ham ushbu safarni o'chirmoqchimisiz?")) {
+        if (confirm("Do you really want to delete this trip??")) {
             const res = await fetch(`/api/trips/${id}`, { method: "DELETE" });
             if (res.ok) {
                 setTrips(trips.filter((t) => t._id !== id));
@@ -65,7 +64,6 @@ export default function AdminTripsList() {
                     <EditHomeButton />
                     <EditTestimonialsButton />
                     <EditAboutButton />
-                    {/* 2. Contact tugmasini shu yerga joylashtirdik */}
                     <EditContactButton />
 
                     <Link

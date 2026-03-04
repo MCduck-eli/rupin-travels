@@ -20,7 +20,7 @@ export default function LoginPage() {
         if (res?.ok) {
             router.push("/admin/trips");
         } else {
-            alert("Xato ma'lumot!");
+            alert("Error information!");
         }
     };
 
