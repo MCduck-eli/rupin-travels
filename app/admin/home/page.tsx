@@ -9,7 +9,6 @@ import {
     Loader2,
     Type,
     Map,
-    Image as ImageIcon,
     Plus,
     Trash2,
 } from "lucide-react";
@@ -32,80 +31,88 @@ export default function AdminHomeSettings() {
     const [saving, setSaving] = useState(false);
 
     useEffect(() => {
-        const fetchSettings = async () => {
+        const fetchData = async () => {
             try {
-                const res = await fetch("/api/home-settings");
-                const data = await res.json();
-                if (data && !data.error) {
+                const settingsRes = await fetch("/api/home-settings");
+                const settingsData = await settingsRes.json();
+
+                const tripsRes = await fetch("/api/trips");
+                const tripsData = await tripsRes.json();
+
+                if (tripsData.success) {
+                    const mergedTrips = tripsData.data.map((trip: any) => {
+                        const existing = settingsData?.highlightedTrips?.find(
+                            (t: any) => t.slug === trip.slug,
+                        );
+
+                        // SLUGni tozalash: oxiridagi ortiqcha chiziqchalarni olib tashlaymiz
+                        const cleanSlug = trip.slug.replace(/-+$/, "");
+
+                        return {
+                            slug: cleanSlug,
+                            title: existing?.title || trip.title,
+                            duration:
+                                existing?.duration || trip.duration || "7 DAYS",
+                            subtitle:
+                                existing?.subtitle ||
+                                trip.fullTitle ||
+                                trip.title,
+                            nights:
+                                existing?.nights ||
+                                `From $${trip.price || 0} per person`,
+                            imageUrl: existing?.imageUrl || trip.image || "",
+                        };
+                    });
+
                     setSettings({
-                        heroVideoUrl: data.heroVideoUrl || "",
-                        heroTitle: data.heroTitle || "",
-                        heroSubtitle: data.heroSubtitle || "",
-                        philosophyTagline: data.philosophyTagline || "",
-                        philosophyTitle: data.philosophyTitle || "",
-                        philosophyContent: data.philosophyContent || "",
-                        tripsSectionTitle: data.tripsSectionTitle || "",
-                        tripsSectionSubtitle: data.tripsSectionSubtitle || "",
-                        highlightedTrips: data.highlightedTrips || [],
+                        ...settingsData,
+                        highlightedTrips: mergedTrips,
                     });
                 }
             } catch (err) {
-                console.error("Yuklashda xatolik:", err);
+                console.error("Fetch error:", err);
             } finally {
                 setLoading(false);
             }
         };
-        fetchSettings();
+        fetchData();
     }, []);
 
     const handleSave = async () => {
         setSaving(true);
+
+        const settingsToSave = {
+            ...settings,
+            highlightedTrips: settings.highlightedTrips.map((trip) => ({
+                ...trip,
+
+                slug: trip.slug,
+            })),
+        };
+
         try {
             const res = await fetch("/api/home-settings", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(settings),
+                body: JSON.stringify(settingsToSave),
             });
+
             if (res.ok) {
                 alert("Home settings saved successfully! ✨");
             } else {
-                const errorData = await res.json();
-                alert(`Xatolik: ${errorData.error || "Saqlab bo'lmadi"}`);
+                alert("Serverda xatolik yuz berdi.");
             }
         } catch (err) {
-            console.error(err);
-            alert("Server bilan bog'lanishda xatolik yuz berdi.");
+            console.error("Save error:", err);
+            alert("Error saving settings.");
         } finally {
             setSaving(false);
         }
     };
 
-    // Card boshqaruv funksiyalari (o'zgarmasdan qoldi)
-    const addTripCard = () => {
-        setSettings({
-            ...settings,
-            highlightedTrips: [
-                ...settings.highlightedTrips,
-                {
-                    title: "",
-                    duration: "",
-                    subtitle: "",
-                    nights: "",
-                    imageUrl: "",
-                },
-            ],
-        });
-    };
-    const removeTripCard = (index: number) => {
-        setSettings({
-            ...settings,
-            highlightedTrips: settings.highlightedTrips.filter(
-                (_, i) => i !== index,
-            ),
-        });
-    };
     const updateTripCard = (index: number, field: string, value: string) => {
         const newTrips = [...settings.highlightedTrips];
+        // Bu yerda slug o'zgarmasdan qoladi, faqat field yangilanadi
         newTrips[index] = { ...newTrips[index], [field]: value };
         setSettings({ ...settings, highlightedTrips: newTrips });
     };
@@ -130,14 +137,14 @@ export default function AdminHomeSettings() {
                     <button
                         onClick={handleSave}
                         disabled={saving}
-                        className="bg-[#004D3C] text-white px-8 py-3 rounded-xl flex items-center gap-2 hover:bg-[#003d30] transition-all shadow-lg disabled:opacity-50"
+                        className="bg-[#004D3C] text-white px-8 py-3 rounded-xl flex items-center gap-2 hover:bg-[#003d30] shadow-lg disabled:opacity-50"
                     >
                         {saving ? (
                             <Loader2 className="animate-spin" size={20} />
                         ) : (
                             <Save size={20} />
                         )}
-                        {saving ? "Saving..." : "Save All Changes"}
+                        Save All Changes
                     </button>
                 </div>
 
@@ -147,50 +154,38 @@ export default function AdminHomeSettings() {
                     </h1>
 
                     <div className="space-y-10">
-                        {/* HERO SECTION - MANA SHU YERGA INPUTLAR QO'SHILDI */}
+                        {/* HERO SECTION */}
                         <section className="p-6 bg-gray-50 rounded-2xl border border-dashed border-gray-200 space-y-6">
                             <h2 className="text-sm font-bold uppercase tracking-widest text-gray-400 flex items-center gap-2">
                                 <Video size={16} /> Hero Section (Video & Text)
                             </h2>
-
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div className="space-y-2">
-                                    <label className="text-xs font-bold text-gray-500">
-                                        Hero Main Title
-                                    </label>
-                                    <input
-                                        type="text"
-                                        placeholder="Welcome to Our Journey"
-                                        className="w-full p-4 bg-white border border-gray-200 rounded-xl outline-none focus:ring-2 focus:ring-[#004D3C]"
-                                        value={settings.heroTitle}
-                                        onChange={(e) =>
-                                            setSettings({
-                                                ...settings,
-                                                heroTitle: e.target.value,
-                                            })
-                                        }
-                                    />
-                                </div>
-                                <div className="space-y-2">
-                                    <label className="text-xs font-bold text-gray-500">
-                                        Hero Subtitle
-                                    </label>
-                                    <input
-                                        type="text"
-                                        placeholder="Travel designed to change how you feel"
-                                        className="w-full p-4 bg-white border border-gray-200 rounded-xl outline-none focus:ring-2 focus:ring-[#004D3C]"
-                                        value={settings.heroSubtitle}
-                                        onChange={(e) =>
-                                            setSettings({
-                                                ...settings,
-                                                heroSubtitle: e.target.value,
-                                            })
-                                        }
-                                    />
-                                </div>
+                                <input
+                                    type="text"
+                                    placeholder="Hero Title"
+                                    className="w-full p-4 border rounded-xl"
+                                    value={settings.heroTitle}
+                                    onChange={(e) =>
+                                        setSettings({
+                                            ...settings,
+                                            heroTitle: e.target.value,
+                                        })
+                                    }
+                                />
+                                <input
+                                    type="text"
+                                    placeholder="Hero Subtitle"
+                                    className="w-full p-4 border rounded-xl"
+                                    value={settings.heroSubtitle}
+                                    onChange={(e) =>
+                                        setSettings({
+                                            ...settings,
+                                            heroSubtitle: e.target.value,
+                                        })
+                                    }
+                                />
                             </div>
-
-                            <div className="flex flex-col items-center gap-6 pt-4 border-t border-gray-200">
+                            <div className="flex flex-col items-center gap-6 pt-4 border-t">
                                 {settings.heroVideoUrl && (
                                     <div className="w-full aspect-video rounded-2xl overflow-hidden bg-black">
                                         <video
@@ -203,16 +198,13 @@ export default function AdminHomeSettings() {
                                 )}
                                 <UploadButton
                                     endpoint="imageUploader"
-                                    onClientUploadComplete={(res) => {
-                                        if (res?.[0]) {
-                                            setSettings((prev) => ({
-                                                ...prev,
-                                                heroVideoUrl:
-                                                    res[0].ufsUrl || res[0].url,
-                                            }));
-                                            alert("Video uploaded!");
-                                        }
-                                    }}
+                                    onClientUploadComplete={(res) =>
+                                        setSettings({
+                                            ...settings,
+                                            heroVideoUrl:
+                                                res[0].ufsUrl || res[0].url,
+                                        })
+                                    }
                                     appearance={{
                                         button: "bg-[#004D3C] rounded-xl px-6 py-2",
                                     }}
@@ -222,23 +214,15 @@ export default function AdminHomeSettings() {
 
                         {/* HIGHLIGHTED TRIPS SECTION */}
                         <section className="space-y-6">
-                            <div className="flex justify-between items-center border-b pb-2">
-                                <h2 className="text-sm font-bold uppercase tracking-widest text-gray-400 flex items-center gap-2">
-                                    <Map size={16} /> Highlighted Trips
-                                </h2>
-                                <button
-                                    onClick={addTripCard}
-                                    className="flex items-center gap-1 bg-[#B59461] text-white px-4 py-2 rounded-lg text-sm hover:bg-[#967a4f]"
-                                >
-                                    <Plus size={16} /> Add Card
-                                </button>
-                            </div>
-                            {/* ... Carousel inputlari o'zgarmasdan qoladi ... */}
+                            <h2 className="text-sm font-bold uppercase tracking-widest text-gray-400 flex items-center gap-2">
+                                <Map size={16} /> Carousel Trips (From Trips
+                                List)
+                            </h2>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <input
                                     type="text"
-                                    placeholder="Section Big Title"
-                                    className="w-full p-4 bg-gray-50 border rounded-2xl outline-none focus:ring-2 focus:ring-[#004D3C]"
+                                    placeholder="Section Title"
+                                    className="w-full p-4 bg-gray-50 border rounded-2xl"
                                     value={settings.tripsSectionTitle}
                                     onChange={(e) =>
                                         setSettings({
@@ -250,7 +234,7 @@ export default function AdminHomeSettings() {
                                 <input
                                     type="text"
                                     placeholder="Small Subtitle"
-                                    className="w-full p-4 bg-gray-50 border rounded-2xl outline-none focus:ring-2 focus:ring-[#004D3C]"
+                                    className="w-full p-4 bg-gray-50 border rounded-2xl"
                                     value={settings.tripsSectionSubtitle}
                                     onChange={(e) =>
                                         setSettings({
@@ -261,35 +245,98 @@ export default function AdminHomeSettings() {
                                     }
                                 />
                             </div>
-                            {/* Trip Card'lar ro'yxati (siz yuborgan kod bo'yicha) */}
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                            <div className="grid grid-cols-1 gap-6">
                                 {settings.highlightedTrips.map(
                                     (trip, index) => (
                                         <div
-                                            key={index}
-                                            className="p-6 bg-gray-50 rounded-2xl border relative space-y-4 shadow-sm"
+                                            key={trip.slug}
+                                            className="p-6 bg-gray-50 rounded-2xl border flex flex-col md:flex-row gap-6"
                                         >
-                                            <button
-                                                onClick={() =>
-                                                    removeTripCard(index)
-                                                }
-                                                className="absolute top-4 right-4 text-red-400 hover:text-red-600"
-                                            >
-                                                <Trash2 size={18} />
-                                            </button>
-                                            <input
-                                                placeholder="Trip Title"
-                                                className="w-full p-2 border rounded-lg text-sm"
-                                                value={trip.title}
-                                                onChange={(e) =>
-                                                    updateTripCard(
-                                                        index,
-                                                        "title",
-                                                        e.target.value,
-                                                    )
-                                                }
-                                            />
-                                            {/* Boshqa inputlaringiz... */}
+                                            <div className="w-full md:w-1/3 space-y-3">
+                                                <div className="aspect-video rounded-xl overflow-hidden border">
+                                                    <img
+                                                        src={trip.imageUrl}
+                                                        className="w-full h-full object-cover"
+                                                        alt={trip.title}
+                                                    />
+                                                </div>
+                                                <UploadButton
+                                                    endpoint="imageUploader"
+                                                    onClientUploadComplete={(
+                                                        res,
+                                                    ) =>
+                                                        updateTripCard(
+                                                            index,
+                                                            "imageUrl",
+                                                            res[0].ufsUrl ||
+                                                                res[0].url,
+                                                        )
+                                                    }
+                                                    appearance={{
+                                                        button: "bg-[#004D3C] text-white px-4 py-2 rounded-lg text-sm hover:bg-[#003d30] transition-all shadow-sm w-full md:w-auto mt-2",
+                                                        allowedContent:
+                                                            "text-gray-400 text-[10px] uppercase font-medium mt-1",
+                                                    }}
+                                                    content={{
+                                                        button: "Change Photo",
+                                                    }}
+                                                />
+                                            </div>
+                                            <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-3">
+                                                <input
+                                                    placeholder="Title on Card"
+                                                    className="p-2 border rounded-lg text-sm"
+                                                    value={trip.title}
+                                                    onChange={(e) =>
+                                                        updateTripCard(
+                                                            index,
+                                                            "title",
+                                                            e.target.value,
+                                                        )
+                                                    }
+                                                />
+                                                <input
+                                                    placeholder="Duration"
+                                                    className="p-2 border rounded-lg text-sm"
+                                                    value={trip.duration}
+                                                    onChange={(e) =>
+                                                        updateTripCard(
+                                                            index,
+                                                            "duration",
+                                                            e.target.value,
+                                                        )
+                                                    }
+                                                />
+                                                <input
+                                                    placeholder="Card Subtitle"
+                                                    className="p-2 border rounded-lg text-sm"
+                                                    value={trip.subtitle}
+                                                    onChange={(e) =>
+                                                        updateTripCard(
+                                                            index,
+                                                            "subtitle",
+                                                            e.target.value,
+                                                        )
+                                                    }
+                                                />
+                                                <input
+                                                    placeholder="Price Text"
+                                                    className="p-2 border rounded-lg text-sm"
+                                                    value={trip.nights}
+                                                    onChange={(e) =>
+                                                        updateTripCard(
+                                                            index,
+                                                            "nights",
+                                                            e.target.value,
+                                                        )
+                                                    }
+                                                />
+                                                <div className="md:col-span-2 text-xs text-gray-400">
+                                                    Linked to: /trips/
+                                                    {trip.slug}
+                                                </div>
+                                            </div>
                                         </div>
                                     ),
                                 )}
@@ -305,7 +352,7 @@ export default function AdminHomeSettings() {
                                 <input
                                     type="text"
                                     placeholder="Tagline"
-                                    className="w-full p-4 bg-gray-50 border rounded-2xl outline-none focus:ring-2 focus:ring-[#004D3C]"
+                                    className="w-full p-4 bg-gray-50 border rounded-2xl"
                                     value={settings.philosophyTagline}
                                     onChange={(e) =>
                                         setSettings({
@@ -317,7 +364,7 @@ export default function AdminHomeSettings() {
                                 <input
                                     type="text"
                                     placeholder="Title"
-                                    className="w-full p-4 bg-gray-50 border rounded-2xl outline-none focus:ring-2 focus:ring-[#004D3C]"
+                                    className="w-full p-4 bg-gray-50 border rounded-2xl"
                                     value={settings.philosophyTitle}
                                     onChange={(e) =>
                                         setSettings({
@@ -329,7 +376,7 @@ export default function AdminHomeSettings() {
                                 <textarea
                                     rows={4}
                                     placeholder="Content"
-                                    className="w-full p-4 bg-gray-50 border rounded-2xl outline-none focus:ring-2 focus:ring-[#004D3C] resize-none"
+                                    className="w-full p-4 bg-gray-50 border rounded-2xl resize-none"
                                     value={settings.philosophyContent}
                                     onChange={(e) =>
                                         setSettings({

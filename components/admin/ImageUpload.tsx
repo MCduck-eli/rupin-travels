@@ -34,7 +34,7 @@ export const ImageUpload = ({ onChange, value }: ImageUploadProps) => {
                 <UploadDropzone
                     endpoint="imageUploader"
                     onClientUploadComplete={(res) => {
-                        const url = res?.[0].url;
+                        const url = res?.[0]?.ufsUrl || res?.[0]?.url;
                         if (url) {
                             onChange(url);
                             alert("Rasm muvaffaqiyatli yuklandi!");

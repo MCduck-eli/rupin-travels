@@ -2,7 +2,6 @@
 
 import React from "react";
 
-// Fontlarni tekshirish va yuklash
 if (
     typeof document !== "undefined" &&
     !document.head.querySelector('[href*="Cormorant"]')
@@ -78,12 +77,12 @@ const WhoSection: React.FC<WhoSectionProps> = ({
             <style>{`
                 .ws-section {
                     background-color: #efede7;
-                    padding: clamp(4rem, 8vw, 6rem) clamp(1.5rem, 7vw, 5.5rem);
+                    padding: clamp(1rem, 3vw, 2rem) clamp(1.5rem, 7vw, 5.5rem);
                 }
                 .ws-grid {
-                    display: flex; /* Height teng bo'lishi uchun flex ishlatildi */
+                    display: flex;
                     justify-content: space-between;
-                    align-items: stretch; /* Ikkala ustun balandligini tenglashtiradi */
+                    align-items: stretch;
                     gap: clamp(2rem, 5vw, 5rem);
                     max-width: 1200px;
                     margin: 0 auto;
@@ -92,13 +91,13 @@ const WhoSection: React.FC<WhoSectionProps> = ({
                     flex: 1;
                     display: flex;
                     flex-direction: column;
-                    justify-content: center; /* Matnni vertical markazda saqlaydi */
+                    justify-content: center;
                 }
                 .ws-heading {
                     font-family: 'Playfair Display', serif;
                     font-size: clamp(2.2rem, 4vw, 3rem);
                     font-weight: 400;
-                    color: #004D3C; /* Rasmdagi to'q yashil rang */
+                    color: #004D3C;
                     line-height: 1.1;
                     margin-bottom: 1.5rem;
                 }
@@ -117,7 +116,7 @@ const WhoSection: React.FC<WhoSectionProps> = ({
                     font-family: 'Cormorant Garamond', serif;
                     font-size: clamp(1.1rem, 1.8vw, 1.25rem);
                     font-weight: 400;
-                    color: #004D3C; /* Ro'yxat matni uchun to'q yashil */
+                    color: #004D3C;
                     line-height: 1.25;
                 }
                 .ws-bullet {
@@ -125,7 +124,7 @@ const WhoSection: React.FC<WhoSectionProps> = ({
                     width: 5px;
                     height: 5px;
                     border-radius: 50%;
-                    background: #004D3C; /* Bullet ham yashil */
+                    background: #004D3C;
                     flex-shrink: 0;
                 }
                 .ws-card {
@@ -136,7 +135,7 @@ const WhoSection: React.FC<WhoSectionProps> = ({
                     display: flex;
                     flex-direction: column;
                     align-items: center;
-                    justify-content: center; /* Karta ichidagilarni markazlaydi */
+                    justify-content: center;
                     gap: 2rem;
                 }
                 .ws-blob-wrap {

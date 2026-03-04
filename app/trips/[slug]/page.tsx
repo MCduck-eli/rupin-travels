@@ -1,35 +1,36 @@
 import { notFound } from "next/navigation";
-
-// Komponentlaringizni import qiling
+import dbConnect from "@/lib/mongo.db";
+import Trip from "@/models/trip";
 import Hero from "./components/hero";
 import TripDetails from "./components/trip-details";
 import RetHimalay from "./components/rethimalay";
 import GallerySection from "./components/photo-gallery";
 import InfoAccordion from "./components/accordion";
 import ItinerarySection from "./components/linetary-section";
-import dbConnect from "@/lib/mongo.db";
-import Trip from "@/models/trip";
 
 async function getTrip(slug: string) {
     await dbConnect();
     const trip = await Trip.findOne({ slug }).lean();
-    return trip ? JSON.parse(JSON.stringify(trip)) : null;
+    if (!trip) return null;
+    return JSON.parse(JSON.stringify(trip));
 }
 
 export default async function Page({ params }: { params: { slug: string } }) {
-    const { slug } = await params;
-    const trip = await getTrip(slug);
+    const resolvedParams = await params;
+    const trip = await getTrip(resolvedParams.slug);
 
-    if (!trip) return notFound();
+    if (!trip) {
+        return notFound();
+    }
 
     return (
-        <>
+        <main className="min-h-screen bg-white">
             <Hero data={trip} />
             <TripDetails data={trip} />
             <RetHimalay data={trip} />
-            <GallerySection data={trip.gallery} />
+            <GallerySection data={trip.gallery || []} />
             <InfoAccordion data={trip} />
-            <ItinerarySection itinerary={trip.itinerary} />
-        </>
+            <ItinerarySection itinerary={trip.itinerary || []} />
+        </main>
     );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import { Plus, Trash2, Save, Image as ImageIcon, Video } from "lucide-react";
 import { ITrip } from "@/types/trip";
@@ -10,6 +10,15 @@ interface TripFormProps {
     initialData?: ITrip;
     onSubmit: (data: ITrip) => void;
 }
+
+const convertToSlug = (text: string) => {
+    return text
+        .toLowerCase()
+        .trim()
+        .replace(/[^\w\s-]/g, "")
+        .replace(/[\s_-]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+};
 
 const TripForm: React.FC<TripFormProps> = ({ initialData, onSubmit }) => {
     const {
@@ -41,10 +50,22 @@ const TripForm: React.FC<TripFormProps> = ({ initialData, onSubmit }) => {
 
     const galleryItems = watch("gallery") || [];
     const headerVideo = watch("headerVideo");
+    const watchedTitle = watch("title");
+
+    useEffect(() => {
+        if (watchedTitle && !initialData) {
+            // Faqat yangi trip yaratilayotganda slugni auto-update qiladi
+            const newSlug = convertToSlug(watchedTitle);
+            setValue("slug", newSlug, {
+                shouldValidate: true,
+                shouldDirty: true,
+            });
+        }
+    }, [watchedTitle, setValue, initialData]);
 
     const handleUploadComplete = (res: any) => {
         const newImages = res.map((file: any) => ({
-            url: file.url,
+            url: file.ufsUrl || file.url, // v9 uchun ufsUrl qo'shildi
             label: "",
             title: "",
         }));
@@ -80,32 +101,29 @@ const TripForm: React.FC<TripFormProps> = ({ initialData, onSubmit }) => {
                         </label>
                         <input
                             {...register("title", { required: true })}
+                            placeholder="e.g. Himalayan Stillness"
                             className="border p-2 rounded-md text-[#004D3C] outline-[#004D3C]"
                         />
                     </div>
                     <div className="flex flex-col gap-1">
+                        <label className="text-sm font-medium text-[#004D3C]">
+                            URL Slug (Auto-generated)
+                        </label>
+                        <input
+                            {...register("slug")}
+                            readOnly
+                            placeholder="himalayan-stillness"
+                            className="border p-2 rounded-md bg-gray-50 text-gray-500 cursor-not-allowed outline-none border-gray-200"
+                        />
+                    </div>
+
+                    <div className="flex flex-col gap-1 md:col-span-2">
                         <label className="text-sm font-medium text-[#004D3C]">
                             Full Title (Main Section)
                         </label>
                         <input
                             {...register("fullTitle")}
                             className="border p-2 rounded-md text-[#004D3C] outline-[#004D3C]"
-                        />
-                    </div>
-
-                    {/* URL SLUG - FAQAT O'QISH UCHUN */}
-                    <div className="flex flex-col gap-1">
-                        <label className="text-sm font-medium text-[#004D3C] flex justify-between">
-                            URL Slug
-                            <span className="text-[10px] text-orange-600 font-normal italic">
-                                Permanent Identifier
-                            </span>
-                        </label>
-                        <input
-                            {...register("slug")}
-                            readOnly
-                            className="border p-2 rounded-md bg-gray-50 text-gray-500 cursor-not-allowed outline-none border-gray-200"
-                            title="This field is permanent and cannot be changed."
                         />
                     </div>
                 </div>
@@ -129,6 +147,17 @@ const TripForm: React.FC<TripFormProps> = ({ initialData, onSubmit }) => {
                         {...register("fullDescription")}
                         rows={4}
                         className="border p-2 rounded-md outline-[#004D3C] text-[#004D3C]"
+                    />
+                </div>
+
+                <div className="flex flex-col gap-1 w-full md:w-1/3">
+                    <label className="text-sm font-medium text-[#004D3C]">
+                        Base Price (Starting from)
+                    </label>
+                    <input
+                        {...register("price")}
+                        placeholder="e.g. 1200"
+                        className="border p-2 rounded-md text-[#004D3C] outline-[#004D3C]"
                     />
                 </div>
             </div>
@@ -155,8 +184,9 @@ const TripForm: React.FC<TripFormProps> = ({ initialData, onSubmit }) => {
                 )}
                 <UploadDropzone
                     endpoint="imageUploader"
-                    onClientUploadComplete={(res) =>
-                        setValue("headerVideo", res[0].url)
+                    onClientUploadComplete={
+                        (res) =>
+                            setValue("headerVideo", res[0].ufsUrl || res[0].url) // v9 update
                     }
                     appearance={{
                         container:
@@ -181,6 +211,7 @@ const TripForm: React.FC<TripFormProps> = ({ initialData, onSubmit }) => {
                                 <img
                                     src={img.url}
                                     className="w-full h-full object-cover"
+                                    alt="Gallery"
                                 />
                                 <button
                                     type="button"
@@ -287,8 +318,8 @@ const TripForm: React.FC<TripFormProps> = ({ initialData, onSubmit }) => {
                                         onClientUploadComplete={(res) => {
                                             setValue(
                                                 `itinerary.${index}.image`,
-                                                res[0].url,
-                                            );
+                                                res[0].ufsUrl || res[0].url,
+                                            ); // v9 update
                                         }}
                                         appearance={{
                                             container:

@@ -7,7 +7,6 @@ interface DayItineraryProps {
     itinerary?: { title: string; content: string; image?: string }[];
 }
 
-// DEFAULT MA'LUMOTLAR - Admin panel bo'sh bo'lsa bular chiqadi
 const DEFAULT_ITINERARY = [
     {
         title: "Ancient City Exploration",
@@ -28,7 +27,6 @@ export default function DayItineraryComponent({
 }: DayItineraryProps) {
     const [activeDay, setActiveDay] = useState(0);
 
-    // Agar prop bo'sh bo'lsa, DEFAULT_ITINERARY ishlatiladi
     const displayItinerary =
         itinerary && itinerary.length > 0 ? itinerary : DEFAULT_ITINERARY;
 
@@ -37,11 +35,13 @@ export default function DayItineraryComponent({
             <div className="w-full max-w-5xl">
                 <div className="mb-10 text-left">
                     <h2 className="font-serif text-3xl md:text-4xl text-[#2D2D2D] tracking-tight italic">
-                        The Journey Day by Day
+                        Itinerary
                     </h2>
+                    <p className="text-[#2D2D2D]/40 font-serif italic mt-2">
+                        The Journey Day by Day
+                    </p>
                 </div>
 
-                {/* Kunlarni tanlash tugmalari */}
                 <div className="flex flex-wrap justify-center gap-2 md:gap-3 mb-12">
                     {displayItinerary.map((_, index) => (
                         <button
