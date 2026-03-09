@@ -10,10 +10,9 @@ import TripForm from "@/components/admin/tripForm";
 export default function EditTripPage() {
     const [trip, setTrip] = useState<ITrip | null>(null);
     const [loading, setLoading] = useState(true);
-    const { id } = useParams(); // URL dagi [id] ni oladi
+    const { id } = useParams();
     const router = useRouter();
 
-    // 1. Safar ma'lumotlarini ID orqali yuklab olish
     useEffect(() => {
         const fetchTrip = async () => {
             try {
@@ -35,7 +34,6 @@ export default function EditTripPage() {
         if (id) fetchTrip();
     }, [id, router]);
 
-    // 2. Yangilangan ma'lumotlarni bazaga yuborish (PUT)
     const handleUpdate = async (data: ITrip) => {
         try {
             const response = await fetch(`/api/trips/${id}`, {
@@ -69,7 +67,6 @@ export default function EditTripPage() {
     return (
         <div className="p-8 bg-[#F7F5F2] min-h-screen">
             <div className="max-w-5xl mx-auto">
-                {/* Orqaga qaytish */}
                 <Link
                     href="/admin/trips"
                     className="flex items-center gap-2 text-[#004D3C] hover:underline mb-6 transition-all"
@@ -82,7 +79,6 @@ export default function EditTripPage() {
                     <span className="italic opacity-70">{trip?.title}</span>
                 </h1>
 
-                {/* 3. TripForm ga mavjud ma'lumotlarni (initialData) uzatamiz */}
                 {trip && (
                     <TripForm initialData={trip} onSubmit={handleUpdate} />
                 )}

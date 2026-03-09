@@ -27,7 +27,7 @@ const TripDetails: React.FC<Props> = ({ data }) => {
         },
         {
             label: "Location",
-            value: data.title, // Sayohat nomi
+            value: data.title,
             icon: <MapPin size={32} strokeWidth={1} />,
         },
     ];

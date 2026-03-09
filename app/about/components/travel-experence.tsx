@@ -25,118 +25,105 @@ const fadeUp = {
     },
 };
 
-const fadeScale = {
-    hidden: { opacity: 0, scale: 1.03 },
-    visible: {
-        opacity: 1,
-        scale: 1,
-        transition: { duration: 1.4, ease: [0.22, 1, 0.36, 1] },
-    },
-};
-
 export default function TravelLandingPage() {
-    // Dinamik state
     const [data, setData] = useState({
         title: "Welcome to your luxurious home away from home",
         description:
-            "Write a paragraph that talks about your brand or property here...",
+            "Write a paragraph that talks about your brand or property here. Convince your prospective clients to choose you and your offerings by highlighting the qualities that set you apart from the competition. Your audience is already on your website, so push a little bit harder to seal the deal!",
         topImage:
             "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80",
-        bottomImage:
-            "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80",
     });
 
     useEffect(() => {
-        // API'dan ma'lumotni olish
         fetch("/api/about-settings")
             .then((res) => res.json())
             .then((resData) => {
                 if (resData && !resData.error) {
-                    setData({
-                        title: resData.title || data.title,
-                        description: resData.description || data.description,
-                        topImage: resData.topImage || data.topImage,
-                        bottomImage: resData.bottomImage || data.bottomImage,
-                    });
+                    setData((prev) => ({
+                        ...prev,
+                        title: resData.title || prev.title,
+                        description: resData.description || prev.description,
+                        topImage: resData.topImage || prev.topImage,
+                    }));
                 }
             })
             .catch((err) => console.error("Error loading about data:", err));
     }, []);
 
-    // Sarlavhani qatorlarga bo'lish (animatsiya uchun)
-    const titleLines = data.title.split(/(?<=[.?!])\s+|(?<=\w)\s+(?=\w{10,})/);
-    // Yoki oddiyroq: title'ni qismlarga bo'lish
-    const lines =
-        data.title.length > 30
-            ? [data.title.substring(0, 20), data.title.substring(20)]
-            : [data.title];
-
     return (
-        <section className="bg-[#F5F2ED] min-h-screen px-6 py-12 md:px-16 md:py-16 lg:px-24">
-            <div className="mx-auto max-w-6xl">
-                <div className="mb-12 grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-16">
-                    <div className="flex flex-col gap-6">
-                        <h1 className="font-serif text-4xl leading-[1.15] text-[#4A2C1A] md:text-5xl lg:text-[3rem]">
-                            {/* Dinamik Title */}
-                            <span className="block overflow-hidden">
-                                <motion.span
-                                    className="block"
-                                    initial="hidden"
-                                    animate="visible"
-                                    // @ts-ignore
-                                    variants={maskReveal}
-                                    custom={0}
-                                >
-                                    {data.title}
-                                </motion.span>
-                            </span>
-                        </h1>
+        <section className="bg-white min-h-screen px-6 py-12 md:px-16 lg:px-24 flex flex-col items-center justify-center">
+            <div className="mx-auto max-w-7xl w-full space-y-24">
+                {/* 1. Yuqori qism: Cultural Information (Rasmdagi tepa qism) */}
+                <div className="max-w-6xl space-y-10">
+                    <div className="space-y-3">
+                        <h3 className="text-[20px] md:text-[22px] font-bold text-black tracking-tight">
+                            Preserving Cultural Traditions
+                        </h3>
+                        <p className="text-[17px] md:text-[19px] font-light leading-relaxed text-black/90">
+                            We honor India’s heritage by offering authentic
+                            yoga, meditation, Ayurveda, and cultural experiences
+                            while supporting the teachers and communities who
+                            keep these traditions alive.
+                        </p>
+                    </div>
+
+                    <div className="space-y-3">
+                        <h3 className="text-[20px] md:text-[22px] font-bold text-black tracking-tight">
+                            Cultural Exchange
+                        </h3>
+                        <p className="text-[17px] md:text-[19px] font-light leading-relaxed text-black/90">
+                            We aim to build meaningful connections between
+                            travelers and local communities, fostering mutual
+                            respect and deeper cultural understanding.
+                        </p>
+                    </div>
+                </div>
+
+                {/* 2. Pastki qism: Welcome Section (Rasm va Yonidagi matn) */}
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center pt-10">
+                    {/* Matn chap tomonda */}
+                    <div className="md:col-span-7 flex flex-col gap-6 order-2 md:order-1">
+                        <motion.h1
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                            // @ts-ignore
+                            variants={maskReveal}
+                            custom={0}
+                            className="font-serif text-[32px] md:text-[42px] leading-[1.2] text-[#8C7355] italic"
+                        >
+                            {data.title}
+                        </motion.h1>
+
                         <motion.p
                             initial="hidden"
-                            animate="visible"
+                            whileInView="visible"
+                            viewport={{ once: true }}
                             // @ts-ignore
                             variants={fadeUp}
-                            className="max-w-md text-sm leading-relaxed text-[#2D2D2D]/60 md:text-base whitespace-pre-line"
+                            className="text-[13px] leading-relaxed text-black/80 max-w-lg"
                         >
-                            {/* Dinamik Description */}
                             {data.description}
                         </motion.p>
                     </div>
 
+                    {/* Rasm o'ng tomonda (Kichikroq va vertikal) */}
                     <motion.div
-                        initial="hidden"
-                        animate="visible"
-                        // @ts-ignore
-                        variants={fadeScale}
-                        className="overflow-hidden flex justify-center"
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1.2 }}
+                        className="md:col-span-5 flex justify-center md:justify-end order-1 md:order-2"
                     >
-                        {/* Dinamik Top Image */}
-                        <img
-                            src={data.topImage}
-                            alt="Luxury about"
-                            className="w-full max-w-100 h-[300px] md:h-[450px] object-cover rounded-sm shadow-md"
-                        />
-                    </motion.div>
-                </div>
-
-                <motion.div
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, margin: "-80px" }}
-                    // @ts-ignore
-                    variants={fadeScale}
-                    className="mx-auto max-w-4xl"
-                >
-                    <div className="border border-[#4A2C1A]/20 p-2">
-                        <div className="border border-[#4A2C1A]/10 p-1 overflow-hidden">
+                        <div className="relative w-[300px] h-[400px] md:w-[350px] md:h-[480px] overflow-hidden shadow-sm">
                             <img
-                                src={data.bottomImage}
-                                alt="Scenic view"
-                                className="w-full h-auto max-h-125 object-cover"
+                                src={data.topImage}
+                                alt="Luxury Home"
+                                className="w-full h-full object-cover"
                             />
                         </div>
-                    </div>
-                </motion.div>
+                    </motion.div>
+                </div>
             </div>
         </section>
     );

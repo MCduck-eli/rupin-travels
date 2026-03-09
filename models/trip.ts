@@ -11,6 +11,16 @@ const TripSchema: Schema = new Schema(
         headerVideo: { type: String },
         description: { type: String },
         fullDescription: { type: String },
+        highlights: [{ type: String }],
+        extraCost: { type: String },
+        cancellationPolicy: { type: String },
+        extraDetails: [
+            {
+                title: { type: String },
+                description: { type: String },
+                icon: { type: String },
+            },
+        ],
         itinerary: [
             {
                 day: { type: Number },

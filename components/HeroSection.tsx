@@ -19,15 +19,12 @@ const HeroSection: React.FC<HeroSectionProps> = ({
     onLearnMore,
 }) => {
     const videoRef = useRef<HTMLVideoElement>(null);
-
-    // Admin paneldan keladigan dinamik ma'lumotlar uchun state
     const [dynamicData, setDynamicData] = useState({
         title: initialTitle,
         subtitle: initialSubtitle,
         videoSrc: initialVideo,
     });
 
-    // Har safar sahifa yuklanganda yoki yangilanganda bazadan oxirgi ma'lumotni oladi
     useEffect(() => {
         const loadSettings = async () => {
             try {
@@ -194,7 +191,6 @@ const HeroSection: React.FC<HeroSectionProps> = ({
                         </svg>
                     </div>
 
-                    {/* Dinamik matnlar endi bu yerda */}
                     <h1 className="rp-title">{dynamicData.title}</h1>
                     <p className="rp-subtitle">{dynamicData.subtitle}</p>
 

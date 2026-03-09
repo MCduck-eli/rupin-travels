@@ -7,6 +7,8 @@ import RetHimalay from "./components/rethimalay";
 import GallerySection from "./components/photo-gallery";
 import InfoAccordion from "./components/accordion";
 import ItinerarySection from "./components/linetary-section";
+import CompleteTripInfo from "./components/complate-trip";
+import CulturalValues from "./components/culture-value";
 
 async function getTrip(slug: string) {
     await dbConnect();
@@ -29,8 +31,10 @@ export default async function Page({ params }: { params: { slug: string } }) {
             <TripDetails data={trip} />
             <RetHimalay data={trip} />
             <GallerySection data={trip.gallery || []} />
+            <CompleteTripInfo data={trip} />
             <InfoAccordion data={trip} />
             <ItinerarySection itinerary={trip.itinerary || []} />
+            <CulturalValues />
         </main>
     );
 }

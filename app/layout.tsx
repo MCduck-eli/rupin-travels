@@ -32,7 +32,7 @@ export default function RootLayout({
             >
                 <NextAuthSessionProvider>
                     <Navbar />
-                    <main className="flex-grow">{children}</main>
+                    <main className="grow">{children}</main>
                     <Footer />
                 </NextAuthSessionProvider>
             </body>

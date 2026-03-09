@@ -4,8 +4,8 @@ import MarineTeamSection from "./components/travel-landing";
 export default function Page() {
     return (
         <main>
-            <TravelLandingPage />
             <MarineTeamSection />
+            <TravelLandingPage />
         </main>
     );
 }

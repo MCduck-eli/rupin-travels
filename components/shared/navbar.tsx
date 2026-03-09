@@ -211,9 +211,9 @@ const Navbar: React.FC = () => {
 
                     <div className="nav-item-container">
                         <span className="rp-nav-link">Experiences</span>
-                        <div className="dropdown-menu">
-                            {trips.length > 0 ? (
-                                trips.map((trip) => (
+                        {trips.length > 0 && (
+                            <div className="dropdown-menu">
+                                {trips.map((trip) => (
                                     <Link
                                         key={trip._id}
                                         href={`/trips/${trip.slug}`}
@@ -222,26 +222,9 @@ const Navbar: React.FC = () => {
                                     >
                                         {trip.title}
                                     </Link>
-                                ))
-                            ) : (
-                                <>
-                                    <Link
-                                        href="/trips/himalayan-stillness"
-                                        className="dropdown-link"
-                                        onClick={() => setIsMenuOpen(false)}
-                                    >
-                                        Himalayan Experiences
-                                    </Link>
-                                    <Link
-                                        href="/trips/soulful-south"
-                                        className="dropdown-link"
-                                        onClick={() => setIsMenuOpen(false)}
-                                    >
-                                        Soulful South
-                                    </Link>
-                                </>
-                            )}
-                        </div>
+                                ))}
+                            </div>
+                        )}
                     </div>
 
                     <div className="nav-item-container">

@@ -13,6 +13,12 @@ export interface IGallery {
     title: string;
 }
 
+export interface IExtraDetail {
+    title: string;
+    description: string;
+    icon: string;
+}
+
 export interface ITrip {
     _id: string;
     title: string;
@@ -24,4 +30,8 @@ export interface ITrip {
     itinerary: IItinerary[];
     gallery: IGallery[];
     price: string;
+    highlights?: string[];
+    extraCost?: string;
+    cancellationPolicy?: string;
+    extraDetails: IExtraDetail[];
 }
