@@ -99,7 +99,7 @@ const WhoSection: React.FC<WhoSectionProps> = ({
                     font-weight: 400;
                     color: #004D3C;
                     line-height: 1.1;
-                    margin-bottom: 1.5rem;
+                    margin-bottom: 20px;
                 }
                 .ws-list {
                     list-style: none;
@@ -107,7 +107,7 @@ const WhoSection: React.FC<WhoSectionProps> = ({
                     margin: 0;
                     display: flex;
                     flex-direction: column;
-                    gap: 0.5rem;
+                    gap: 0px; 
                 }
                 .ws-list-item {
                     display: flex;
@@ -117,10 +117,11 @@ const WhoSection: React.FC<WhoSectionProps> = ({
                     font-size: clamp(1.1rem, 1.8vw, 1.25rem);
                     font-weight: 400;
                     color: #004D3C;
-                    line-height: 1.25;
+                    line-height: 1.1;
+                    margin-bottom: 10px;
                 }
                 .ws-bullet {
-                    margin-top: 0.45rem;
+                    margin-top: 0.4rem;
                     width: 5px;
                     height: 5px;
                     border-radius: 50%;

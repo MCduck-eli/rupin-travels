@@ -31,8 +31,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
             <TripDetails data={trip} />
             <RetHimalay data={trip} />
             <GallerySection data={trip.gallery || []} />
-            <CompleteTripInfo data={trip} />
             <InfoAccordion data={trip} />
+            <CompleteTripInfo data={trip} />
             <ItinerarySection itinerary={trip.itinerary || []} />
             <CulturalValues />
         </main>

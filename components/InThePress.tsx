@@ -135,8 +135,8 @@ const InThePress: React.FC<InThePressProps> = ({ cards = DEFAULT_CARDS }) => {
         .itp-heading {
           font-family: 'Cormorant Garamond', serif;
           font-size: clamp(2.2rem, 5.5vw, 4rem);
-          font-weight: 400;
-          color: #504c4c;
+          font-weight: 550;
+          color: #6f4e37;
           text-align: center;
           line-height: 1.15;
           margin: 0 0 clamp(2rem, 4vw, 3.5rem);

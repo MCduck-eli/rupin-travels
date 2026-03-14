@@ -1,7 +1,18 @@
 "use client";
 
 import React from "react";
-import { Camera, Instagram, Users, Clock, MapPin, Star } from "lucide-react";
+import {
+    Camera,
+    Instagram,
+    Users,
+    Clock,
+    MapPin,
+    Star,
+    Activity,
+    Calendar,
+    CreditCard,
+    Home,
+} from "lucide-react";
 import { ITrip } from "@/types/trip";
 
 interface Props {
@@ -11,24 +22,44 @@ interface Props {
 const TripDetails: React.FC<Props> = ({ data }) => {
     const details = [
         {
+            label: "Activity level",
+            value: "Easy",
+            icon: <Activity size={32} strokeWidth={1} />,
+        },
+        {
+            label: "Suitable for",
+            value: "17 years & above",
+            icon: <Users size={32} strokeWidth={1} />,
+        },
+        {
+            label: "Price",
+            value: "$ 4,500 pp",
+            icon: <CreditCard size={32} strokeWidth={1} />,
+        },
+        {
+            label: "Duration",
+            value: "10 D/ 9 N",
+            icon: <Clock size={32} strokeWidth={1} />,
+        },
+        {
+            label: "Category",
+            value: "Stillness",
+            icon: <Star size={32} strokeWidth={1} />,
+        },
+        {
             label: "Group size",
             value: "Max of 10",
             icon: <Users size={32} strokeWidth={1} />,
         },
         {
-            label: "Duration",
-            value: `${data.itinerary?.length || 0} Days`,
-            icon: <Clock size={32} strokeWidth={1} />,
+            label: "Date",
+            value: "Apr 10 - Apr 25, 2026",
+            icon: <Calendar size={32} strokeWidth={1} />,
         },
         {
-            label: "Category",
-            value: "Boutique Travel",
-            icon: <Star size={32} strokeWidth={1} />,
-        },
-        {
-            label: "Location",
-            value: data.title,
-            icon: <MapPin size={32} strokeWidth={1} />,
+            label: "Accomodation",
+            value: "Boutique Hotels / Guest houses",
+            icon: <Home size={32} strokeWidth={1} />,
         },
     ];
 

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
     Save,
     ArrowLeft,
@@ -30,91 +30,79 @@ export default function AdminHomeSettings() {
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const settingsRes = await fetch("/api/home-settings");
-                const settingsData = await settingsRes.json();
+    const fetchData = useCallback(async () => {
+        try {
+            const settingsRes = await fetch("/api/home-settings");
+            const settingsData = await settingsRes.json();
 
-                const tripsRes = await fetch("/api/trips");
-                const tripsData = await tripsRes.json();
+            const tripsRes = await fetch("/api/trips");
+            const tripsData = await tripsRes.json();
 
-                if (tripsData.success) {
-                    const mergedTrips = tripsData.data.map((trip: any) => {
-                        const existing = settingsData?.highlightedTrips?.find(
-                            (t: any) => t.slug === trip.slug,
-                        );
+            if (tripsData.success && settingsData) {
+                const savedTrips = settingsData.highlightedTrips || [];
 
-                        // SLUGni tozalash: oxiridagi ortiqcha chiziqchalarni olib tashlaymiz
-                        const cleanSlug = trip.slug.replace(/-+$/, "");
+                const mergedTrips = tripsData.data.map((t: any) => {
+                    const cleanSlug = t.slug.replace(/-+$/, "");
+                    const existingTrip = savedTrips.find(
+                        (s: any) => s.slug === cleanSlug,
+                    );
 
-                        return {
-                            slug: cleanSlug,
-                            title: existing?.title || trip.title,
-                            duration:
-                                existing?.duration || trip.duration || "7 DAYS",
-                            subtitle:
-                                existing?.subtitle ||
-                                trip.fullTitle ||
-                                trip.title,
-                            nights:
-                                existing?.nights ||
-                                `From $${trip.price || 0} per person`,
-                            imageUrl: existing?.imageUrl || trip.image || "",
-                        };
-                    });
+                    if (existingTrip) {
+                        return { ...existingTrip, slug: cleanSlug };
+                    }
 
-                    setSettings({
-                        ...settingsData,
-                        highlightedTrips: mergedTrips,
-                    });
-                }
-            } catch (err) {
-                console.error("Fetch error:", err);
-            } finally {
-                setLoading(false);
+                    return {
+                        slug: cleanSlug,
+                        title: t.title,
+                        duration: t.duration || "7 DAYS",
+                        subtitle: t.fullTitle || t.title,
+                        nights: `From $${t.price || 0} per person`,
+                        imageUrl: t.image || "",
+                    };
+                });
+
+                setSettings({
+                    ...settingsData,
+                    highlightedTrips: mergedTrips,
+                });
             }
-        };
-        fetchData();
+        } catch (err) {
+            console.error(err);
+        } finally {
+            setLoading(false);
+        }
     }, []);
+
+    useEffect(() => {
+        fetchData();
+    }, [fetchData]);
 
     const handleSave = async () => {
         setSaving(true);
-
-        const settingsToSave = {
-            ...settings,
-            highlightedTrips: settings.highlightedTrips.map((trip) => ({
-                ...trip,
-
-                slug: trip.slug,
-            })),
-        };
-
         try {
             const res = await fetch("/api/home-settings", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(settingsToSave),
+                body: JSON.stringify(settings),
             });
 
             if (res.ok) {
                 alert("Home settings saved successfully! ✨");
-            } else {
-                alert("Serverda xatolik yuz berdi.");
+                fetchData();
             }
         } catch (err) {
-            console.error("Save error:", err);
-            alert("Error saving settings.");
+            console.error(err);
         } finally {
             setSaving(false);
         }
     };
 
     const updateTripCard = (index: number, field: string, value: string) => {
-        const newTrips = [...settings.highlightedTrips];
-        // Bu yerda slug o'zgarmasdan qoladi, faqat field yangilanadi
-        newTrips[index] = { ...newTrips[index], [field]: value };
-        setSettings({ ...settings, highlightedTrips: newTrips });
+        setSettings((prev) => {
+            const newTrips = [...prev.highlightedTrips];
+            newTrips[index] = { ...newTrips[index], [field]: value };
+            return { ...prev, highlightedTrips: newTrips };
+        });
     };
 
     if (loading)
@@ -125,7 +113,7 @@ export default function AdminHomeSettings() {
         );
 
     return (
-        <div className="p-8 bg-[#F7F5F2] min-h-screen">
+        <div className="p-8 bg-[#F7F5F2] min-h-screen text-black">
             <div className="max-w-5xl mx-auto">
                 <div className="flex justify-between items-center mb-8">
                     <Link
@@ -135,7 +123,7 @@ export default function AdminHomeSettings() {
                         <ArrowLeft size={20} /> Back to Dashboard
                     </Link>
                     <button
-                        onClick={handleSave}
+                        onClick={() => handleSave()}
                         disabled={saving}
                         className="bg-[#004D3C] text-white px-8 py-3 rounded-xl flex items-center gap-2 hover:bg-[#003d30] shadow-lg disabled:opacity-50"
                     >
@@ -148,13 +136,13 @@ export default function AdminHomeSettings() {
                     </button>
                 </div>
 
-                <div className="bg-white rounded-3xl p-8 shadow-sm border border-gray-100 text-black">
+                <div className="bg-white rounded-3xl p-8 shadow-sm border border-gray-100">
                     <h1 className="text-3xl font-serif text-[#004D3C] mb-8 flex items-center gap-3 border-b pb-6">
                         <LayoutDashboard /> Home Page Customization
                     </h1>
 
                     <div className="space-y-10">
-                        {/* HERO SECTION */}
+                        {/* Hero Section */}
                         <section className="p-6 bg-gray-50 rounded-2xl border border-dashed border-gray-200 space-y-6">
                             <h2 className="text-sm font-bold uppercase tracking-widest text-gray-400 flex items-center gap-2">
                                 <Video size={16} /> Hero Section (Video & Text)
@@ -198,12 +186,12 @@ export default function AdminHomeSettings() {
                                 )}
                                 <UploadButton
                                     endpoint="imageUploader"
-                                    onClientUploadComplete={(res) =>
-                                        setSettings({
-                                            ...settings,
+                                    onClientUploadComplete={(res: any) =>
+                                        setSettings((prev) => ({
+                                            ...prev,
                                             heroVideoUrl:
                                                 res[0].ufsUrl || res[0].url,
-                                        })
+                                        }))
                                     }
                                     appearance={{
                                         button: "bg-[#004D3C] rounded-xl px-6 py-2",
@@ -212,7 +200,7 @@ export default function AdminHomeSettings() {
                             </div>
                         </section>
 
-                        {/* HIGHLIGHTED TRIPS SECTION */}
+                        {/* Carousel Section */}
                         <section className="space-y-6">
                             <h2 className="text-sm font-bold uppercase tracking-widest text-gray-400 flex items-center gap-2">
                                 <Map size={16} /> Carousel Trips (From Trips
@@ -264,7 +252,7 @@ export default function AdminHomeSettings() {
                                                 <UploadButton
                                                     endpoint="imageUploader"
                                                     onClientUploadComplete={(
-                                                        res,
+                                                        res: any,
                                                     ) =>
                                                         updateTripCard(
                                                             index,
@@ -275,8 +263,6 @@ export default function AdminHomeSettings() {
                                                     }
                                                     appearance={{
                                                         button: "bg-[#004D3C] text-white px-4 py-2 rounded-lg text-sm hover:bg-[#003d30] transition-all shadow-sm w-full md:w-auto mt-2",
-                                                        allowedContent:
-                                                            "text-gray-400 text-[10px] uppercase font-medium mt-1",
                                                     }}
                                                     content={{
                                                         button: "Change Photo",
@@ -284,17 +270,12 @@ export default function AdminHomeSettings() {
                                                 />
                                             </div>
                                             <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-3">
+                                                {/* FAQAT O'QISH UCHUN QILINDI (ReadOnly) */}
                                                 <input
                                                     placeholder="Title on Card"
-                                                    className="p-2 border rounded-lg text-sm"
+                                                    className="p-2 border rounded-lg text-sm bg-gray-200 cursor-not-allowed"
                                                     value={trip.title}
-                                                    onChange={(e) =>
-                                                        updateTripCard(
-                                                            index,
-                                                            "title",
-                                                            e.target.value,
-                                                        )
-                                                    }
+                                                    readOnly
                                                 />
                                                 <input
                                                     placeholder="Duration"
@@ -332,7 +313,7 @@ export default function AdminHomeSettings() {
                                                         )
                                                     }
                                                 />
-                                                <div className="md:col-span-2 text-xs text-gray-400">
+                                                <div className="md:col-span-2 text-xs text-gray-400 font-mono">
                                                     Linked to: /trips/
                                                     {trip.slug}
                                                 </div>
@@ -343,7 +324,7 @@ export default function AdminHomeSettings() {
                             </div>
                         </section>
 
-                        {/* PHILOSOPHY SECTION */}
+                        {/* Philosophy Section */}
                         <section className="space-y-6">
                             <h2 className="text-sm font-bold uppercase tracking-widest text-gray-400 border-b pb-2 flex items-center gap-2">
                                 <Type size={16} /> Philosophy Content

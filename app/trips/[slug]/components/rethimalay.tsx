@@ -36,41 +36,21 @@ const RetHimalay: React.FC<Props> = ({ data }) => {
         <section className="relative w-full bg-white py-16 px-6 md:px-16 lg:px-24 text-[#2d2d2d]">
             <div className="max-w-7xl mx-auto">
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
-                    <div className="md:col-span-8 space-y-10">
-                        <div>
-                            <h3 className="text-[#2b5a9e] text-[20px] md:text-[24px] mb-4 font-normal">
-                                Trip Highlights:
-                            </h3>
-                            <ul className="space-y-3">
-                                {highlights.map((item, index) => (
-                                    <li
-                                        key={index}
-                                        className="flex items-start gap-3 text-[18px] md:text-[20px] font-light text-[#333]"
-                                    >
-                                        <span className="mt-2.5 h-1.5 w-1.5 rounded-full bg-black shrink-0" />
-                                        {item}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-
-                        <div className="pt-6 border-t border-gray-100">
-                            <h3 className="text-[#2b5a9e] text-[20px] md:text-[24px] mb-4 font-normal">
-                                Trip Description
-                            </h3>
-                            <div className="space-y-6 text-[18px] md:text-[20px] font-light leading-relaxed text-[#444]">
-                                <p className="italic font-medium text-black/80">
-                                    {data.fullTitle || data.title}
-                                </p>
-                                <div className="whitespace-pre-line">
-                                    {data.fullDescription || data.description}
-                                </div>
-                                <p className="font-normal text-black pt-4 border-t border-gray-50 italic">
-                                    Arrive as you are—leave grounded, refreshed,
-                                    and inspired.
-                                </p>
-                            </div>
-                        </div>
+                    <div className="md:col-span-8">
+                        <h3 className="text-[#2b5a9e] text-[20px] md:text-[24px] mb-4 font-normal">
+                            Trip Highlights:
+                        </h3>
+                        <ul className="space-y-3">
+                            {highlights.map((item, index) => (
+                                <li
+                                    key={index}
+                                    className="flex items-start gap-3 text-[18px] md:text-[20px] font-light text-[#333]"
+                                >
+                                    <span className="mt-2.5 h-1.5 w-1.5 rounded-full bg-black shrink-0" />
+                                    {item}
+                                </li>
+                            ))}
+                        </ul>
                     </div>
 
                     <div className="md:col-span-4">
@@ -103,6 +83,24 @@ const RetHimalay: React.FC<Props> = ({ data }) => {
                                     Cancellation Policy
                                 </button>
                             </div>
+                        </div>
+                    </div>
+
+                    <div className="col-span-full pt-10 border-t border-gray-100">
+                        <h3 className="text-[#2b5a9e] text-[20px] md:text-[24px] mb-4 font-normal">
+                            Trip Description
+                        </h3>
+                        <div className="space-y-6 text-[18px] md:text-[20px] font-light leading-relaxed text-[#444]">
+                            <p className="italic font-medium text-black/80">
+                                {data.fullTitle || data.title}
+                            </p>
+                            <div className="whitespace-pre-line w-full">
+                                {data.fullDescription || data.description}
+                            </div>
+                            <p className="font-normal text-black pt-4 border-t border-gray-50 italic">
+                                Arrive as you are—leave grounded, refreshed, and
+                                inspired.
+                            </p>
                         </div>
                     </div>
                 </div>
