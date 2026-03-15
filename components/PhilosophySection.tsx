@@ -81,7 +81,7 @@ const PhilosophySection: React.FC<PhilosophySectionProps> = ({
         .ps-luxury-item {
           font-family: 'Cormorant Garamond', serif;
           font-size: 1.2rem;
-          color: #aa9484;
+          color: #d4baac;
           line-height: 1.6;
           white-space: pre-line;
         }
