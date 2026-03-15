@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
     UseFormRegister,
     UseFormSetValue,
@@ -6,7 +6,7 @@ import {
     useFieldArray,
     Control,
 } from "react-hook-form";
-import { Plus, Trash2, Info } from "lucide-react";
+import { Trash2, Info } from "lucide-react";
 import { ITrip } from "@/types/trip";
 import { UploadDropzone } from "@/lib/uploadthing";
 
@@ -28,21 +28,35 @@ export const TripDetailsSection = ({
         name: "extraDetails",
     });
 
+    const defaultTitles = [
+        "Who this is for",
+        "Who this is not for",
+        "Perfect For",
+        "Inclusions",
+        "Exclusions",
+        "Food Philosophy",
+        "Quick Itinerary",
+    ];
+
+    useEffect(() => {
+        // Agar dublikat bo'lsa yoki noto'g'ri tartibda bo'lsa, tozalab qayta yozamiz
+        // Faqat fields.length defaultTitles uzunligiga mos kelmasa ishlaydi
+        if (fields.length !== defaultTitles.length) {
+            // Avval hammasini o'chirib tashlaymiz (tozalash)
+            remove();
+            // Keyin faqat kerakli 7 tasini qo'shamiz
+            defaultTitles.forEach((title) => {
+                append({ title: title, description: "", icon: "" });
+            });
+        }
+    }, [fields.length, append, remove]);
+
     return (
         <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm space-y-6">
             <div className="flex justify-between items-center border-b pb-2">
                 <h3 className="text-lg font-semibold text-[#004D3C] flex items-center gap-2">
                     <Info size={20} /> Complete Trip Information
                 </h3>
-                <button
-                    type="button"
-                    onClick={() =>
-                        append({ title: "", description: "", icon: "" })
-                    }
-                    className="flex items-center gap-1 text-sm bg-[#004D3C] text-white px-3 py-1 rounded-md hover:bg-[#003d30] transition-all"
-                >
-                    <Plus size={16} /> Add Section
-                </button>
             </div>
 
             <div className="space-y-6">
@@ -51,14 +65,6 @@ export const TripDetailsSection = ({
                         key={field.id}
                         className="p-4 bg-gray-50 rounded-lg border border-gray-100 relative group"
                     >
-                        <button
-                            type="button"
-                            onClick={() => remove(index)}
-                            className="absolute top-2 right-2 text-red-500 p-1 opacity-0 group-hover:opacity-100 transition-opacity"
-                        >
-                            <Trash2 size={18} />
-                        </button>
-
                         <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
                             <div className="md:col-span-3 flex flex-col gap-2">
                                 <label className="text-[10px] uppercase font-bold text-gray-400">
@@ -114,8 +120,8 @@ export const TripDetailsSection = ({
                                         {...register(
                                             `extraDetails.${index}.title` as const,
                                         )}
-                                        placeholder="e.g. Who this is for"
-                                        className="w-full border p-2 rounded-md text-[#004D3C] font-medium outline-[#004D3C]"
+                                        readOnly
+                                        className="w-full border p-2 rounded-md text-[#004D3C] font-bold bg-gray-100 cursor-not-allowed outline-none"
                                     />
                                 </div>
                                 <div className="flex flex-col gap-1">
@@ -128,19 +134,13 @@ export const TripDetailsSection = ({
                                         )}
                                         rows={2}
                                         className="w-full border p-2 rounded-md text-[#004D3C] outline-[#004D3C]"
-                                        placeholder="Enter details..."
+                                        placeholder={`Enter details for ${field.title}...`}
                                     />
                                 </div>
                             </div>
                         </div>
                     </div>
                 ))}
-
-                {fields.length === 0 && (
-                    <div className="text-center py-10 border-2 border-dashed rounded-xl text-gray-300">
-                        No extra sections added. Click "Add Section" to start.
-                    </div>
-                )}
             </div>
         </div>
     );

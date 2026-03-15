@@ -34,4 +34,12 @@ export interface ITrip {
     extraCost?: string;
     cancellationPolicy?: string;
     extraDetails: IExtraDetail[];
+    activityLevel: string;
+    suitableFor: string;
+    duration: string;
+    category: string;
+    groupSize: string;
+    dateRange: string;
+    accommodation: string;
+    prices: string;
 }

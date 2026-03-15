@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
@@ -17,14 +17,39 @@ interface CompleteTripInfoProps {
 export default function CompleteTripInfo({ data }: CompleteTripInfoProps) {
     const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-    const infoItems: TripInfoItem[] = data?.extraDetails || [];
+    const defaultTitles = [
+        "Who this is for",
+        "Who this is not for",
+        "Perfect For",
+        "Inclusions",
+        "Exclusions",
+        "Food Philosophy",
+        "Quick Itinerary",
+    ];
+
+    const rawItems: TripInfoItem[] = data?.extraDetails || [];
+
+    const infoItems = defaultTitles.map((title) => {
+        const existingItem = rawItems.find(
+            (item) => item.title.trim().toLowerCase() === title.toLowerCase(),
+        );
+
+        return {
+            title: title,
+            description: existingItem?.description || "",
+            icon: existingItem?.icon || "",
+        };
+    });
 
     if (!infoItems || infoItems.length === 0) return null;
 
     return (
         <section className="w-full py-16 px-4 md:px-10 bg-[#ede4d9]">
             <div className="max-w-4xl mx-auto">
-                <h2 className="text-[20px] md:text-[22px] font-light text-[#1a1a1a] mb-8 tracking-[0.05em] uppercase border-b border-black/5 pb-4">
+                <h2
+                    style={{ fontFamily: "'Higuen', serif" }}
+                    className="text-[24px] md:text-[28px] font-normal text-[#1a1a1a] mb-8 tracking-[0.02em] uppercase border-b border-black/5 pb-4"
+                >
                     Complete Trip Information
                 </h2>
 
@@ -60,7 +85,10 @@ export default function CompleteTripInfo({ data }: CompleteTripInfoProps) {
                                             )}
                                         </div>
                                         <span
-                                            className={`text-[16px] md:text-[17px] font-light tracking-wide transition-colors duration-300 ${isOpen ? "text-[#2b5a9e]" : "text-[#1a1a1a]"}`}
+                                            style={{
+                                                fontFamily: "'Higuen', serif",
+                                            }}
+                                            className={`text-[18px] md:text-[20px] font-normal tracking-wide transition-colors duration-300 ${isOpen ? "text-[#2b5a9e]" : "text-[#1a1a1a]"}`}
                                         >
                                             {item.title}
                                         </span>
@@ -114,7 +142,7 @@ export default function CompleteTripInfo({ data }: CompleteTripInfoProps) {
                                                     ) : (
                                                         <li className="text-[14px] text-black/30 italic">
                                                             No information
-                                                            provided.
+                                                            provided yet.
                                                         </li>
                                                     )}
                                                 </ul>

@@ -11,7 +11,6 @@ interface InfoAccordionProps {
 export default function InfoAccordion({ data }: InfoAccordionProps) {
     const [openIndex, setOpenIndex] = useState<number | null>(0);
 
-    // Bazadan kelgan ma'lumotlar asosida dinamik punktlar yaratamiz
     const infoItems = [
         {
             title: "General Information",

@@ -2,11 +2,8 @@
 
 import React from "react";
 import {
-    Camera,
-    Instagram,
     Users,
     Clock,
-    MapPin,
     Star,
     Activity,
     Calendar,
@@ -23,42 +20,42 @@ const TripDetails: React.FC<Props> = ({ data }) => {
     const details = [
         {
             label: "Activity level",
-            value: "Easy",
+            value: data?.activityLevel || "Easy",
             icon: <Activity size={32} strokeWidth={1} />,
         },
         {
             label: "Suitable for",
-            value: "17 years & above",
+            value: data?.suitableFor || "17 years & above",
             icon: <Users size={32} strokeWidth={1} />,
         },
         {
             label: "Price",
-            value: "$ 4,500 pp",
+            value: data?.prices || data?.price || "$ 4,500 pp", // Admin paneldagi 'prices' ga mosladik
             icon: <CreditCard size={32} strokeWidth={1} />,
         },
         {
             label: "Duration",
-            value: "10 D/ 9 N",
+            value: data?.duration || "10 D/ 9 N",
             icon: <Clock size={32} strokeWidth={1} />,
         },
         {
             label: "Category",
-            value: "Stillness",
+            value: data?.category || "Stillness",
             icon: <Star size={32} strokeWidth={1} />,
         },
         {
             label: "Group size",
-            value: "Max of 10",
+            value: data?.groupSize || "Max of 10",
             icon: <Users size={32} strokeWidth={1} />,
         },
         {
             label: "Date",
-            value: "Apr 10 - Apr 25, 2026",
+            value: data?.dateRange || "Apr 10 - Apr 25, 2026",
             icon: <Calendar size={32} strokeWidth={1} />,
         },
         {
-            label: "Accomodation",
-            value: "Boutique Hotels / Guest houses",
+            label: "Accommodation",
+            value: data?.accommodation || "Boutique Hotels / Guest houses",
             icon: <Home size={32} strokeWidth={1} />,
         },
     ];

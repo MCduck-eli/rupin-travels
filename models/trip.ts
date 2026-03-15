@@ -14,6 +14,18 @@ const TripSchema: Schema = new Schema(
         highlights: [{ type: String }],
         extraCost: { type: String },
         cancellationPolicy: { type: String },
+
+        // MANA SHU YANGI QO'SHILGAN MAYDONLAR (Baza endi bularni saqlaydi):
+        activityLevel: { type: String, default: "" },
+        suitableFor: { type: String, default: "" },
+        prices: { type: String, default: "" },
+        duration: { type: String, default: "" },
+        category: { type: String, default: "" },
+        groupSize: { type: String, default: "" },
+        dateRange: { type: String, default: "" },
+        accommodation: { type: String, default: "" },
+        // -----------------------------------------------------------
+
         extraDetails: [
             {
                 title: { type: String },

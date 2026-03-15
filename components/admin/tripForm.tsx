@@ -9,6 +9,7 @@ import { HeaderVideoSection } from "./header-video-section";
 import { TripGallerySection } from "./trip-gallery";
 import { ItinerarySection } from "./Itinerary-section";
 import { TripDetailsSection } from "./trip-details-section";
+import { TripMainDetailsSection } from "./trip-main-details-section";
 
 const TripForm = ({
     initialData,
@@ -27,6 +28,13 @@ const TripForm = ({
                 description: "",
                 fullDescription: "",
                 price: "",
+                activityLevel: "",
+                suitableFor: "",
+                duration: "",
+                category: "",
+                groupSize: "",
+                dateRange: "",
+                accommodation: "",
                 highlights: [""],
                 extraCost: "",
                 cancellationPolicy: "",
@@ -58,6 +66,10 @@ const TripForm = ({
             className="space-y-8 max-w-5xl pb-20"
         >
             <GeneralInfo register={register} />
+            <TripMainDetailsSection
+                register={register}
+                initialData={initialData}
+            />
             <TripHighlights register={register} control={control} />
             <HeaderVideoSection setValue={setValue} watch={watch} />
             <TripGallerySection

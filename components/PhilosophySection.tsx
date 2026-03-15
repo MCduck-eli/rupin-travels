@@ -56,6 +56,7 @@ const PhilosophySection: React.FC<PhilosophySectionProps> = ({
         }
 
         .ps-section-header {
+
           margin-bottom: 1.2rem;
         }
         .ps-label-gold {
@@ -63,14 +64,12 @@ const PhilosophySection: React.FC<PhilosophySectionProps> = ({
           font-size: 0.85rem;
           letter-spacing: 0.2em;
           text-transform: uppercase;
-          color: #D4A843;
           display: block;
           margin-bottom: 0.3rem;
         }
         .ps-title-white {
           font-family: 'Playfair Display', serif;
           font-size: 2rem;
-          color: #ffffff;
         }
 
         .ps-divider {
@@ -82,7 +81,7 @@ const PhilosophySection: React.FC<PhilosophySectionProps> = ({
         .ps-luxury-item {
           font-family: 'Cormorant Garamond', serif;
           font-size: 1.2rem;
-          color: #d6cfc4;
+          color: #aa9484;
           line-height: 1.6;
           white-space: pre-line;
         }
@@ -92,7 +91,7 @@ const PhilosophySection: React.FC<PhilosophySectionProps> = ({
           font-size: 1.1rem;
           letter-spacing: 0.1em;
           text-transform: uppercase;
-          color: #b89a67;
+          color: #ffbd59;
           border-top: 1px solid rgba(184, 154, 103, 0.2);
           padding-top: 1.5rem;
         }
@@ -104,16 +103,29 @@ const PhilosophySection: React.FC<PhilosophySectionProps> = ({
 
             <div className="ps-philosophy-band">
                 <div className="ps-container">
-                    <div className="ps-section-header">
+                    <div
+                        className="ps-section-header text-[#ffbd59]"
+                        style={{
+                            fontFamily: "'Beautifully Delicious', cursive",
+                        }}
+                    >
                         <span className="ps-label-gold">Our Philosophy</span>
-                        <h2 className="ps-title-white">
-                            {title || "Luxury As Intention"}
+                        <h2
+                            className="ps-title-white text-[#ffbd59] "
+                            style={{
+                                fontFamily: "'Beautifully Delicious', cursive",
+                            }}
+                        >
+                            Luxury As Intention
                         </h2>
                     </div>
 
                     <div className="ps-divider" />
 
-                    <div className="ps-luxury-item">
+                    <div
+                        className="ps-luxury-item"
+                        style={{ fontFamily: "'Higuen Elegant Serif', serif" }}
+                    >
                         {content ||
                             `To us, luxury means:
                         • Time to slow down
@@ -123,7 +135,12 @@ const PhilosophySection: React.FC<PhilosophySectionProps> = ({
                         • Experiences that stay with you long after you return home`}
                     </div>
 
-                    <p className="ps-footer-text">
+                    <p
+                        className="ps-footer-text"
+                        style={{
+                            fontFamily: "'Beautifully Delicious', cursive",
+                        }}
+                    >
                         We design journeys that protect these values.
                     </p>
                 </div>

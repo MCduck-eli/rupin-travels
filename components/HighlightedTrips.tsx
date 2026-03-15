@@ -69,8 +69,6 @@ const HighlightedTrips: React.FC<HighlightedTripsProps> = ({
                 ) {
                     const validatedTrips = homeData.highlightedTrips.map(
                         (t: any) => {
-                            // 1. Agar slug bo'lsa, uni tozalaymiz (oxiridagi chiziqchalarni olib tashlaymiz)
-                            // 2. Agar slug bo'lmasa, title dan yasaymiz
                             const finalSlug = t.slug
                                 ? t.slug.trim().replace(/-+$/, "")
                                 : t.title
@@ -143,12 +141,18 @@ const HighlightedTrips: React.FC<HighlightedTripsProps> = ({
     return (
         <section className="bg-[#efede7] py-12 md:py-20 px-4">
             <div className="max-w-7xl mx-auto">
-                <h2 className="text-5xl md:text-[100px] text-[#0D2B1D] text-center mb-10 md:mb-16 font-serif leading-[0.9] tracking-tight">
+                <h2
+                    className="text-5xl md:text-[100px] text-[#0D2B1D] text-center mb-10 md:mb-16 font-serif leading-[0.9] tracking-tight"
+                    style={{ fontFamily: "'Higuen Elegant Serif', serif" }}
+                >
                     {sectionTitle}
                 </h2>
 
                 <div className="bg-[#FAF7F2] p-4 md:p-12 rounded-sm relative shadow-sm">
-                    <h3 className="text-[#2D2D2D] text-2xl md:text-4xl mb-6 md:mb-10 font-serif font-light">
+                    <h3
+                        className="text-[#2D2D2D] text-2xl md:text-4xl mb-6 md:mb-10 font-serif font-light"
+                        style={{ fontFamily: "'Higuen Elegant Serif', serif" }}
+                    >
                         {sectionSubtitle}
                     </h3>
 
@@ -185,10 +189,22 @@ const HighlightedTrips: React.FC<HighlightedTripsProps> = ({
                                                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                                 />
                                                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-6 text-white">
-                                                    <h4 className="text-xl md:text-2xl font-serif leading-tight mb-2 transform transition-transform duration-500 group-hover:-translate-y-1">
+                                                    <h4
+                                                        className="text-xl md:text-2xl font-serif  leading-tight mb-2 transform transition-transform duration-500 group-hover:-translate-y-1"
+                                                        style={{
+                                                            fontFamily:
+                                                                "'Higuen Elegant Serif', serif",
+                                                        }}
+                                                    >
                                                         {trip.title}
                                                     </h4>
-                                                    <p className="text-xs md:text-sm font-sans tracking-[0.2em] opacity-80 uppercase font-bold">
+                                                    <p
+                                                        className="text-xs md:text-sm font-sans tracking-[0.2em] opacity-80 uppercase font-bold"
+                                                        style={{
+                                                            fontFamily:
+                                                                "'Higuen Elegant Serif', serif",
+                                                        }}
+                                                    >
                                                         {trip.duration}
                                                     </p>
                                                 </div>
