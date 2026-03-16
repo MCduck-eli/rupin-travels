@@ -22,9 +22,9 @@ const ExperienceSection: React.FC = () => {
         .es-heading {
           /* Sarlavha uchun Beautifully Delicious */
           font-family: 'Beautifully Delicious', sans-serif;
-          font-size: clamp(1.8rem, 3.5vw, 2.5rem);
-          font-weight: 600;
-          color: #D4A843;
+            font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+                    font-weight: 400;
+          color: #ffbd59;
           text-align: center;
           line-height: 1.4;
           margin: 0 0 1.4rem;

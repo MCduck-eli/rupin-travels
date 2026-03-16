@@ -62,6 +62,8 @@ const PhilosophySection: React.FC<PhilosophySectionProps> = ({
           font-family: 'Beautifully Delicious', sans-serif;
           font-size: 2rem;
           color: #ffbd59;
+         font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+          font-weight: 400;
         }
 
         .ps-divider {

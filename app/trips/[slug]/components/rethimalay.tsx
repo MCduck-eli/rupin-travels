@@ -37,7 +37,7 @@ const RetHimalay: React.FC<Props> = ({ data }) => {
             <div className="max-w-7xl mx-auto">
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
                     <div className="md:col-span-8">
-                        <h3
+                        <h2
                             className="text-[#2b5a9e] text-[22px] md:text-[28px] mb-6 font-normal"
                             style={{
                                 fontFamily:
@@ -45,7 +45,7 @@ const RetHimalay: React.FC<Props> = ({ data }) => {
                             }}
                         >
                             Trip Highlights:
-                        </h3>
+                        </h2>
                         <ul className="space-y-3">
                             {highlights.map((item, index) => (
                                 <li
@@ -109,7 +109,7 @@ const RetHimalay: React.FC<Props> = ({ data }) => {
                     </div>
 
                     <div className="col-span-full pt-10 border-t border-gray-100">
-                        <h3
+                        <h2
                             className="text-[#2b5a9e] text-[22px] md:text-[28px] mb-6 font-normal"
                             style={{
                                 fontFamily:
@@ -117,7 +117,7 @@ const RetHimalay: React.FC<Props> = ({ data }) => {
                             }}
                         >
                             Trip Description
-                        </h3>
+                        </h2>
                         <div
                             className="space-y-6 text-[18px] md:text-[20px] font-light leading-relaxed text-[#444]"
                             style={{ fontFamily: "'Higuen', serif" }}

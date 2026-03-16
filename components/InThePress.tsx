@@ -71,8 +71,8 @@ const InThePress: React.FC<InThePressProps> = ({ cards = DEFAULT_CARDS }) => {
         .itp-heading {
           /* Sarlavha uchun Beautifully Delicious */
           font-family: 'Beautifully Delicious', sans-serif;
-          font-size: clamp(2.2rem, 5.5vw, 4rem);
-          font-weight: 550;
+          font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+          font-weight: 400;
           color: #6f4e37;
           text-align: center;
           line-height: 1.15;

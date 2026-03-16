@@ -28,14 +28,14 @@ const Hero: React.FC<HeroProps> = ({ data }) => {
             </div>
 
             <div className="relative z-20 flex flex-col items-center text-center px-4">
-                <h1
-                    className="text-4xl md:text-7xl font-medium tracking-tight mb-4 drop-shadow-md"
+                <h2
+                    className="text-4xl md:text-6xl font-medium tracking-tight mb-4 drop-shadow-md"
                     style={{
                         fontFamily: "'Beautifully Delicious', sans-serif",
                     }}
                 >
                     {data.title}
-                </h1>
+                </h2>
 
                 <div
                     className="w-16 h-px bg-[#D4A843] mb-6"

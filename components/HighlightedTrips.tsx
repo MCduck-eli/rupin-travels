@@ -142,7 +142,7 @@ const HighlightedTrips: React.FC<HighlightedTripsProps> = ({
         <section className="bg-[#efede7] py-6 md:py-10 px-4">
             <div className="max-w-7xl mx-auto">
                 <h2
-                    className="text-4xl md:text-7xl text-[#0D2B1D] text-center mb-6 md:mb-10 leading-[0.9] tracking-tight"
+                    className="text-3xl md:text-6xl text-[#0D2B1D] text-center mb-6 md:mb-10 leading-[0.9] tracking-tight"
                     style={{
                         fontFamily: "'Beautifully Delicious', sans-serif",
                     }}

@@ -80,10 +80,8 @@ const WhoSection: React.FC<WhoSectionProps> = ({
                     flex: 1;
                     display: flex;
                     flex-direction: column;
-                    justify-content: center;
                 }
                 .ws-heading {
-                    /* Sarlavha uchun Beautifully Delicious */
                     font-family: 'Beautifully Delicious', sans-serif;
                     font-size: clamp(2.2rem, 4.5vw, 3.5rem);
                     font-weight: 400;
@@ -177,12 +175,12 @@ const WhoSection: React.FC<WhoSectionProps> = ({
             `}</style>
 
             <section className="ws-section">
-                <div className="ws-grid">
-                    <div className="ws-text-column">
-                        <h2 className="ws-heading">
-                            Who these journeys are for
-                        </h2>
-                        <ul className="ws-list">
+                <h2 className="ws-heading flex justify-center items-center mb-10">
+                    Who these journeys are for
+                </h2>
+                <div className="ws-grid flex justify-center">
+                    <div className="ws-text-column mt-5">
+                        <ul className="ws-list ">
                             {bulletItems.map((item) => (
                                 <li key={item.id} className="ws-list-item">
                                     <span
@@ -195,7 +193,7 @@ const WhoSection: React.FC<WhoSectionProps> = ({
                         </ul>
                     </div>
 
-                    <div className="ws-card">
+                    <div className="ws-card mt-5">
                         <div className="ws-blob-wrap">
                             <img
                                 src={founderImageSrc}
