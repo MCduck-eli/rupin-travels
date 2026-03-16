@@ -31,11 +31,22 @@ export default function CulturalValues({ data }: CulturalValuesProps) {
         <section className="w-full py-16 px-6 md:px-16 lg:px-24 bg-[#ede4d9]">
             <div className="max-w-6xl mx-auto space-y-12">
                 {values.map((item, index) => (
-                    <div key={index} className="space-y-3">
-                        <h3 className="text-[22px] md:text-[24px] font-bold text-black tracking-tight">
+                    <div key={index} className="space-y-4">
+                        {/* Sarlavha uchun Beautifully Delicious */}
+                        <h3
+                            className="text-[28px] md:text-[34px] font-normal text-black tracking-normal"
+                            style={{
+                                fontFamily:
+                                    "'Beautifully Delicious', sans-serif",
+                            }}
+                        >
                             {item.title}
                         </h3>
-                        <p className="text-[18px] md:text-[20px] font-light leading-relaxed text-black/90 max-w-5xl">
+                        {/* Tavsif uchun Higuen */}
+                        <p
+                            className="text-[18px] md:text-[21px] font-light leading-relaxed text-black/80 max-w-5xl"
+                            style={{ fontFamily: "'Higuen', serif" }}
+                        >
                             {item.description}
                         </p>
                     </div>

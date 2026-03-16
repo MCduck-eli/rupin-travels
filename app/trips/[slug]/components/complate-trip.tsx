@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface TripInfoItem {
     title: string;
@@ -25,6 +25,7 @@ export default function CompleteTripInfo({ data }: CompleteTripInfoProps) {
         "Exclusions",
         "Food Philosophy",
         "Quick Itinerary",
+        "Detailed Itinerary", // Yangi qator qo'shildi
     ];
 
     const rawItems: TripInfoItem[] = data?.extraDetails || [];
@@ -47,8 +48,10 @@ export default function CompleteTripInfo({ data }: CompleteTripInfoProps) {
         <section className="w-full py-16 px-4 md:px-10 bg-[#ede4d9]">
             <div className="max-w-4xl mx-auto">
                 <h2
-                    style={{ fontFamily: "'Higuen', serif" }}
-                    className="text-[24px] md:text-[28px] font-normal text-[#1a1a1a] mb-8 tracking-[0.02em] uppercase border-b border-black/5 pb-4"
+                    style={{
+                        fontFamily: "'Beautifully Delicious', sans-serif",
+                    }}
+                    className="text-[32px] md:text-[40px] font-normal text-[#1a1a1a] mb-8 tracking-normal border-b border-black/5 pb-4"
                 >
                     Complete Trip Information
                 </h2>
@@ -131,7 +134,11 @@ export default function CompleteTripInfo({ data }: CompleteTripInfoProps) {
                                                         lines.map((line, i) => (
                                                             <li
                                                                 key={i}
-                                                                className="text-[14px] md:text-[15px] leading-relaxed text-black/60 italic flex items-start gap-2"
+                                                                style={{
+                                                                    fontFamily:
+                                                                        "'Higuen', serif",
+                                                                }}
+                                                                className="text-[15px] md:text-[17px] leading-relaxed text-black/70 flex items-start gap-2"
                                                             >
                                                                 <span className="mt-2 text-[#2b5a9e]/40 text-[12px]">
                                                                     •
@@ -140,7 +147,13 @@ export default function CompleteTripInfo({ data }: CompleteTripInfoProps) {
                                                             </li>
                                                         ))
                                                     ) : (
-                                                        <li className="text-[14px] text-black/30 italic">
+                                                        <li
+                                                            style={{
+                                                                fontFamily:
+                                                                    "'Higuen', serif",
+                                                            }}
+                                                            className="text-[14px] text-black/30 italic"
+                                                        >
                                                             No information
                                                             provided yet.
                                                         </li>

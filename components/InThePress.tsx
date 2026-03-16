@@ -1,15 +1,6 @@
-import React from "react";
+"use client";
 
-if (
-    typeof document !== "undefined" &&
-    !document.head.querySelector('[href*="Cormorant"]')
-) {
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href =
-        "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Tenor+Sans&family=Inter:wght@300;400&display=swap";
-    document.head.appendChild(link);
-}
+import React from "react";
 
 interface PressCard {
     id: number;
@@ -67,65 +58,10 @@ const DEFAULT_CARDS: PressCard[] = [
         ),
     },
 ];
-const MASK_ID = "itp-notch-mask";
-
-const NotchMaskDef: React.FC = () => (
-    <svg
-        width="0"
-        height="0"
-        style={{ position: "absolute", overflow: "hidden" }}
-        aria-hidden="true"
-    >
-        <defs>
-            <clipPath id={MASK_ID} clipPathUnits="objectBoundingBox">
-                <path
-                    d="
-          M 0.07,0
-          L 0.93,0
-          Q 1,0 1,0.07
-          L 1,0.0
-          Q 0.93,0 0.93,0
-          M 0.07,0
-          Q 0,0 0,0.07
-
-          M 0.07,0
-          L 0.93,0
-          A 0.07,0.07 0 0 0 1,0.07
-          L 1,0.93
-          A 0.07,0.07 0 0 0 0.93,1
-          L 0.07,1
-          A 0.07,0.07 0 0 0 0,0.93
-          L 0,0.07
-          A 0.07,0.07 0 0 0 0.07,0
-          Z
-        "
-                />
-            </clipPath>
-            <clipPath id="itp-notch-concave" clipPathUnits="objectBoundingBox">
-                <path
-                    d="
-          M 0.09,0
-          L 0.91,0
-          A 0.09,0.09 0 0 1 1,0.09
-          L 1,0.91
-          A 0.09,0.09 0 0 1 0.91,1
-          L 0.09,1
-          A 0.09,0.09 0 0 1 0,0.91
-          L 0,0.09
-          A 0.09,0.09 0 0 1 0.09,0
-          Z
-        "
-                />
-            </clipPath>
-        </defs>
-    </svg>
-);
 
 const InThePress: React.FC<InThePressProps> = ({ cards = DEFAULT_CARDS }) => {
     return (
         <>
-            <NotchMaskDef />
-
             <style>{`
        .itp-section {
          background-color: #efede7;
@@ -133,7 +69,8 @@ const InThePress: React.FC<InThePressProps> = ({ cards = DEFAULT_CARDS }) => {
          padding-bottom: 2rem;
          }
         .itp-heading {
-          font-family: 'Cormorant Garamond', serif;
+          /* Sarlavha uchun Beautifully Delicious */
+          font-family: 'Beautifully Delicious', sans-serif;
           font-size: clamp(2.2rem, 5.5vw, 4rem);
           font-weight: 550;
           color: #6f4e37;
@@ -143,7 +80,6 @@ const InThePress: React.FC<InThePressProps> = ({ cards = DEFAULT_CARDS }) => {
           animation: itp-fadeUp 0.8s ease both;
         }
 
-        /* ── Cards grid ── */
         .itp-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
@@ -152,7 +88,6 @@ const InThePress: React.FC<InThePressProps> = ({ cards = DEFAULT_CARDS }) => {
           margin: 0 auto;
         }
 
-        /* ── Card wrapper (handles label below) ── */
         .itp-card-wrap {
           display: flex;
           flex-direction: column;
@@ -162,7 +97,6 @@ const InThePress: React.FC<InThePressProps> = ({ cards = DEFAULT_CARDS }) => {
           animation: itp-fadeUp 0.7s ease forwards;
         }
 
-        /* ── The card itself ── */
         .itp-card {
           width: 80%;
           aspect-ratio: 4 / 5;
@@ -173,21 +107,11 @@ const InThePress: React.FC<InThePressProps> = ({ cards = DEFAULT_CARDS }) => {
           justify-content: center;
           padding: clamp(1.5rem, 3vw, 2.5rem);
 
-          /*
-            Concave / notched corners:
-            We layer two box-shadows that "fake" the background bleeding into
-            the corners, combined with a clip-path that rounds into the card.
-            Approach: use a radial-gradient mask at each corner.
-          */
-          --r: clamp(16px, 2.5vw, 28px);   /* corner notch radius */
-          --bg: #F2EFE9;                    /* must match section background */
+          --r: clamp(16px, 2.5vw, 28px);   
+          --bg: #F2EFE9;                    
 
           border-radius: 4px;
 
-          /* 
-            Four corner radial gradients that paint the section bg colour
-            into each corner, creating the illusion of inward-curved notches.
-          */
           -webkit-mask:
             radial-gradient(circle at 0    0,    transparent var(--r), white calc(var(--r) + 0.5px)) top    left  / 51% 51% no-repeat,
             radial-gradient(circle at 100% 0,    transparent var(--r), white calc(var(--r) + 0.5px)) top    right / 51% 51% no-repeat,
@@ -200,9 +124,9 @@ const InThePress: React.FC<InThePressProps> = ({ cards = DEFAULT_CARDS }) => {
             radial-gradient(circle at 100% 100%, transparent var(--r), white calc(var(--r) + 0.5px)) bottom right / 51% 51% no-repeat;
         }
 
-        /* ── Card text ── */
         .itp-card-text {
-          font-family: 'Tenor Sans', 'Inter', sans-serif;
+          /* Matn uchun Higuen */
+          font-family: 'Higuen', serif;
           font-size: clamp(0.78rem, 1.4vw, 0.95rem);
           font-weight: 300;
           color: rgba(255,255,255,0.92);
@@ -211,18 +135,17 @@ const InThePress: React.FC<InThePressProps> = ({ cards = DEFAULT_CARDS }) => {
           letter-spacing: 0.03em;
         }
 
-        /* ── Bottom label ── */
         .itp-label {
-          font-family: 'Cormorant Garamond', serif;
-          font-size: clamp(0.62rem, 1.1vw, 0.72rem);
+          /* Label uchun Higuen */
+          font-family: 'Higuen', serif;
+          font-size: clamp(0.7rem, 1.2vw, 0.85rem);
           font-weight: 400;
-          letter-spacing: 0.2em;
+          letter-spacing: 0.15em;
           text-transform: uppercase;
           color: #3a3530;
           text-align: center;
         }
 
-        /* ── Mobile ── */
         @media (max-width: 680px) {
           .itp-grid {
             grid-template-columns: 1fr;
@@ -234,7 +157,6 @@ const InThePress: React.FC<InThePressProps> = ({ cards = DEFAULT_CARDS }) => {
           .itp-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
-        /* ── Keyframes ── */
         @keyframes itp-fadeUp {
           from { opacity: 0; transform: translateY(20px); }
           to   { opacity: 1; transform: translateY(0); }
@@ -252,7 +174,9 @@ const InThePress: React.FC<InThePressProps> = ({ cards = DEFAULT_CARDS }) => {
                             style={{ animationDelay: `${index * 0.13}s` }}
                         >
                             <div className="itp-card">
-                                <p className="itp-card-text">{card.content}</p>
+                                <div className="itp-card-text">
+                                    {card.content}
+                                </div>
                             </div>
                             <span className="itp-label">{card.label}</span>
                         </div>

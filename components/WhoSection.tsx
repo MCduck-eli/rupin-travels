@@ -2,17 +2,6 @@
 
 import React from "react";
 
-if (
-    typeof document !== "undefined" &&
-    !document.head.querySelector('[href*="Cormorant"]')
-) {
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href =
-        "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Playfair+Display:wght@400;500&family=Inter:wght@300;400&display=swap";
-    document.head.appendChild(link);
-}
-
 interface BulletItem {
     id: number;
     text: string;
@@ -94,8 +83,9 @@ const WhoSection: React.FC<WhoSectionProps> = ({
                     justify-content: center;
                 }
                 .ws-heading {
-                    font-family: 'Playfair Display', serif;
-                    font-size: clamp(2.2rem, 4vw, 3rem);
+                    /* Sarlavha uchun Beautifully Delicious */
+                    font-family: 'Beautifully Delicious', sans-serif;
+                    font-size: clamp(2.2rem, 4.5vw, 3.5rem);
                     font-weight: 400;
                     color: #004D3C;
                     line-height: 1.1;
@@ -113,15 +103,16 @@ const WhoSection: React.FC<WhoSectionProps> = ({
                     display: flex;
                     align-items: flex-start;
                     gap: 0.75rem;
-                    font-family: 'Cormorant Garamond', serif;
+                    /* Matn uchun Higuen */
+                    font-family: 'Higuen', serif;
                     font-size: clamp(1.1rem, 1.8vw, 1.25rem);
                     font-weight: 400;
                     color: #004D3C;
-                    line-height: 1.1;
-                    margin-bottom: 10px;
+                    line-height: 1.4;
+                    margin-bottom: 15px;
                 }
                 .ws-bullet {
-                    margin-top: 0.4rem;
+                    margin-top: 0.6rem;
                     width: 5px;
                     height: 5px;
                     border-radius: 50%;
@@ -151,7 +142,8 @@ const WhoSection: React.FC<WhoSectionProps> = ({
                     object-fit: cover;
                 }
                 .ws-yt-link {
-                    font-family: 'Cormorant Garamond', serif;
+                    /* Linklar uchun Higuen */
+                    font-family: 'Higuen', serif;
                     font-size: 1.2rem;
                     font-style: italic;
                     color: #1A1A1A;
@@ -159,8 +151,9 @@ const WhoSection: React.FC<WhoSectionProps> = ({
                     text-underline-offset: 4px;
                 }
                 .ws-cta-btn {
-                    font-family: 'Inter', sans-serif;
-                    font-size: 0.75rem;
+                    /* Tugma uchun Higuen */
+                    font-family: 'Higuen', serif;
+                    font-size: 0.85rem;
                     letter-spacing: 0.2em;
                     text-transform: uppercase;
                     color: #ffffff;

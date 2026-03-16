@@ -139,19 +139,23 @@ const HighlightedTrips: React.FC<HighlightedTripsProps> = ({
     }, [emblaApi]);
 
     return (
-        <section className="bg-[#efede7] py-12 md:py-20 px-4">
+        <section className="bg-[#efede7] py-6 md:py-10 px-4">
             <div className="max-w-7xl mx-auto">
                 <h2
-                    className="text-5xl md:text-[100px] text-[#0D2B1D] text-center mb-10 md:mb-16 font-serif leading-[0.9] tracking-tight"
-                    style={{ fontFamily: "'Higuen Elegant Serif', serif" }}
+                    className="text-4xl md:text-7xl text-[#0D2B1D] text-center mb-6 md:mb-10 leading-[0.9] tracking-tight"
+                    style={{
+                        fontFamily: "'Beautifully Delicious', sans-serif",
+                    }}
                 >
                     {sectionTitle}
                 </h2>
 
-                <div className="bg-[#FAF7F2] p-4 md:p-12 rounded-sm relative shadow-sm">
+                <div className="bg-[#FAF7F2] p-4 md:p-8 rounded-sm relative shadow-sm">
                     <h3
-                        className="text-[#2D2D2D] text-2xl md:text-4xl mb-6 md:mb-10 font-serif font-light"
-                        style={{ fontFamily: "'Higuen Elegant Serif', serif" }}
+                        className="text-[#2D2D2D] text-xl md:text-2xl mb-4 md:mb-6 font-light"
+                        style={{
+                            fontFamily: "'Beautifully Delicious', sans-serif",
+                        }}
                     >
                         {sectionSubtitle}
                     </h3>
@@ -159,14 +163,14 @@ const HighlightedTrips: React.FC<HighlightedTripsProps> = ({
                     <div className="relative group/arrows">
                         <button
                             onClick={scrollPrev}
-                            className="absolute -left-3 md:-left-15 top-[40%] -translate-y-1/2 bg-[#B59461] text-white w-10 h-10 md:w-14 md:h-14 rounded-full flex items-center justify-center z-20 hover:bg-[#967a4f] transition-all shadow-lg active:scale-90"
+                            className="absolute -left-3 md:-left-15 top-[40%] -translate-y-1/2 bg-[#B59461] text-white w-8 h-8 md:w-12 md:h-12 rounded-full flex items-center justify-center z-20 hover:bg-[#967a4f] transition-all shadow-lg active:scale-90"
                         >
                             <span>❮</span>
                         </button>
 
                         <button
                             onClick={scrollNext}
-                            className="absolute -right-3 md:-right-15 top-[40%] -translate-y-1/2 bg-[#B59461] text-white w-10 h-10 md:w-14 md:h-14 rounded-full flex items-center justify-center z-20 hover:bg-[#967a4f] transition-all shadow-lg active:scale-90"
+                            className="absolute -right-3 md:-right-15 top-[40%] -translate-y-1/2 bg-[#B59461] text-white w-8 h-8 md:w-12 md:h-12 rounded-full flex items-center justify-center z-20 hover:bg-[#967a4f] transition-all shadow-lg active:scale-90"
                         >
                             <span>❯</span>
                         </button>
@@ -182,27 +186,27 @@ const HighlightedTrips: React.FC<HighlightedTripsProps> = ({
                                         className="flex-[0_0_100%] min-w-0 md:flex-[0_0_33.33%] pl-4 group"
                                     >
                                         <Link href={`/trips/${trip.slug}`}>
-                                            <div className="relative aspect-10/10 overflow-hidden rounded-3xl mb-6 shadow-md transition-all duration-500 group-hover:shadow-xl">
+                                            <div className="relative aspect-4/4 overflow-hidden rounded-2xl mb-4 shadow-md transition-all duration-500 group-hover:shadow-xl">
                                                 <img
                                                     src={trip.imageUrl}
                                                     alt={trip.title}
                                                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                                 />
-                                                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-6 text-white">
+                                                <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-4 text-white">
                                                     <h4
-                                                        className="text-xl md:text-2xl font-serif  leading-tight mb-2 transform transition-transform duration-500 group-hover:-translate-y-1"
+                                                        className="text-lg md:text-xl leading-tight mb-1 transform transition-transform duration-500 group-hover:-translate-y-1"
                                                         style={{
                                                             fontFamily:
-                                                                "'Higuen Elegant Serif', serif",
+                                                                "'Beautifully Delicious', sans-serif",
                                                         }}
                                                     >
                                                         {trip.title}
                                                     </h4>
                                                     <p
-                                                        className="text-xs md:text-sm font-sans tracking-[0.2em] opacity-80 uppercase font-bold"
+                                                        className="text-[10px] md:text-xs tracking-[0.2em] opacity-80 uppercase font-bold"
                                                         style={{
                                                             fontFamily:
-                                                                "'Higuen Elegant Serif', serif",
+                                                                "'Higuen', serif",
                                                         }}
                                                     >
                                                         {trip.duration}
@@ -213,11 +217,23 @@ const HighlightedTrips: React.FC<HighlightedTripsProps> = ({
 
                                         <div className="text-center hidden md:block">
                                             <Link href={`/trips/${trip.slug}`}>
-                                                <h5 className="text-[#0D2B1D] text-2xl lg:text-3xl font-serif mb-1 hover:text-[#B59461] transition-colors">
+                                                <h5
+                                                    className="text-[#0D2B1D] text-xl lg:text-2xl mb-0.5 hover:text-[#B59461] transition-colors"
+                                                    style={{
+                                                        fontFamily:
+                                                            "'Beautifully Delicious', sans-serif",
+                                                    }}
+                                                >
                                                     {trip.subtitle}
                                                 </h5>
                                             </Link>
-                                            <p className="text-[#6F4E37] italic text-lg font-serif opacity-80">
+                                            <p
+                                                className="text-[#6F4E37] italic text-md opacity-80"
+                                                style={{
+                                                    fontFamily:
+                                                        "'Higuen', serif",
+                                                }}
+                                            >
                                                 {trip.nights}
                                             </p>
                                         </div>
@@ -228,18 +244,27 @@ const HighlightedTrips: React.FC<HighlightedTripsProps> = ({
                     </div>
                 </div>
 
-                <div className="mt-16 space-y-12 md:hidden">
-                    <div className="h-px bg-[#0D2B1D]/10 w-full mb-8" />
+                <div className="mt-8 space-y-6 md:hidden">
+                    <div className="h-px bg-[#0D2B1D]/10 w-full mb-4" />
                     {displayTrips.map((trip, index) => (
                         <Link
                             href={`/trips/${trip.slug}`}
                             key={`mobile-${index}`}
                             className="block text-center"
                         >
-                            <h4 className="text-2xl text-[#0D2B1D] font-serif mb-2 uppercase tracking-tight">
+                            <h4
+                                className="text-xl text-[#0D2B1D] mb-1 uppercase tracking-tight"
+                                style={{
+                                    fontFamily:
+                                        "'Beautifully Delicious', sans-serif",
+                                }}
+                            >
                                 {trip.subtitle}
                             </h4>
-                            <p className="text-[#6F4E37] italic text-lg font-serif">
+                            <p
+                                className="text-[#6F4E37] italic text-md"
+                                style={{ fontFamily: "'Higuen', serif" }}
+                            >
                                 {trip.nights}
                             </p>
                         </Link>

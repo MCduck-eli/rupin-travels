@@ -53,13 +53,22 @@ export default function TravelLandingPage() {
     return (
         <section className="bg-white min-h-screen px-6 py-12 md:px-16 lg:px-24 flex flex-col items-center justify-center">
             <div className="mx-auto max-w-7xl w-full space-y-24">
-                {/* 1. Yuqori qism: Cultural Information (Rasmdagi tepa qism) */}
-                <div className="max-w-6xl space-y-10">
-                    <div className="space-y-3">
-                        <h3 className="text-[20px] md:text-[22px] font-bold text-black tracking-tight">
+                {/* 1. Cultural Information Section */}
+                <div className="max-w-6xl space-y-12">
+                    <div className="space-y-4">
+                        <h3
+                            className="text-[28px] md:text-[34px] text-black tracking-normal"
+                            style={{
+                                fontFamily:
+                                    "'Beautifully Delicious', sans-serif",
+                            }}
+                        >
                             Preserving Cultural Traditions
                         </h3>
-                        <p className="text-[17px] md:text-[19px] font-light leading-relaxed text-black/90">
+                        <p
+                            className="text-[18px] md:text-[21px] font-light leading-relaxed text-black/80"
+                            style={{ fontFamily: "'Higuen', serif" }}
+                        >
                             We honor India’s heritage by offering authentic
                             yoga, meditation, Ayurveda, and cultural experiences
                             while supporting the teachers and communities who
@@ -67,11 +76,20 @@ export default function TravelLandingPage() {
                         </p>
                     </div>
 
-                    <div className="space-y-3">
-                        <h3 className="text-[20px] md:text-[22px] font-bold text-black tracking-tight">
+                    <div className="space-y-4">
+                        <h3
+                            className="text-[28px] md:text-[34px] text-black tracking-normal"
+                            style={{
+                                fontFamily:
+                                    "'Beautifully Delicious', sans-serif",
+                            }}
+                        >
                             Cultural Exchange
                         </h3>
-                        <p className="text-[17px] md:text-[19px] font-light leading-relaxed text-black/90">
+                        <p
+                            className="text-[18px] md:text-[21px] font-light leading-relaxed text-black/80"
+                            style={{ fontFamily: "'Higuen', serif" }}
+                        >
                             We aim to build meaningful connections between
                             travelers and local communities, fostering mutual
                             respect and deeper cultural understanding.
@@ -79,10 +97,9 @@ export default function TravelLandingPage() {
                     </div>
                 </div>
 
-                {/* 2. Pastki qism: Welcome Section (Rasm va Yonidagi matn) */}
+                {/* 2. Welcome Section */}
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center pt-10">
-                    {/* Matn chap tomonda */}
-                    <div className="md:col-span-7 flex flex-col gap-6 order-2 md:order-1">
+                    <div className="md:col-span-7 flex flex-col gap-8 order-2 md:order-1">
                         <motion.h1
                             initial="hidden"
                             whileInView="visible"
@@ -90,7 +107,11 @@ export default function TravelLandingPage() {
                             // @ts-ignore
                             variants={maskReveal}
                             custom={0}
-                            className="font-serif text-[32px] md:text-[42px] leading-[1.2] text-[#8C7355] italic"
+                            style={{
+                                fontFamily:
+                                    "'Beautifully Delicious', sans-serif",
+                            }}
+                            className="text-[42px] md:text-[60px] leading-[1.1] text-[#8C7355]"
                         >
                             {data.title}
                         </motion.h1>
@@ -101,13 +122,13 @@ export default function TravelLandingPage() {
                             viewport={{ once: true }}
                             // @ts-ignore
                             variants={fadeUp}
-                            className="text-[13px] leading-relaxed text-black/80 max-w-lg"
+                            style={{ fontFamily: "'Higuen', serif" }}
+                            className="text-lg md:text-xl leading-relaxed text-black/70 max-w-lg"
                         >
                             {data.description}
                         </motion.p>
                     </div>
 
-                    {/* Rasm o'ng tomonda (Kichikroq va vertikal) */}
                     <motion.div
                         initial={{ opacity: 0, scale: 0.95 }}
                         whileInView={{ opacity: 1, scale: 1 }}
@@ -115,11 +136,11 @@ export default function TravelLandingPage() {
                         transition={{ duration: 1.2 }}
                         className="md:col-span-5 flex justify-center md:justify-end order-1 md:order-2"
                     >
-                        <div className="relative w-[300px] h-[400px] md:w-[350px] md:h-[480px] overflow-hidden shadow-sm">
+                        <div className="relative w-[300px] h-[400px] md:w-[380px] md:h-[520px] overflow-hidden shadow-2xl rounded-sm">
                             <img
                                 src={data.topImage}
-                                alt="Luxury Home"
-                                className="w-full h-full object-cover"
+                                alt="Luxury Journey"
+                                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000"
                             />
                         </div>
                     </motion.div>

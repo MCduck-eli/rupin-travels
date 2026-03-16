@@ -2,20 +2,7 @@
 
 import React from "react";
 
-// ── Google Fonts injection
-if (
-    typeof document !== "undefined" &&
-    !document.head.querySelector('[href*="Playfair"]')
-) {
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href =
-        "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant+Garamond:wght@300;400;500&display=swap";
-    document.head.appendChild(link);
-}
-
 const ExperienceSection: React.FC = () => {
-    // Original matnlar va rasm
     const priorityItems = [
         { id: 1, text: "Small groups" },
         { id: 2, text: "Thoughtful pacing" },
@@ -33,10 +20,10 @@ const ExperienceSection: React.FC = () => {
         }
 
         .es-heading {
-          font-family: 'Playfair Display', serif;
-          font-size: clamp(1.2rem, 2.4vw, 1.75rem);
+          /* Sarlavha uchun Beautifully Delicious */
+          font-family: 'Beautifully Delicious', sans-serif;
+          font-size: clamp(1.8rem, 3.5vw, 2.5rem);
           font-weight: 600;
-          font-style: italic;
           color: #D4A843;
           text-align: center;
           line-height: 1.4;
@@ -45,7 +32,8 @@ const ExperienceSection: React.FC = () => {
         }
 
         .es-body {
-          font-family: "Radley", serif;
+          /* Matn uchun Higuen */
+          font-family: 'Higuen', serif;
           font-size: clamp(1.1rem, 2.2vw, 1.45rem); 
           color: #ffffff;
           text-align: center;
@@ -72,10 +60,12 @@ const ExperienceSection: React.FC = () => {
         }
 
         .es-list-intro {
-          font-family: 'Cormorant Garamond', serif;
+          font-family: 'Higuen', serif;
           font-size: clamp(0.88rem, 1.5vw, 1rem);
           color: rgba(255,255,255,0.82);
           margin: 0 0 0.65rem;
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
         }
 
         .es-list {
@@ -91,7 +81,8 @@ const ExperienceSection: React.FC = () => {
           display: flex;
           align-items: center;
           gap: 0.65rem;
-          font-family: 'Cormorant Garamond', serif;
+          /* List elementlari uchun Higuen */
+          font-family: 'Higuen', serif;
           font-size: clamp(1rem, 1.8vw, 1.2rem);
           color: rgba(255,255,255,0.88);
           animation: es-fadeUp 0.65s ease forwards;

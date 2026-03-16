@@ -36,15 +36,15 @@ export const TripDetailsSection = ({
         "Exclusions",
         "Food Philosophy",
         "Quick Itinerary",
+        "Detailed Itinerary",
     ];
 
     useEffect(() => {
         // Agar dublikat bo'lsa yoki noto'g'ri tartibda bo'lsa, tozalab qayta yozamiz
-        // Faqat fields.length defaultTitles uzunligiga mos kelmasa ishlaydi
         if (fields.length !== defaultTitles.length) {
             // Avval hammasini o'chirib tashlaymiz (tozalash)
             remove();
-            // Keyin faqat kerakli 7 tasini qo'shamiz
+            // Keyin faqat kerakli 8 tasini qo'shamiz
             defaultTitles.forEach((title) => {
                 append({ title: title, description: "", icon: "" });
             });

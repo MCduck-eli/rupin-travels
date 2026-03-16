@@ -57,7 +57,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
                 }
 
                 .rp-title {
-                  font-family: 'Playfair Display', serif;
+                  font-family: 'Higuen', serif;
                   font-size: clamp(2.5rem, 7vw, 5.5rem);
                   font-weight: 600;
                   color: #c9a84c;
@@ -66,11 +66,11 @@ const HeroSection: React.FC<HeroSectionProps> = ({
                   animation: fadeUp 1s ease both;
                   animation-delay: 0.2s;
                   text-align: center;
-                  word-break: break-word; /* Uzun matnlar sig'ishi uchun */
+                  word-break: break-word;
                 }
 
                 .rp-subtitle {
-                  font-family: 'Bodoni Moda', serif;
+                  font-family: 'Beautifully Delicious', sans-serif;
                   font-style: italic;
                   font-size: clamp(1rem, 2.5vw, 1.5rem);
                   font-weight: 400;
@@ -84,7 +84,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
                 }
 
                 .rp-btn {
-                  font-family: 'Cormorant Garamond', serif;
+                  font-family: 'Beautifully Delicious', sans-serif;
                   font-size: 0.78rem;
                   letter-spacing: 0.22em;
                   text-transform: uppercase;

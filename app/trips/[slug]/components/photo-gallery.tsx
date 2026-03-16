@@ -50,10 +50,20 @@ function GalleryCard({
             </div>
 
             <div className="flex flex-col gap-1">
-                <span className="text-[10px] font-medium tracking-[0.3em] text-[#D4A843] uppercase">
+                {/* Label uchun Beautifully Delicious */}
+                <span
+                    className="text-[14px] md:text-[16px] tracking-[0.1em] text-[#D4A843] uppercase"
+                    style={{
+                        fontFamily: "'Beautifully Delicious', sans-serif",
+                    }}
+                >
                     {label || "Moments"}
                 </span>
-                <span className="text-xl font-light text-neutral-900 italic">
+                {/* Title uchun Higuen */}
+                <span
+                    className="text-xl font-light text-neutral-900 italic"
+                    style={{ fontFamily: "'Higuen', serif" }}
+                >
                     {title || "Untitled Moment"}
                 </span>
             </div>

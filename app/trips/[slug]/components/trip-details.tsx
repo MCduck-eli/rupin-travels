@@ -30,7 +30,7 @@ const TripDetails: React.FC<Props> = ({ data }) => {
         },
         {
             label: "Price",
-            value: data?.prices || data?.price || "$ 4,500 pp", // Admin paneldagi 'prices' ga mosladik
+            value: data?.prices || data?.price || "$ 4,500 pp",
             icon: <CreditCard size={32} strokeWidth={1} />,
         },
         {
@@ -69,10 +69,19 @@ const TripDetails: React.FC<Props> = ({ data }) => {
                             {item.icon}
                         </div>
                         <div className="flex flex-col">
-                            <span className="text-gray-500 text-sm tracking-wider uppercase font-light">
+                            <span
+                                className="text-gray-500 text-xs tracking-widest uppercase mb-1"
+                                style={{
+                                    fontFamily:
+                                        "'Beautifully Delicious', sans-serif",
+                                }}
+                            >
                                 {item.label}
                             </span>
-                            <span className="text-black text-lg font-medium font-serif">
+                            <span
+                                className="text-black text-lg font-medium"
+                                style={{ fontFamily: "'Higuen', serif" }}
+                            >
                                 {item.value}
                             </span>
                         </div>

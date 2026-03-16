@@ -29,10 +29,11 @@ const Hero: React.FC<HeroProps> = ({ data }) => {
 
             <div className="relative z-20 flex flex-col items-center text-center px-4">
                 <h1
-                    className="text-4xl md:text-6xl font-medium tracking-widest mb-4 drop-shadow-md uppercase"
-                    style={{ fontFamily: "'Playfair Display', serif" }}
+                    className="text-4xl md:text-7xl font-medium tracking-tight mb-4 drop-shadow-md"
+                    style={{
+                        fontFamily: "'Beautifully Delicious', sans-serif",
+                    }}
                 >
-                    {/* Faqat Hero uchun sarlavha */}
                     {data.title}
                 </h1>
 
@@ -42,13 +43,16 @@ const Hero: React.FC<HeroProps> = ({ data }) => {
                 />
 
                 <p
-                    className="text-lg md:text-xl font-light tracking-[0.15em] mb-10 opacity-90 uppercase"
-                    style={{ fontFamily: "'Cormorant Garamond', serif" }}
+                    className="text-lg md:text-2xl font-light tracking-[0.1em] mb-10 opacity-95"
+                    style={{ fontFamily: "'Higuen', serif" }}
                 >
                     {data.description || "Journeys that transform"}
                 </p>
 
-                <button className="px-10 py-3 border border-white/60 text-white text-xs tracking-[0.3em] uppercase transition-all duration-500 hover:bg-white hover:text-black hover:border-white">
+                <button
+                    className="px-10 py-3 border border-white/60 text-white text-xs tracking-[0.3em] uppercase transition-all duration-500 hover:bg-white hover:text-black hover:border-white"
+                    style={{ fontFamily: "'Higuen', serif" }}
+                >
                     Explore the Journey
                 </button>
             </div>

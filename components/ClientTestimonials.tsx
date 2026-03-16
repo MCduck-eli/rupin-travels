@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 
 interface Testimonial {
@@ -116,7 +118,10 @@ const ClientTestimonials: React.FC = () => {
             <div className="flex flex-col justify-start z-10 w-3/5">
                 <h2
                     className="text-2xl md:text-5xl font-normal mb-6 md:mb-10"
-                    style={{ color: "#6F4E37", fontFamily: "Georgia, serif" }}
+                    style={{
+                        color: "#6F4E37",
+                        fontFamily: "'Beautifully Delicious', sans-serif",
+                    }}
                 >
                     Client Testimonials
                 </h2>
@@ -125,11 +130,12 @@ const ClientTestimonials: React.FC = () => {
                     {TESTIMONIALS.map((t) => (
                         <li key={t.id}>
                             <p
-                                className="text-[10px] md:text-lg leading-tight inline"
+                                className="text-[12px] md:text-xl leading-relaxed inline"
                                 style={{
                                     color: "#6F4E37",
-                                    fontFamily: "'Courier New', monospace",
-                                    borderBottom: "1px solid #6F4E37",
+                                    fontFamily: "'Higuen', serif",
+                                    borderBottom:
+                                        "1px solid rgba(111, 78, 55, 0.3)",
                                 }}
                             >
                                 {t.text}
@@ -156,13 +162,11 @@ const ClientTestimonials: React.FC = () => {
                     rotate={-10}
                     color="#9CC474"
                     className="absolute top-[30%] right-[12%] w-2 md:w-5 h-auto z-30"
-                    opacity={0.6}
                 />
                 <Leaf
                     rotate={35}
                     color="#CDE4A8"
                     className="absolute top-[50%] right-[2%] w-2 md:w-4 h-auto z-30"
-                    opacity={0.4}
                 />
             </div>
         </section>

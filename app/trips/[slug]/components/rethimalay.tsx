@@ -37,7 +37,13 @@ const RetHimalay: React.FC<Props> = ({ data }) => {
             <div className="max-w-7xl mx-auto">
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
                     <div className="md:col-span-8">
-                        <h3 className="text-[#2b5a9e] text-[20px] md:text-[24px] mb-4 font-normal">
+                        <h3
+                            className="text-[#2b5a9e] text-[22px] md:text-[28px] mb-6 font-normal"
+                            style={{
+                                fontFamily:
+                                    "'Beautifully Delicious', sans-serif",
+                            }}
+                        >
                             Trip Highlights:
                         </h3>
                         <ul className="space-y-3">
@@ -45,6 +51,7 @@ const RetHimalay: React.FC<Props> = ({ data }) => {
                                 <li
                                     key={index}
                                     className="flex items-start gap-3 text-[18px] md:text-[20px] font-light text-[#333]"
+                                    style={{ fontFamily: "'Higuen', serif" }}
                                 >
                                     <span className="mt-2.5 h-1.5 w-1.5 rounded-full bg-black shrink-0" />
                                     {item}
@@ -56,17 +63,31 @@ const RetHimalay: React.FC<Props> = ({ data }) => {
                     <div className="md:col-span-4">
                         <div className="sticky top-12 bg-[#ede4d9] rounded-[30px] p-8 md:p-10 shadow-sm space-y-6">
                             <div>
-                                <p className="text-gray-600 text-[14px] uppercase tracking-widest mb-1 font-medium">
+                                <p
+                                    className="text-gray-600 text-[12px] uppercase tracking-widest mb-1 font-medium"
+                                    style={{
+                                        fontFamily:
+                                            "'Beautifully Delicious', sans-serif",
+                                    }}
+                                >
                                     Cost
                                 </p>
-                                <p className="text-[28px] md:text-[32px] font-light text-[#333]">
+                                <p
+                                    className="text-[28px] md:text-[32px] font-light text-[#333]"
+                                    style={{ fontFamily: "'Higuen', serif" }}
+                                >
                                     $ {data.price || "0.00"} pp
                                 </p>
                             </div>
 
                             {data.extraCost && (
                                 <div className="pt-4 border-t border-black/10">
-                                    <p className="text-[17px] font-light text-[#444] leading-snug">
+                                    <p
+                                        className="text-[17px] font-light text-[#444] leading-snug"
+                                        style={{
+                                            fontFamily: "'Higuen', serif",
+                                        }}
+                                    >
                                         {data.extraCost}
                                     </p>
                                 </div>
@@ -75,6 +96,7 @@ const RetHimalay: React.FC<Props> = ({ data }) => {
                             <div className="pt-6">
                                 <button
                                     className="text-[15px] font-medium border-b border-black/30 hover:border-black transition-all text-black/70 hover:text-black"
+                                    style={{ fontFamily: "'Higuen', serif" }}
                                     onClick={() =>
                                         data.cancellationPolicy &&
                                         alert(data.cancellationPolicy)
@@ -87,10 +109,19 @@ const RetHimalay: React.FC<Props> = ({ data }) => {
                     </div>
 
                     <div className="col-span-full pt-10 border-t border-gray-100">
-                        <h3 className="text-[#2b5a9e] text-[20px] md:text-[24px] mb-4 font-normal">
+                        <h3
+                            className="text-[#2b5a9e] text-[22px] md:text-[28px] mb-6 font-normal"
+                            style={{
+                                fontFamily:
+                                    "'Beautifully Delicious', sans-serif",
+                            }}
+                        >
                             Trip Description
                         </h3>
-                        <div className="space-y-6 text-[18px] md:text-[20px] font-light leading-relaxed text-[#444]">
+                        <div
+                            className="space-y-6 text-[18px] md:text-[20px] font-light leading-relaxed text-[#444]"
+                            style={{ fontFamily: "'Higuen', serif" }}
+                        >
                             <p className="italic font-medium text-black/80">
                                 {data.fullTitle || data.title}
                             </p>

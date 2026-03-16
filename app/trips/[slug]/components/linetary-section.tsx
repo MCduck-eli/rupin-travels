@@ -34,10 +34,19 @@ export default function DayItineraryComponent({
         <section className="bg-[#F5F2ED] py-12 px-6 md:px-16 lg:px-24 min-h-150 flex flex-col items-center">
             <div className="w-full max-w-5xl">
                 <div className="mb-10 text-left">
-                    <h2 className="font-serif text-3xl md:text-4xl text-[#2D2D2D] tracking-tight italic">
+                    {/* Asosiy sarlavha uchun Beautifully Delicious */}
+                    <h2
+                        className="text-4xl md:text-5xl text-[#2D2D2D] tracking-tight"
+                        style={{
+                            fontFamily: "'Beautifully Delicious', sans-serif",
+                        }}
+                    >
                         Itinerary
                     </h2>
-                    <p className="text-[#2D2D2D]/40 font-serif italic mt-2">
+                    <p
+                        className="text-[#2D2D2D]/40 mt-2 italic text-lg"
+                        style={{ fontFamily: "'Higuen', serif" }}
+                    >
                         The Journey Day by Day
                     </p>
                 </div>
@@ -47,6 +56,7 @@ export default function DayItineraryComponent({
                         <button
                             key={index}
                             onClick={() => setActiveDay(index)}
+                            style={{ fontFamily: "'Higuen', serif" }}
                             className={`px-4 py-2 md:px-6 md:py-2.5 rounded-full text-[10px] md:text-xs font-bold tracking-[0.2em] transition-all duration-300 border ${
                                 activeDay === index
                                     ? "bg-[#D4B94E] border-[#D4B94E] text-white shadow-md"
@@ -69,7 +79,7 @@ export default function DayItineraryComponent({
                             className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center"
                         >
                             <div className="order-2 md:order-1">
-                                <div className="border border-[#4A2C1A]/10 p-2 bg-white shadow-sm">
+                                <div className="border border-[#4A2C1A]/10 p-2 bg-white shadow-sm rounded-sm">
                                     <img
                                         src={
                                             displayItinerary[activeDay].image ||
@@ -82,13 +92,25 @@ export default function DayItineraryComponent({
                             </div>
 
                             <div className="order-1 md:order-2 text-center md:text-left">
-                                <span className="text-[10px] tracking-[0.3em] text-[#D4B94E] font-bold uppercase block mb-2">
+                                <span
+                                    className="text-[14px] tracking-[0.1em] text-[#D4B94E] uppercase block mb-2"
+                                    style={{
+                                        fontFamily:
+                                            "'Beautifully Delicious', sans-serif",
+                                    }}
+                                >
                                     Daily Experience
                                 </span>
-                                <h3 className="font-serif text-3xl md:text-4xl text-[#2D2D2D] mb-6 leading-tight">
+                                <h3
+                                    className="text-3xl md:text-4xl text-[#2D2D2D] mb-6 leading-tight italic"
+                                    style={{ fontFamily: "'Higuen', serif" }}
+                                >
                                     {displayItinerary[activeDay].title}
                                 </h3>
-                                <p className="text-[#2D2D2D]/60 text-sm md:text-base leading-relaxed max-w-md mx-auto md:mx-0 font-light">
+                                <p
+                                    className="text-[#2D2D2D]/70 text-base md:text-lg leading-relaxed max-w-md mx-auto md:mx-0 font-light"
+                                    style={{ fontFamily: "'Higuen', serif" }}
+                                >
                                     {displayItinerary[activeDay].content}
                                 </p>
                                 <div className="mt-8 h-px w-24 bg-[#D4B94E] mx-auto md:mx-0" />

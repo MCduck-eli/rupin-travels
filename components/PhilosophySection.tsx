@@ -2,17 +2,6 @@
 
 import React from "react";
 
-if (
-    typeof document !== "undefined" &&
-    !document.head.querySelector('[href*="Playfair"]')
-) {
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href =
-        "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant+Garamond:wght@300;400;500&display=swap";
-    document.head.appendChild(link);
-}
-
 interface PhilosophySectionProps {
     tagline?: string;
     title?: string;
@@ -36,7 +25,7 @@ const PhilosophySection: React.FC<PhilosophySectionProps> = ({
           text-align: center;
         }
         .ps-tagline {
-          font-family: 'Playfair Display', serif;
+          font-family: 'Higuen', serif;
           font-size: clamp(1.4rem, 3vw, 2.2rem);
           font-weight: 500;
           color: #1a1510;
@@ -56,20 +45,23 @@ const PhilosophySection: React.FC<PhilosophySectionProps> = ({
         }
 
         .ps-section-header {
-
           margin-bottom: 1.2rem;
         }
+
         .ps-label-gold {
-          font-family: 'Cormorant Garamond', serif;
+          font-family: 'Beautifully Delicious', sans-serif;
           font-size: 0.85rem;
           letter-spacing: 0.2em;
           text-transform: uppercase;
           display: block;
           margin-bottom: 0.3rem;
+          color: #ffbd59;
         }
+
         .ps-title-white {
-          font-family: 'Playfair Display', serif;
+          font-family: 'Beautifully Delicious', sans-serif;
           font-size: 2rem;
+          color: #ffbd59;
         }
 
         .ps-divider {
@@ -79,7 +71,7 @@ const PhilosophySection: React.FC<PhilosophySectionProps> = ({
         }
 
         .ps-luxury-item {
-          font-family: 'Cormorant Garamond', serif;
+          font-family: 'Higuen', serif;
           font-size: 1.2rem;
           color: #d4baac;
           line-height: 1.6;
@@ -87,7 +79,7 @@ const PhilosophySection: React.FC<PhilosophySectionProps> = ({
         }
 
         .ps-footer-text {
-          font-family: 'Cormorant Garamond', serif;
+          font-family: 'Beautifully Delicious', sans-serif;
           font-size: 1.1rem;
           letter-spacing: 0.1em;
           text-transform: uppercase;
@@ -103,29 +95,14 @@ const PhilosophySection: React.FC<PhilosophySectionProps> = ({
 
             <div className="ps-philosophy-band">
                 <div className="ps-container">
-                    <div
-                        className="ps-section-header text-[#ffbd59]"
-                        style={{
-                            fontFamily: "'Beautifully Delicious', cursive",
-                        }}
-                    >
+                    <div className="ps-section-header">
                         <span className="ps-label-gold">Our Philosophy</span>
-                        <h2
-                            className="ps-title-white text-[#ffbd59] "
-                            style={{
-                                fontFamily: "'Beautifully Delicious', cursive",
-                            }}
-                        >
-                            Luxury As Intention
-                        </h2>
+                        <h2 className="ps-title-white">Luxury As Intention</h2>
                     </div>
 
                     <div className="ps-divider" />
 
-                    <div
-                        className="ps-luxury-item"
-                        style={{ fontFamily: "'Higuen Elegant Serif', serif" }}
-                    >
+                    <div className="ps-luxury-item">
                         {content ||
                             `To us, luxury means:
                         • Time to slow down
@@ -135,12 +112,7 @@ const PhilosophySection: React.FC<PhilosophySectionProps> = ({
                         • Experiences that stay with you long after you return home`}
                     </div>
 
-                    <p
-                        className="ps-footer-text"
-                        style={{
-                            fontFamily: "'Beautifully Delicious', cursive",
-                        }}
-                    >
+                    <p className="ps-footer-text">
                         We design journeys that protect these values.
                     </p>
                 </div>

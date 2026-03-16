@@ -54,7 +54,7 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
             transition={{ duration: 0.3 }}
             className="flex flex-col"
         >
-            <div className="aspect-square w-full overflow-hidden rounded-2xl">
+            <div className="aspect-square w-full overflow-hidden rounded-2xl bg-white shadow-sm">
                 <img
                     src={testimonial.image || "/placeholder-user.jpg"}
                     alt={testimonial.name}
@@ -62,15 +62,29 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
                 />
             </div>
             <div className="flex flex-1 flex-col justify-between pt-6">
-                <p className="mb-6 font-serif text-base italic leading-relaxed text-[#1a1a1a]/80">
+                {/* Comment uchun Higuen */}
+                <p
+                    className="mb-6 text-[18px] md:text-[20px] italic leading-relaxed text-[#1a1a1a]/80"
+                    style={{ fontFamily: "'Higuen', serif" }}
+                >
                     {`"${testimonial.comment}"`}
                 </p>
                 <div>
-                    <p className="font-serif text-2xl text-[#1a1a1a] md:text-3xl">
+                    {/* Name uchun Higuen */}
+                    <p
+                        className="text-2xl text-[#1a1a1a] md:text-3xl"
+                        style={{ fontFamily: "'Higuen', serif" }}
+                    >
                         {`\u2014 ${testimonial.name}`}
                     </p>
                     {testimonial.location && (
-                        <p className="text-sm font-sans uppercase tracking-widest text-gray-400 mt-1">
+                        <p
+                            className="text-xs uppercase tracking-[0.2em] text-[#D4A843] mt-2"
+                            style={{
+                                fontFamily:
+                                    "'Beautifully Delicious', sans-serif",
+                            }}
+                        >
                             {testimonial.location}
                         </p>
                     )}
@@ -94,9 +108,15 @@ export default function TestimonialsClient({
     const displayTitle = title || "Client Testimonials";
 
     return (
-        <section className="bg-[#F5F2ED] px-6 py-20 md:px-16 lg:px-24 min-h-screen">
+        <section className="bg-[#F5F2ED] px-6 py-20 md:px-16 lg:px-24">
             <div className="mx-auto max-w-6xl">
-                <h2 className="mb-2 text-center font-serif text-4xl text-[#1a1a1a] md:text-5xl">
+                {/* Sarlavha uchun Beautifully Delicious */}
+                <h2
+                    className="mb-2 text-center text-4xl md:text-6xl text-[#1a1a1a]"
+                    style={{
+                        fontFamily: "'Beautifully Delicious', sans-serif",
+                    }}
+                >
                     {displayTitle}
                 </h2>
                 <div className="mx-auto mb-14 mt-4 h-px w-full max-w-4xl bg-[#1a1a1a]/15" />
