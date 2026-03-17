@@ -33,7 +33,6 @@ export default async function Page({ params }: { params: { slug: string } }) {
             <GallerySection data={trip.gallery || []} />
             <InfoAccordion data={trip} />
             <CompleteTripInfo data={trip} />
-            <ItinerarySection itinerary={trip.itinerary || []} />
             <CulturalValues />
         </main>
     );

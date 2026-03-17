@@ -13,6 +13,34 @@ const AboutSettingsSchema = new mongoose.Schema(
         },
         topImage: { type: String, default: "" },
         bottomImage: { type: String, default: "" },
+        whoAreWeTitle: {
+            type: String,
+            default: "Who Are We?",
+        },
+        founderName: {
+            type: String,
+            default: "Sashi Nk",
+        },
+        founderRole: {
+            type: String,
+            default: "Founder and CEO",
+        },
+        founderImage: {
+            type: String,
+            default: "",
+        },
+        founderAboutTitle: {
+            type: String,
+            default: "About the Founder",
+        },
+        founderDescription1: {
+            type: String,
+            default: "",
+        },
+        founderDescription2: {
+            type: String,
+            default: "",
+        },
     },
     { timestamps: true },
 );

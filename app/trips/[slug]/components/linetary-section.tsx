@@ -31,12 +31,11 @@ export default function DayItineraryComponent({
         itinerary && itinerary.length > 0 ? itinerary : DEFAULT_ITINERARY;
 
     return (
-        <section className="bg-[#F5F2ED] py-12 px-6 md:px-16 lg:px-24 min-h-150 flex flex-col items-center">
+        <section className="bg-[#F5F2ED] py-6 px-4 md:px-10 lg:px-16 min-h-fit flex flex-col items-center">
             <div className="w-full max-w-5xl">
-                <div className="mb-10 text-left">
-                    {/* Asosiy sarlavha uchun Beautifully Delicious */}
+                <div className="mb-6 text-left">
                     <h2
-                        className="text-4xl md:text-5xl text-[#2D2D2D] tracking-tight"
+                        className="text-3xl md:text-4xl text-[#2D2D2D] tracking-tight"
                         style={{
                             fontFamily: "'Beautifully Delicious', sans-serif",
                         }}
@@ -44,23 +43,23 @@ export default function DayItineraryComponent({
                         Itinerary
                     </h2>
                     <p
-                        className="text-[#2D2D2D]/40 mt-2 italic text-lg"
+                        className="text-[#2D2D2D]/40 mt-1 italic text-base"
                         style={{ fontFamily: "'Higuen', serif" }}
                     >
                         The Journey Day by Day
                     </p>
                 </div>
 
-                <div className="flex flex-wrap justify-center gap-2 md:gap-3 mb-12">
+                <div className="flex flex-wrap justify-center gap-2 mb-8">
                     {displayItinerary.map((_, index) => (
                         <button
                             key={index}
                             onClick={() => setActiveDay(index)}
                             style={{ fontFamily: "'Higuen', serif" }}
-                            className={`px-4 py-2 md:px-6 md:py-2.5 rounded-full text-[10px] md:text-xs font-bold tracking-[0.2em] transition-all duration-300 border ${
+                            className={`px-3 py-1.5 md:px-5 md:py-2 rounded-full text-[9px] md:text-[11px] font-bold tracking-[0.15em] transition-all duration-300 border ${
                                 activeDay === index
-                                    ? "bg-[#D4B94E] border-[#D4B94E] text-white shadow-md"
-                                    : "bg-transparent border-[#2D2D2D]/20 text-[#2D2D2D]/40 hover:border-[#2D2D2D]/60"
+                                    ? "bg-[#D4B94E] border-[#D4B94E] text-white shadow-sm"
+                                    : "bg-transparent border-[#2D2D2D]/10 text-[#2D2D2D]/40 hover:border-[#2D2D2D]/40"
                             }`}
                         >
                             DAY {index + 1}
@@ -68,32 +67,32 @@ export default function DayItineraryComponent({
                     ))}
                 </div>
 
-                <div className="relative overflow-hidden min-h-[400px]">
+                <div className="relative overflow-hidden min-h-[300px]">
                     <AnimatePresence mode="wait">
                         <motion.div
                             key={activeDay}
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -20 }}
-                            transition={{ duration: 0.5, ease: "easeInOut" }}
-                            className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center"
+                            exit={{ opacity: 0, y: -10 }}
+                            transition={{ duration: 0.4, ease: "easeInOut" }}
+                            className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center"
                         >
                             <div className="order-2 md:order-1">
-                                <div className="border border-[#4A2C1A]/10 p-2 bg-white shadow-sm rounded-sm">
+                                <div className="border border-[#4A2C1A]/10 p-1.5 bg-white shadow-sm rounded-sm">
                                     <img
                                         src={
                                             displayItinerary[activeDay].image ||
                                             "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&q=80"
                                         }
                                         alt={displayItinerary[activeDay].title}
-                                        className="w-full h-80 object-cover grayscale hover:grayscale-0 transition-all duration-700 ease-in-out"
+                                        className="w-full h-64 md:h-72 object-cover grayscale hover:grayscale-0 transition-all duration-700 ease-in-out"
                                     />
                                 </div>
                             </div>
 
                             <div className="order-1 md:order-2 text-center md:text-left">
                                 <span
-                                    className="text-[14px] tracking-[0.1em] text-[#D4B94E] uppercase block mb-2"
+                                    className="text-[12px] tracking-[0.1em] text-[#D4B94E] uppercase block mb-1"
                                     style={{
                                         fontFamily:
                                             "'Beautifully Delicious', sans-serif",
@@ -102,18 +101,18 @@ export default function DayItineraryComponent({
                                     Daily Experience
                                 </span>
                                 <h3
-                                    className="text-3xl md:text-4xl text-[#2D2D2D] mb-6 leading-tight italic"
+                                    className="text-2xl md:text-3xl text-[#2D2D2D] mb-3 leading-tight italic"
                                     style={{ fontFamily: "'Higuen', serif" }}
                                 >
                                     {displayItinerary[activeDay].title}
                                 </h3>
                                 <p
-                                    className="text-[#2D2D2D]/70 text-base md:text-lg leading-relaxed max-w-md mx-auto md:mx-0 font-light"
+                                    className="text-[#2D2D2D]/70 text-sm md:text-base leading-relaxed max-w-md mx-auto md:mx-0 font-light"
                                     style={{ fontFamily: "'Higuen', serif" }}
                                 >
                                     {displayItinerary[activeDay].content}
                                 </p>
-                                <div className="mt-8 h-px w-24 bg-[#D4B94E] mx-auto md:mx-0" />
+                                <div className="mt-4 h-px w-16 bg-[#D4B94E] mx-auto md:mx-0" />
                             </div>
                         </motion.div>
                     </AnimatePresence>

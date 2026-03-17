@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import DayItineraryComponent from "./linetary-section";
 
 interface TripInfoItem {
     title: string;
@@ -25,7 +26,7 @@ export default function CompleteTripInfo({ data }: CompleteTripInfoProps) {
         "Exclusions",
         "Food Philosophy",
         "Quick Itinerary",
-        "Detailed Itinerary", // Yangi qator qo'shildi
+        "Detailed Itinerary",
     ];
 
     const rawItems: TripInfoItem[] = data?.extraDetails || [];
@@ -59,6 +60,9 @@ export default function CompleteTripInfo({ data }: CompleteTripInfoProps) {
                 <div className="flex flex-col">
                     {infoItems.map((item, index) => {
                         const isOpen = openIndex === index;
+                        const isDetailedItinerary =
+                            item.title === "Detailed Itinerary";
+
                         const lines =
                             item.description
                                 ?.split("\n")
@@ -128,37 +132,49 @@ export default function CompleteTripInfo({ data }: CompleteTripInfoProps) {
                                             transition={{ duration: 0.3 }}
                                             className="overflow-hidden"
                                         >
-                                            <div className="pb-6 pl-13 pr-4 md:pl-13">
-                                                <ul className="space-y-3 border-l border-black/5 ml-4 md:ml-4 pl-5">
-                                                    {lines.length > 0 ? (
-                                                        lines.map((line, i) => (
+                                            <div className="pb-6">
+                                                {isDetailedItinerary ? (
+                                                    <div className="mt-4">
+                                                        <DayItineraryComponent
+                                                            itinerary={
+                                                                data?.itinerary
+                                                            }
+                                                        />
+                                                    </div>
+                                                ) : (
+                                                    <ul className="space-y-3 border-l border-black/5 ml-13 pl-5">
+                                                        {lines.length > 0 ? (
+                                                            lines.map(
+                                                                (line, i) => (
+                                                                    <li
+                                                                        key={i}
+                                                                        style={{
+                                                                            fontFamily:
+                                                                                "'Higuen', serif",
+                                                                        }}
+                                                                        className="text-[15px] md:text-[17px] leading-relaxed text-black/70 flex items-start gap-2"
+                                                                    >
+                                                                        <span className="mt-2 text-[#2b5a9e]/40 text-[12px]">
+                                                                            •
+                                                                        </span>
+                                                                        {line}
+                                                                    </li>
+                                                                ),
+                                                            )
+                                                        ) : (
                                                             <li
-                                                                key={i}
                                                                 style={{
                                                                     fontFamily:
                                                                         "'Higuen', serif",
                                                                 }}
-                                                                className="text-[15px] md:text-[17px] leading-relaxed text-black/70 flex items-start gap-2"
+                                                                className="text-[14px] text-black/30 italic"
                                                             >
-                                                                <span className="mt-2 text-[#2b5a9e]/40 text-[12px]">
-                                                                    •
-                                                                </span>
-                                                                {line}
+                                                                No information
+                                                                provided yet.
                                                             </li>
-                                                        ))
-                                                    ) : (
-                                                        <li
-                                                            style={{
-                                                                fontFamily:
-                                                                    "'Higuen', serif",
-                                                            }}
-                                                            className="text-[14px] text-black/30 italic"
-                                                        >
-                                                            No information
-                                                            provided yet.
-                                                        </li>
-                                                    )}
-                                                </ul>
+                                                        )}
+                                                    </ul>
+                                                )}
                                             </div>
                                         </motion.div>
                                     )}

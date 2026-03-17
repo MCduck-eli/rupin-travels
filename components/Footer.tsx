@@ -7,14 +7,14 @@ import Link from "next/link";
 const Footer: React.FC = () => {
     return (
         <footer
-            className="w-full py-16 px-6 md:px-16"
-            style={{ backgroundColor: "#4A4643" }}
+            className="w-full py-12 px-6 md:px-16 border-t border-white/10"
+            style={{ backgroundColor: "#3f3e38" }}
         >
-            <div className="max-w-7xl mx-auto relative">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-start">
+            <div className="max-w-7xl mx-auto">
+                <div className="flex flex-col md:flex-row justify-between items-center md:items-start gap-12">
                     <div className="text-center md:text-left space-y-4">
                         <h3
-                            className="text-[#D4A843] text-lg tracking-[0.15em] uppercase"
+                            className="text-white text-xl tracking-[0.1em] uppercase"
                             style={{
                                 fontFamily:
                                     "'Beautifully Delicious', sans-serif",
@@ -23,132 +23,57 @@ const Footer: React.FC = () => {
                             RESERVATIONS OFFICE
                         </h3>
                         <div
-                            className="text-[#D4A843] text-lg space-y-1"
+                            className="text-white/90 text-lg space-y-1 font-light"
                             style={{ fontFamily: "'Higuen', serif" }}
                         >
                             <p>Los Angeles, CA</p>
                             <p>+1-805-285-3237</p>
-                            <p className="lowercase italic">
-                                Info@RupinTravels.com
-                            </p>
-                        </div>
-                        <div className="pt-4">
-                            <h3
-                                className="text-[#D4A843] text-lg tracking-[0.15em] uppercase mb-2"
-                                style={{
-                                    fontFamily:
-                                        "'Beautifully Delicious', sans-serif",
-                                }}
-                            >
-                                HOURS
-                            </h3>
-                            <p
-                                className="text-[#D4A843] text-lg"
-                                style={{ fontFamily: "'Higuen', serif" }}
-                            >
-                                M-F - 9 - 6:00 PM PST
-                            </p>
+                            <p>Info@RupinTravels.com</p>
                         </div>
                     </div>
-
-                    <div className="text-center md:text-left">
+                    <div className="flex flex-col items-center space-y-6">
                         <h3
-                            className="text-[#D4A843] text-lg tracking-[0.15em] uppercase mb-4"
+                            className="text-white text-xl tracking-[0.1em] uppercase border border-white/20 px-8 py-2 rounded-lg"
                             style={{
                                 fontFamily:
                                     "'Beautifully Delicious', sans-serif",
                             }}
                         >
-                            TRAVEL HELP
+                            FOLLOW US
                         </h3>
-                        <a
-                            href="#faqs"
-                            className="text-[#D4A843] text-lg hover:underline"
-                            style={{ fontFamily: "'Higuen', serif" }}
+                        <div className="flex gap-6 text-white">
+                            <Link
+                                href="#"
+                                className="hover:opacity-80 transition-opacity"
+                            >
+                                <Facebook size={28} fill="currentColor" />
+                            </Link>
+                            <Link
+                                href="#"
+                                className="hover:opacity-80 transition-opacity"
+                            >
+                                <Twitter size={28} fill="currentColor" />
+                            </Link>
+                            <Link
+                                href="#"
+                                className="hover:opacity-80 transition-opacity"
+                            >
+                                <Instagram size={28} />
+                            </Link>
+                        </div>
+                    </div>
+                    <div className="flex justify-center"></div>
+                    <div className="flex flex-col items-center md:items-end">
+                        <Link
+                            href={"/contact"}
+                            className="text-white text-xl tracking-widest uppercase border border-white/20 px-10 py-3 rounded-lg hover:bg-white/5 transition-all"
+                            style={{
+                                fontFamily:
+                                    "'Beautifully Delicious', sans-serif",
+                            }}
                         >
-                            FAQs
-                        </a>
-                    </div>
-
-                    <div className="flex flex-col items-center relative pt-4 lg:-mt-10">
-                        <div className="bg-[#D4A843] p-6 rounded-xl relative mb-4 text-center shadow-lg">
-                            <h3
-                                className="text-[#4A4643] text-lg font-bold leading-tight uppercase mb-2"
-                                style={{
-                                    fontFamily:
-                                        "'Beautifully Delicious', sans-serif",
-                                }}
-                            >
-                                MAKE SURE TO JOIN US <br /> ON ZOOM
-                            </h3>
-                            <p
-                                className="text-[#4A4643] text-sm italic"
-                                style={{ fontFamily: "'Higuen', serif" }}
-                            >
-                                next Zoom call -{" "}
-                                <span className="not-italic font-bold tracking-wider">
-                                    &lt;ds99990999&gt;
-                                </span>
-                            </p>
-                            <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[15px] border-l-transparent border-r-[15px] border-r-transparent border-t-[15px] border-[#D4A843]"></div>
-                        </div>
-                    </div>
-
-                    <div className="text-center md:text-right flex flex-col items-center md:items-end space-y-8">
-                        <div>
-                            <h3
-                                className="text-[#D4A843] text-lg tracking-[0.15em] uppercase"
-                                style={{
-                                    fontFamily:
-                                        "'Beautifully Delicious', sans-serif",
-                                }}
-                            >
-                                CONTACT US
-                            </h3>
-                        </div>
-
-                        <div className="space-y-4">
-                            <h3
-                                className="text-[#D4A843] text-lg tracking-[0.15em] uppercase"
-                                style={{
-                                    fontFamily:
-                                        "'Beautifully Delicious', sans-serif",
-                                }}
-                            >
-                                FOLLOW US
-                            </h3>
-                            <div className="flex gap-4 justify-center md:justify-end text-white">
-                                <Link
-                                    href="#"
-                                    className="bg-white p-1 rounded-sm"
-                                >
-                                    <Facebook
-                                        size={24}
-                                        className="text-[#4A4643]"
-                                        fill="currentColor"
-                                    />
-                                </Link>
-                                <Link
-                                    href="#"
-                                    className="bg-white p-1 rounded-sm"
-                                >
-                                    <Twitter
-                                        size={24}
-                                        className="text-[#4A4643]"
-                                        fill="currentColor"
-                                    />
-                                </Link>
-                                <Link
-                                    href="#"
-                                    className="bg-white p-1 rounded-sm"
-                                >
-                                    <Instagram
-                                        size={24}
-                                        className="text-[#4A4643]"
-                                    />
-                                </Link>
-                            </div>
-                        </div>
+                            CONTACT US
+                        </Link>
                     </div>
                 </div>
             </div>

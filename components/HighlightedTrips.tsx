@@ -150,9 +150,9 @@ const HighlightedTrips: React.FC<HighlightedTripsProps> = ({
                     {sectionTitle}
                 </h2>
 
-                <div className="bg-[#FAF7F2] p-4 md:p-8 rounded-sm relative shadow-sm">
+                <div className="bg-[#FAF7F2] p-4  rounded-sm relative shadow-sm">
                     <h3
-                        className="text-[#2D2D2D] text-xl md:text-2xl mb-4 md:mb-6 font-light"
+                        className="text-[#2D2D2D] text-xl md:text-2xl mb-4 md:mb-4 font-light"
                         style={{
                             fontFamily: "'Beautifully Delicious', sans-serif",
                         }}
