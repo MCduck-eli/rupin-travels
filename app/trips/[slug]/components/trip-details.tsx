@@ -61,7 +61,7 @@ const TripDetails: React.FC<Props> = ({ data }) => {
     ];
 
     return (
-        <div className="bg-[#eeeeee] py-16 px-6 md:px-20">
+        <div className="bg-[#eeeeee]  py-6 px-6 md:px-20">
             <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-12 gap-y-10">
                 {details.map((item, index) => (
                     <div key={index} className="flex items-center gap-4 group">

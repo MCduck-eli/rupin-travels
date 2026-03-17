@@ -28,7 +28,7 @@ export default function ContactSection() {
     }, []);
 
     return (
-        <section className="bg-[#fff7f5] py-24 px-6 md:px-16 lg:px-24">
+        <section className="bg-[#fff7f5] py-24 px-6 md:px-16 lg:px-24 h-180">
             <div className="mx-auto max-w-6xl flex flex-col md:flex-row items-center justify-between gap-12 md:gap-20">
                 <motion.div
                     initial={{ opacity: 0, x: -30 }}
