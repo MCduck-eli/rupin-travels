@@ -82,7 +82,7 @@ const WhoSection: React.FC<WhoSectionProps> = ({
                     flex-direction: column;
                 }
                 .ws-heading {
-                    font-family: 'Beautifully Delicious', sans-serif;
+                    /* font-family olib tashlandi, h2 bo'lgani uchun globals.css dan oladi */
                     font-size: clamp(2.2rem, 4.5vw, 3.5rem);
                     font-weight: 400;
                     color: #004D3C;
@@ -101,8 +101,7 @@ const WhoSection: React.FC<WhoSectionProps> = ({
                     display: flex;
                     align-items: flex-start;
                     gap: 0.75rem;
-                    /* Matn uchun Higuen */
-                    font-family: 'Higuen', serif;
+                    /* font-family olib tashlandi, li va span globals.css dan oladi */
                     font-size: clamp(1.1rem, 1.8vw, 1.25rem);
                     font-weight: 400;
                     color: #004D3C;
@@ -140,8 +139,7 @@ const WhoSection: React.FC<WhoSectionProps> = ({
                     object-fit: cover;
                 }
                 .ws-yt-link {
-                    /* Linklar uchun Higuen */
-                    font-family: 'Higuen', serif;
+                    /* font-family olib tashlandi, a bo'lgani uchun globals.css dan oladi */
                     font-size: 1.2rem;
                     font-style: italic;
                     color: #1A1A1A;
@@ -149,8 +147,7 @@ const WhoSection: React.FC<WhoSectionProps> = ({
                     text-underline-offset: 4px;
                 }
                 .ws-cta-btn {
-                    /* Tugma uchun Higuen */
-                    font-family: 'Higuen', serif;
+                    /* font-family olib tashlandi, button bo'lgani uchun globals.css dan oladi */
                     font-size: 0.85rem;
                     letter-spacing: 0.2em;
                     text-transform: uppercase;

@@ -53,59 +53,34 @@ export default function ContactSection() {
                     transition={{ duration: 0.8, ease: "easeOut" }}
                     className="w-full md:w-1/2"
                 >
-                    {/* Sarlavha - Beautifully Delicious */}
-                    <h2
-                        className="text-5xl md:text-7xl text-[#59493b] mb-12 tracking-tight"
-                        style={{
-                            fontFamily: "'Beautifully Delicious', sans-serif",
-                        }}
-                    >
+                    <h2 className="text-5xl md:text-7xl text-[#59493b] mb-12 tracking-tight">
                         Contact Us
                     </h2>
 
                     <div className="space-y-10">
-                        {/* Kontakt bloklari - Higuen */}
                         <div className="flex flex-col md:flex-row md:items-start gap-2 md:gap-16">
-                            <h3
-                                className="text-xl text-[#59493b] min-w-[150px] opacity-60"
-                                style={{ fontFamily: "'Higuen', serif" }}
-                            >
+                            <h3 className="text-xl text-[#59493b] min-w-[150px] opacity-60">
                                 Mailing Address
                             </h3>
-                            <p
-                                className="text-[#59493b] text-lg md:text-xl font-light whitespace-pre-line"
-                                style={{ fontFamily: "'Higuen', serif" }}
-                            >
+                            <p className="text-[#59493b] text-lg md:text-xl font-light whitespace-pre-line">
                                 {data.address}
                             </p>
                         </div>
 
                         <div className="flex flex-col md:flex-row md:items-start gap-2 md:gap-16">
-                            <h3
-                                className="text-xl text-[#59493b] min-w-[150px] opacity-60"
-                                style={{ fontFamily: "'Higuen', serif" }}
-                            >
+                            <h3 className="text-xl text-[#59493b] min-w-[150px] opacity-60">
                                 Email Address
                             </h3>
-                            <p
-                                className="text-[#59493b] text-lg md:text-xl font-light"
-                                style={{ fontFamily: "'Higuen', serif" }}
-                            >
+                            <p className="text-[#59493b] text-lg md:text-xl font-light">
                                 {data.email}
                             </p>
                         </div>
 
                         <div className="flex flex-col md:flex-row md:items-start gap-2 md:gap-16">
-                            <h3
-                                className="text-xl text-[#59493b] min-w-[150px] opacity-60"
-                                style={{ fontFamily: "'Higuen', serif" }}
-                            >
+                            <h3 className="text-xl text-[#59493b] min-w-[150px] opacity-60">
                                 Phone Number
                             </h3>
-                            <p
-                                className="text-[#59493b] text-lg md:text-xl font-light"
-                                style={{ fontFamily: "'Higuen', serif" }}
-                            >
+                            <p className="text-[#59493b] text-lg md:text-xl font-light">
                                 {data.phone}
                             </p>
                         </div>

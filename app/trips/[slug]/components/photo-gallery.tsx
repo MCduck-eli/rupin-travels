@@ -48,20 +48,10 @@ function GalleryCard({
                     }}
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-4 text-white">
-                    <h4
-                        className="text-lg md:text-xl leading-tight mb-1"
-                        style={{
-                            fontFamily: "'Beautifully Delicious', sans-serif",
-                        }}
-                    >
+                    <h4 className="text-lg md:text-xl leading-tight mb-1">
                         {title || "Untitled Moment"}
                     </h4>
-                    <p
-                        className="text-[10px] md:text-xs tracking-[0.2em] opacity-80 uppercase font-bold"
-                        style={{
-                            fontFamily: "'Higuen', serif",
-                        }}
-                    >
+                    <p className="text-[10px] md:text-xs tracking-[0.2em] opacity-80 uppercase font-bold">
                         {label || "Moments"}
                     </p>
                 </div>

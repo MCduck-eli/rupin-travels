@@ -69,8 +69,7 @@ const InThePress: React.FC<InThePressProps> = ({ cards = DEFAULT_CARDS }) => {
          padding-bottom: 2rem;
          }
         .itp-heading {
-          /* Sarlavha uchun Beautifully Delicious */
-          font-family: 'Beautifully Delicious', sans-serif;
+          /* font-family olib tashlandi, globals.css dan h2 qoidasini oladi */
           font-size: clamp(2.2rem, 4.5vw, 3.4rem);
           font-weight: 400;
           color: #6f4e37;
@@ -125,8 +124,7 @@ const InThePress: React.FC<InThePressProps> = ({ cards = DEFAULT_CARDS }) => {
         }
 
         .itp-card-text {
-          /* Matn uchun Higuen */
-          font-family: 'Higuen', serif;
+          /* font-family olib tashlandi, globals.css dan div qoidasini oladi */
           font-size: clamp(0.78rem, 1.4vw, 0.95rem);
           font-weight: 300;
           color: rgba(255,255,255,0.92);
@@ -136,8 +134,7 @@ const InThePress: React.FC<InThePressProps> = ({ cards = DEFAULT_CARDS }) => {
         }
 
         .itp-label {
-          /* Label uchun Higuen */
-          font-family: 'Higuen', serif;
+          /* font-family olib tashlandi, globals.css dan span qoidasini oladi */
           font-size: clamp(0.7rem, 1.2vw, 0.85rem);
           font-weight: 400;
           letter-spacing: 0.15em;

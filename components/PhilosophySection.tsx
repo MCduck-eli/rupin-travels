@@ -13,7 +13,6 @@ const DEFAULT_TAGLINE =
 
 const PhilosophySection: React.FC<PhilosophySectionProps> = ({
     tagline,
-    title,
     content,
 }) => {
     return (
@@ -25,7 +24,7 @@ const PhilosophySection: React.FC<PhilosophySectionProps> = ({
           text-align: center;
         }
         .ps-tagline {
-          font-family: 'Higuen', serif;
+          /* font-family olib tashlandi, globals.css dan p qoidasini oladi */
           font-size: clamp(1.4rem, 3vw, 2.2rem);
           font-weight: 500;
           color: #1a1510;
@@ -49,7 +48,7 @@ const PhilosophySection: React.FC<PhilosophySectionProps> = ({
         }
 
         .ps-label-gold {
-          font-family: 'Beautifully Delicious', sans-serif;
+          /* font-family olib tashlandi, globals.css dan span qoidasini oladi */
           font-size: 0.85rem;
           letter-spacing: 0.2em;
           text-transform: uppercase;
@@ -59,10 +58,9 @@ const PhilosophySection: React.FC<PhilosophySectionProps> = ({
         }
 
         .ps-title-white {
-          font-family: 'Beautifully Delicious', sans-serif;
-          font-size: 2rem;
+          /* font-family olib tashlandi, globals.css dan h2 qoidasini oladi */
           color: #ffbd59;
-         font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+          font-size: clamp(2.2rem, 4.5vw, 3.4rem);
           font-weight: 400;
         }
 
@@ -73,7 +71,7 @@ const PhilosophySection: React.FC<PhilosophySectionProps> = ({
         }
 
         .ps-luxury-item {
-          font-family: 'Higuen', serif;
+          /* font-family olib tashlandi, globals.css dan div qoidasini oladi */
           font-size: 1.2rem;
           color: #d4baac;
           line-height: 1.6;
@@ -81,7 +79,9 @@ const PhilosophySection: React.FC<PhilosophySectionProps> = ({
         }
 
         .ps-footer-text {
-          font-family: 'Beautifully Delicious', sans-serif;
+          /* DIQQAT: Agar bu p-teg bo'lsa-yu, siz unga h-teg shriftini (Beautifully Delicious) 
+             bermoqchi bo'lsangiz, faqat shunda font-family yozish kerak. 
+             Lekin globals.css da p uchun Higuen berilgani uchun uni shunday qoldiramiz. */
           font-size: 1.1rem;
           letter-spacing: 0.1em;
           text-transform: uppercase;

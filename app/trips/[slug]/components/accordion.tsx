@@ -43,12 +43,7 @@ export default function InfoAccordion({ data }: InfoAccordionProps) {
     return (
         <section className="py-24 px-6 bg-[#F7F5F2]">
             <div className="max-w-3xl mx-auto">
-                <h2
-                    className="text-4xl md:text-5xl text-[#004D3C] mb-12 text-center"
-                    style={{
-                        fontFamily: "'Beautifully Delicious', sans-serif",
-                    }}
-                >
+                <h2 className="text-4xl md:text-5xl text-[#004D3C] mb-12 text-center">
                     Essential Information
                 </h2>
 
@@ -70,12 +65,7 @@ export default function InfoAccordion({ data }: InfoAccordionProps) {
                                     <span className="opacity-60">
                                         {item.icon}
                                     </span>
-                                    <span
-                                        className="text-lg font-medium tracking-wide"
-                                        style={{
-                                            fontFamily: "'Higuen', serif",
-                                        }}
-                                    >
+                                    <span className="text-lg font-medium tracking-wide">
                                         {item.title}
                                     </span>
                                 </div>
@@ -101,12 +91,7 @@ export default function InfoAccordion({ data }: InfoAccordionProps) {
                                             ease: "easeInOut",
                                         }}
                                     >
-                                        <div
-                                            className="px-6 pb-6 pl-[60px] text-[#004D3C]/80 leading-relaxed font-light text-lg"
-                                            style={{
-                                                fontFamily: "'Higuen', serif",
-                                            }}
-                                        >
+                                        <div className="px-6 pb-6 pl-[60px] text-[#004D3C]/80 leading-relaxed font-light text-lg">
                                             {item.content}
                                         </div>
                                     </motion.div>

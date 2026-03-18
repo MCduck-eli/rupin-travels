@@ -57,7 +57,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
                 }
 
                 .rp-title {
-                  font-family: 'Beautifully Delicious', sans-serif;
+                  /* font-family olib tashlandi, globals.css dan h1 qoidasini oladi */
                   font-size: 56px;
                   font-weight: 600;
                   color: #c9a84c;
@@ -70,7 +70,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
                 }
 
                 .rp-subtitle {
-                  font-family: 'Beautifully Delicious', sans-serif;
+                  /* font-family olib tashlandi, globals.css dan p qoidasini oladi */
                   font-size: 17px;
                   font-weight: 400;
                   color: #ffffff;
@@ -173,10 +173,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
                     <p className="rp-subtitle">{dynamicData.subtitle}</p>
 
                     <Link href={"/contact"}>
-                        <button
-                            className="px-10 py-3 border border-white/60 text-white text-xs tracking-[0.3em] uppercase transition-all duration-500 hover:bg-white hover:text-black hover:border-white"
-                            style={{ fontFamily: "'Higuen', serif" }}
-                        >
+                        <button className="px-10 py-3 border border-white/60 text-white text-xs tracking-[0.3em] uppercase transition-all duration-500 hover:bg-white hover:text-black hover:border-white">
                             Contact us
                         </button>
                     </Link>

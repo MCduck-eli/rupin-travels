@@ -141,22 +141,14 @@ const HighlightedTrips: React.FC<HighlightedTripsProps> = ({
     return (
         <section className="bg-[#efede7] py-6 md:py-10 px-4">
             <div className="max-w-7xl mx-auto">
-                <h2
-                    className="text-3xl md:text-6xl text-[#0D2B1D] text-center mb-6 md:mb-10 leading-[0.9] tracking-tight"
-                    style={{
-                        fontFamily: "'Beautifully Delicious', sans-serif",
-                    }}
-                >
+                {/* h2 globals.css dagi 'Beautifully Delicious' shriftini oladi */}
+                <h2 className="text-3xl md:text-6xl text-[#0D2B1D] text-center mb-6 md:mb-10 leading-[0.9] tracking-tight">
                     {sectionTitle}
                 </h2>
 
-                <div className="bg-[#FAF7F2] p-4  rounded-sm relative shadow-sm">
-                    <h3
-                        className="text-[#2D2D2D] text-xl md:text-2xl mb-4 md:mb-4 font-light"
-                        style={{
-                            fontFamily: "'Beautifully Delicious', sans-serif",
-                        }}
-                    >
+                <div className="bg-[#FAF7F2] p-4 rounded-sm relative shadow-sm">
+                    {/* h3 globals.css dagi 'Beautifully Delicious' shriftini oladi */}
+                    <h3 className="text-[#2D2D2D] text-xl md:text-2xl mb-4 md:mb-4 font-light">
                         {sectionSubtitle}
                     </h3>
 
@@ -193,22 +185,12 @@ const HighlightedTrips: React.FC<HighlightedTripsProps> = ({
                                                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                                 />
                                                 <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-4 text-white">
-                                                    <h4
-                                                        className="text-lg md:text-xl leading-tight mb-1 transform transition-transform duration-500 group-hover:-translate-y-1"
-                                                        style={{
-                                                            fontFamily:
-                                                                "'Beautifully Delicious', sans-serif",
-                                                        }}
-                                                    >
+                                                    {/* h4 globals.css dagi sarlavha shriftini oladi */}
+                                                    <h4 className="text-lg md:text-xl leading-tight mb-1 transform transition-transform duration-500 group-hover:-translate-y-1">
                                                         {trip.title}
                                                     </h4>
-                                                    <p
-                                                        className="text-[10px] md:text-xs tracking-[0.2em] opacity-80 uppercase font-bold"
-                                                        style={{
-                                                            fontFamily:
-                                                                "'Higuen', serif",
-                                                        }}
-                                                    >
+                                                    {/* p globals.css dagi 'Higuen Elegant Serif' shriftini oladi */}
+                                                    <p className="text-[10px] md:text-xs tracking-[0.2em] opacity-80 uppercase font-bold">
                                                         {trip.duration}
                                                     </p>
                                                 </div>
@@ -217,23 +199,12 @@ const HighlightedTrips: React.FC<HighlightedTripsProps> = ({
 
                                         <div className="text-center hidden md:block">
                                             <Link href={`/trips/${trip.slug}`}>
-                                                <h5
-                                                    className="text-[#0D2B1D] text-xl lg:text-2xl mb-0.5 hover:text-[#B59461] transition-colors"
-                                                    style={{
-                                                        fontFamily:
-                                                            "'Beautifully Delicious', sans-serif",
-                                                    }}
-                                                >
+                                                {/* h5 globals.css dagi sarlavha shriftini oladi */}
+                                                <h5 className="text-[#0D2B1D] text-xl lg:text-2xl mb-0.5 hover:text-[#B59461] transition-colors">
                                                     {trip.subtitle}
                                                 </h5>
                                             </Link>
-                                            <p
-                                                className="text-[#6F4E37] italic text-md opacity-80"
-                                                style={{
-                                                    fontFamily:
-                                                        "'Higuen', serif",
-                                                }}
-                                            >
+                                            <p className="text-[#6F4E37] italic text-md opacity-80">
                                                 {trip.nights}
                                             </p>
                                         </div>
@@ -252,19 +223,10 @@ const HighlightedTrips: React.FC<HighlightedTripsProps> = ({
                             key={`mobile-${index}`}
                             className="block text-center"
                         >
-                            <h4
-                                className="text-xl text-[#0D2B1D] mb-1 uppercase tracking-tight"
-                                style={{
-                                    fontFamily:
-                                        "'Beautifully Delicious', sans-serif",
-                                }}
-                            >
+                            <h4 className="text-xl text-[#0D2B1D] mb-1 uppercase tracking-tight">
                                 {trip.subtitle}
                             </h4>
-                            <p
-                                className="text-[#6F4E37] italic text-md"
-                                style={{ fontFamily: "'Higuen', serif" }}
-                            >
+                            <p className="text-[#6F4E37] italic text-md">
                                 {trip.nights}
                             </p>
                         </Link>

@@ -32,21 +32,10 @@ export default function CulturalValues({ data }: CulturalValuesProps) {
             <div className="max-w-6xl mx-auto space-y-12">
                 {values.map((item, index) => (
                     <div key={index} className="space-y-4">
-                        {/* Sarlavha uchun Beautifully Delicious */}
-                        <h3
-                            className="text-[28px] md:text-[34px] font-normal text-black tracking-normal"
-                            style={{
-                                fontFamily:
-                                    "'Beautifully Delicious', sans-serif",
-                            }}
-                        >
+                        <h3 className="text-[28px] md:text-[34px] font-normal text-black tracking-normal">
                             {item.title}
                         </h3>
-                        {/* Tavsif uchun Higuen */}
-                        <p
-                            className="text-[18px] md:text-[21px] font-light leading-relaxed text-black/80 max-w-5xl"
-                            style={{ fontFamily: "'Higuen', serif" }}
-                        >
+                        <p className="text-[18px] md:text-[21px] font-light leading-relaxed text-black/80 max-w-5xl">
                             {item.description}
                         </p>
                     </div>

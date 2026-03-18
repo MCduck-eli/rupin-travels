@@ -29,12 +29,7 @@ const Hero: React.FC<HeroProps> = ({ data }) => {
             </div>
 
             <div className="relative z-20 flex flex-col items-center text-center px-4">
-                <h2
-                    className="text-[56px] font-medium tracking-tight mb-4 drop-shadow-md leading-tight"
-                    style={{
-                        fontFamily: "'Beautifully Delicious', sans-serif",
-                    }}
-                >
+                <h2 className="text-[56px] font-medium tracking-tight mb-4 drop-shadow-md leading-tight">
                     {data.title}
                 </h2>
 
@@ -43,20 +38,12 @@ const Hero: React.FC<HeroProps> = ({ data }) => {
                     style={{ animation: "ps-lineGrow 1.5s ease-out forwards" }}
                 />
 
-                <p
-                    className="text-[17px] font-light tracking-widest mb-10 opacity-95"
-                    style={{
-                        fontFamily: "'Beautifully Delicious', sans-serif",
-                    }}
-                >
+                <p className="text-[17px] font-light tracking-widest mb-10 opacity-95">
                     {data.description || "Journeys that transform"}
                 </p>
 
                 <Link href={"/contact"}>
-                    <button
-                        className="px-10 py-3 border border-white/60 text-white text-xs tracking-[0.3em] uppercase transition-all duration-500 hover:bg-white hover:text-black hover:border-white"
-                        style={{ fontFamily: "'Higuen', serif" }}
-                    >
+                    <button className="px-10 py-3 border border-white/60 text-white text-xs tracking-[0.3em] uppercase transition-all duration-500 hover:bg-white hover:text-black hover:border-white">
                         Contact us
                     </button>
                 </Link>

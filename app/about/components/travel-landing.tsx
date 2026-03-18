@@ -49,9 +49,6 @@ export default function MarineTeamSection() {
                     initial={{ opacity: 0, y: -20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    style={{
-                        fontFamily: "'Beautifully Delicious', sans-serif",
-                    }}
                     className="mb-16 text-center text-5xl md:text-6xl text-[#59493b] uppercase tracking-[0.2em]"
                 >
                     {data.whoAreWeTitle}
@@ -66,35 +63,20 @@ export default function MarineTeamSection() {
                             />
                         </div>
                         <div className="text-center md:text-left pl-2">
-                            <p
-                                style={{ fontFamily: "'Higuen', serif" }}
-                                className="text-lg text-[#59493b] font-semibold leading-tight"
-                            >
+                            <p className="text-lg text-[#59493b] font-semibold leading-tight">
                                 {data.founderName}
                             </p>
-                            <p
-                                style={{ fontFamily: "'Higuen', serif" }}
-                                className="text-sm text-[#59493b]/70 italic"
-                            >
+                            <p className="text-sm text-[#59493b]/70 italic">
                                 {data.founderRole}
                             </p>
                         </div>
                     </div>
                     <div className="md:col-span-9 space-y-6 pt-2 md:pl-8">
-                        <h3
-                            style={{
-                                fontFamily:
-                                    "'Beautifully Delicious', sans-serif",
-                            }}
-                            className="text-3xl md:text-4xl text-[#59493b] uppercase tracking-wider"
-                        >
+                        <h3 className="text-3xl md:text-4xl text-[#59493b] uppercase tracking-wider">
                             {data.founderAboutTitle}
                         </h3>
 
-                        <div
-                            style={{ fontFamily: "'Higuen', serif" }}
-                            className="text-[17px] md:text-[19px] leading-[1.7] text-[#59493b] space-y-6 font-light max-w-none"
-                        >
+                        <div className="text-[17px] md:text-[19px] leading-[1.7] text-[#59493b] space-y-6 font-light max-w-none">
                             <p>{data.founderDescription1}</p>
                             <p>{data.founderDescription2}</p>
                         </div>

@@ -32,21 +32,12 @@ export default function CulturalSupportSection() {
                         >
                             <div className="flex items-start gap-4">
                                 <span className="mt-[14px] h-1.5 w-1.5 shrink-0 rounded-full bg-[#59493b]" />
-                                <h3
-                                    style={{
-                                        fontFamily:
-                                            "'Beautifully Delicious', sans-serif",
-                                    }}
-                                    className="text-2xl md:text-3xl lg:text-[32px] text-[#59493b] leading-tight uppercase tracking-wide"
-                                >
+                                <h3 className="text-2xl md:text-3xl lg:text-[32px] text-[#59493b] leading-tight uppercase tracking-wide">
                                     {feature.title}
                                 </h3>
                             </div>
                             <div className="md:pl-8">
-                                <p
-                                    style={{ fontFamily: "'Higuen', serif" }}
-                                    className="text-[17px] md:text-[19px] leading-[1.7] text-[#59493b] font-light"
-                                >
+                                <p className="text-[17px] md:text-[19px] leading-[1.7] text-[#59493b] font-light">
                                     {feature.description}
                                 </p>
                             </div>

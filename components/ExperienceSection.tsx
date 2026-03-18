@@ -20,10 +20,9 @@ const ExperienceSection: React.FC = () => {
         }
 
         .es-heading {
-          /* Sarlavha uchun Beautifully Delicious */
-          font-family: 'Beautifully Delicious', sans-serif;
-            font-size: clamp(2.2rem, 4.5vw, 3.5rem);
-                    font-weight: 400;
+          /* font-family olib tashlandi, h2 bo'lgani uchun globals.css dan oladi */
+          font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+          font-weight: 400;
           color: #ffbd59;
           text-align: center;
           line-height: 1.4;
@@ -32,8 +31,7 @@ const ExperienceSection: React.FC = () => {
         }
 
         .es-body {
-          /* Matn uchun Higuen */
-          font-family: 'Higuen', serif;
+          /* font-family olib tashlandi, p bo'lgani uchun globals.css dan oladi */
           font-size: clamp(1.1rem, 2.2vw, 1.45rem); 
           color: #ffffff;
           text-align: center;
@@ -60,7 +58,7 @@ const ExperienceSection: React.FC = () => {
         }
 
         .es-list-intro {
-          font-family: 'Higuen', serif;
+          /* font-family olib tashlandi, p bo'lgani uchun globals.css dan oladi */
           font-size: clamp(0.88rem, 1.5vw, 1rem);
           color: rgba(255,255,255,0.82);
           margin: 0 0 0.65rem;
@@ -81,8 +79,7 @@ const ExperienceSection: React.FC = () => {
           display: flex;
           align-items: center;
           gap: 0.65rem;
-          /* List elementlari uchun Higuen */
-          font-family: 'Higuen', serif;
+          /* font-family olib tashlandi, li bo'lgani uchun globals.css dan oladi */
           font-size: clamp(1rem, 1.8vw, 1.2rem);
           color: rgba(255,255,255,0.88);
           animation: es-fadeUp 0.65s ease forwards;

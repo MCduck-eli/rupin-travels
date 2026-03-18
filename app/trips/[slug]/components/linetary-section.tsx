@@ -35,18 +35,20 @@ export default function DayItineraryComponent({
             <div className="w-full max-w-5xl">
                 <div className="flex flex-wrap justify-center gap-2 mb-8">
                     {displayItinerary.map((_, index) => (
-                        <button
-                            key={index}
-                            onClick={() => setActiveDay(index)}
-                            style={{ fontFamily: "'Higuen', serif" }}
-                            className={`px-3 py-1.5 md:px-5 md:py-2 rounded-full text-[9px] md:text-[11px] font-bold tracking-[0.15em] transition-all duration-300 border ${
-                                activeDay === index
-                                    ? "bg-[#D4B94E] border-[#D4B94E] text-white shadow-sm"
-                                    : "bg-transparent border-[#2D2D2D]/10 text-[#2D2D2D]/40 hover:border-[#2D2D2D]/40"
-                            }`}
-                        >
-                            DAY {index + 1}
-                        </button>
+                        <h3>
+                            <button
+                                key={index}
+                                onClick={() => setActiveDay(index)}
+                                style={{ fontFamily: "'Higuen', serif" }}
+                                className={`px-3 py-1.5 md:px-5 md:py-2 rounded-full text-[9px] md:text-[11px] font-bold tracking-[0.15em] transition-all duration-300 border ${
+                                    activeDay === index
+                                        ? "bg-[#D4B94E] border-[#D4B94E] text-white shadow-sm"
+                                        : "bg-transparent border-[#2D2D2D]/10 text-[#2D2D2D]/40 hover:border-[#2D2D2D]/40"
+                                }`}
+                            >
+                                DAY {index + 1}
+                            </button>
+                        </h3>
                     ))}
                 </div>
 
@@ -74,15 +76,6 @@ export default function DayItineraryComponent({
                             </div>
 
                             <div className="order-1 md:order-2 text-center md:text-left">
-                                <span
-                                    className="text-[12px] tracking-[0.1em] text-[#D4B94E] uppercase block mb-1"
-                                    style={{
-                                        fontFamily:
-                                            "'Beautifully Delicious', sans-serif",
-                                    }}
-                                >
-                                    Daily Experience
-                                </span>
                                 <h3
                                     className="text-2xl md:text-3xl text-[#2D2D2D] mb-3 leading-tight italic"
                                     style={{ fontFamily: "'Higuen', serif" }}
@@ -90,7 +83,7 @@ export default function DayItineraryComponent({
                                     {displayItinerary[activeDay].title}
                                 </h3>
                                 <p
-                                    className="text-[#2D2D2D]/70 text-sm md:text-base leading-relaxed max-w-md mx-auto md:mx-0 font-light"
+                                    className="text-[#2D2D2D]/70 text-sm md:text-[16px] leading-relaxed max-w-md mx-auto md:mx-0 font-light"
                                     style={{ fontFamily: "'Higuen', serif" }}
                                 >
                                     {displayItinerary[activeDay].content}

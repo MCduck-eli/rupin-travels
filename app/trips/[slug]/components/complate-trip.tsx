@@ -48,12 +48,7 @@ export default function CompleteTripInfo({ data }: CompleteTripInfoProps) {
     return (
         <section className="w-full py-16 px-4 md:px-10 bg-[#ede4d9]">
             <div className="max-w-4xl mx-auto">
-                <h2
-                    style={{
-                        fontFamily: "'Beautifully Delicious', sans-serif",
-                    }}
-                    className="text-[32px] md:text-[40px] font-normal text-[#1a1a1a] mb-8 tracking-normal border-b border-black/5 pb-4"
-                >
+                <h2 className="text-[32px] md:text-[40px] font-normal text-[#1a1a1a] mb-8 tracking-normal border-b border-black/5 pb-4">
                     Complete Trip Information
                 </h2>
 
@@ -91,14 +86,11 @@ export default function CompleteTripInfo({ data }: CompleteTripInfoProps) {
                                                 <div className="w-2 h-2 rounded-full bg-black/10" />
                                             )}
                                         </div>
-                                        <span
-                                            style={{
-                                                fontFamily: "'Higuen', serif",
-                                            }}
+                                        <h3
                                             className={`text-[18px] md:text-[20px] font-normal tracking-wide transition-colors duration-300 ${isOpen ? "text-[#2b5a9e]" : "text-[#1a1a1a]"}`}
                                         >
                                             {item.title}
-                                        </span>
+                                        </h3>
                                     </div>
 
                                     <motion.div
@@ -148,10 +140,6 @@ export default function CompleteTripInfo({ data }: CompleteTripInfoProps) {
                                                                 (line, i) => (
                                                                     <li
                                                                         key={i}
-                                                                        style={{
-                                                                            fontFamily:
-                                                                                "'Higuen', serif",
-                                                                        }}
                                                                         className="text-[15px] md:text-[17px] leading-relaxed text-black/70 flex items-start gap-2"
                                                                     >
                                                                         <span className="mt-2 text-[#2b5a9e]/40 text-[12px]">
@@ -162,13 +150,7 @@ export default function CompleteTripInfo({ data }: CompleteTripInfoProps) {
                                                                 ),
                                                             )
                                                         ) : (
-                                                            <li
-                                                                style={{
-                                                                    fontFamily:
-                                                                        "'Higuen', serif",
-                                                                }}
-                                                                className="text-[14px] text-black/30 italic"
-                                                            >
+                                                            <li className="text-[14px] text-black/30 italic">
                                                                 No information
                                                                 provided yet.
                                                             </li>

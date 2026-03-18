@@ -116,24 +116,18 @@ const ClientTestimonials: React.FC = () => {
             style={{ backgroundColor: "#FDF6E9" }}
         >
             <div className="flex flex-col justify-start z-10 w-3/5">
-                <h2
-                    className="text-2xl md:text-5xl font-normal mb-6 md:mb-10"
-                    style={{
-                        color: "#6F4E37",
-                        fontFamily: "'Beautifully Delicious', sans-serif",
-                    }}
-                >
+                {/* font-family olib tashlandi, globals.css dan h2 qoidasini oladi */}
+                <h2 className="text-2xl md:text-5xl font-normal mb-6 md:mb-10 text-[#6F4E37]">
                     Client Testimonials
                 </h2>
 
                 <ul className="flex flex-col gap-4 md:gap-8 list-none p-0 m-0">
                     {TESTIMONIALS.map((t) => (
                         <li key={t.id}>
+                            {/* font-family olib tashlandi, globals.css dan p qoidasini oladi */}
                             <p
-                                className="text-[12px] md:text-xl leading-relaxed inline"
+                                className="text-[12px] md:text-xl leading-relaxed inline text-[#6F4E37]"
                                 style={{
-                                    color: "#6F4E37",
-                                    fontFamily: "'Higuen', serif",
                                     borderBottom:
                                         "1px solid rgba(111, 78, 55, 0.3)",
                                 }}

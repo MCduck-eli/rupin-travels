@@ -69,19 +69,10 @@ const TripDetails: React.FC<Props> = ({ data }) => {
                             {item.icon}
                         </div>
                         <div className="flex flex-col">
-                            <span
-                                className="text-gray-500 text-xs tracking-widest uppercase mb-1"
-                                style={{
-                                    fontFamily:
-                                        "'Beautifully Delicious', sans-serif",
-                                }}
-                            >
+                            <span className="text-black text-[16px] font-bold">
                                 {item.label}
                             </span>
-                            <span
-                                className="text-black text-lg font-medium"
-                                style={{ fontFamily: "'Higuen', serif" }}
-                            >
+                            <span className="text-black text-[16px] font-bold">
                                 {item.value}
                             </span>
                         </div>

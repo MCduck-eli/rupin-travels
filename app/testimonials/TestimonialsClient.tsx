@@ -62,29 +62,15 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
                 />
             </div>
             <div className="flex flex-1 flex-col justify-between pt-6">
-                {/* Comment uchun Higuen */}
-                <p
-                    className="mb-6 text-[18px] md:text-[20px] italic leading-relaxed text-[#1a1a1a]/80"
-                    style={{ fontFamily: "'Higuen', serif" }}
-                >
+                <p className="mb-6 text-[18px] md:text-[20px] italic leading-relaxed text-[#1a1a1a]/80">
                     {`"${testimonial.comment}"`}
                 </p>
                 <div>
-                    {/* Name uchun Higuen */}
-                    <p
-                        className="text-2xl text-[#1a1a1a] md:text-3xl"
-                        style={{ fontFamily: "'Higuen', serif" }}
-                    >
+                    <p className="text-2xl text-[#1a1a1a] md:text-3xl">
                         {`\u2014 ${testimonial.name}`}
                     </p>
                     {testimonial.location && (
-                        <p
-                            className="text-xs uppercase tracking-[0.2em] text-[#D4A843] mt-2"
-                            style={{
-                                fontFamily:
-                                    "'Beautifully Delicious', sans-serif",
-                            }}
-                        >
+                        <p className="text-xs uppercase tracking-[0.2em] text-[#D4A843] mt-2">
                             {testimonial.location}
                         </p>
                     )}
@@ -110,13 +96,7 @@ export default function TestimonialsClient({
     return (
         <section className="bg-[#F5F2ED] px-6 py-20 md:px-16 lg:px-24">
             <div className="mx-auto max-w-6xl">
-                {/* Sarlavha uchun Beautifully Delicious */}
-                <h2
-                    className="mb-2 text-center text-4xl md:text-6xl text-[#1a1a1a]"
-                    style={{
-                        fontFamily: "'Beautifully Delicious', sans-serif",
-                    }}
-                >
+                <h2 className="mb-2 text-center text-4xl md:text-6xl text-[#1a1a1a]">
                     {displayTitle}
                 </h2>
                 <div className="mx-auto mb-14 mt-4 h-px w-full max-w-4xl bg-[#1a1a1a]/15" />
