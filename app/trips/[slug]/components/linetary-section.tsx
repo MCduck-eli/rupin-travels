@@ -33,23 +33,6 @@ export default function DayItineraryComponent({
     return (
         <section className="bg-[#F5F2ED] py-6 px-4 md:px-10 lg:px-16 min-h-fit flex flex-col items-center">
             <div className="w-full max-w-5xl">
-                <div className="mb-6 text-left">
-                    <h2
-                        className="text-3xl md:text-4xl text-[#2D2D2D] tracking-tight"
-                        style={{
-                            fontFamily: "'Beautifully Delicious', sans-serif",
-                        }}
-                    >
-                        Itinerary
-                    </h2>
-                    <p
-                        className="text-[#2D2D2D]/40 mt-1 italic text-base"
-                        style={{ fontFamily: "'Higuen', serif" }}
-                    >
-                        The Journey Day by Day
-                    </p>
-                </div>
-
                 <div className="flex flex-wrap justify-center gap-2 mb-8">
                     {displayItinerary.map((_, index) => (
                         <button

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useCallback, useState } from "react";
-import { ChevronsRight, ChevronLeft } from "lucide-react";
+import { ChevronRight, ChevronLeft } from "lucide-react";
 import { motion } from "framer-motion";
 import useEmblaCarousel from "embla-carousel-react";
 import { ITrip } from "@/types/trip";
@@ -37,35 +37,34 @@ function GalleryCard({
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
-            <div className="relative aspect-[3/4] w-full overflow-hidden rounded-sm bg-neutral-200 shadow-lg">
+            <div className="relative aspect-4/4 w-full overflow-hidden rounded-2xl bg-neutral-200 shadow-md transition-all duration-500 hover:shadow-xl">
                 <img
                     src={src}
                     alt={title}
                     className="h-full w-full object-cover transition-all duration-700 ease-in-out"
                     style={{
                         filter: isHovered ? "grayscale(0%)" : "grayscale(100%)",
-                        transform: isHovered ? "scale(1.05)" : "scale(1)",
+                        transform: isHovered ? "scale(1.1)" : "scale(1)",
                     }}
                 />
-            </div>
-
-            <div className="flex flex-col gap-1">
-                {/* Label uchun Beautifully Delicious */}
-                <span
-                    className="text-[14px] md:text-[16px] tracking-[0.1em] text-[#D4A843] uppercase"
-                    style={{
-                        fontFamily: "'Beautifully Delicious', sans-serif",
-                    }}
-                >
-                    {label || "Moments"}
-                </span>
-                {/* Title uchun Higuen */}
-                <span
-                    className="text-xl font-light text-neutral-900 italic"
-                    style={{ fontFamily: "'Higuen', serif" }}
-                >
-                    {title || "Untitled Moment"}
-                </span>
+                <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-4 text-white">
+                    <h4
+                        className="text-lg md:text-xl leading-tight mb-1"
+                        style={{
+                            fontFamily: "'Beautifully Delicious', sans-serif",
+                        }}
+                    >
+                        {title || "Untitled Moment"}
+                    </h4>
+                    <p
+                        className="text-[10px] md:text-xs tracking-[0.2em] opacity-80 uppercase font-bold"
+                        style={{
+                            fontFamily: "'Higuen', serif",
+                        }}
+                    >
+                        {label || "Moments"}
+                    </p>
+                </div>
             </div>
         </motion.div>
     );
@@ -89,42 +88,50 @@ export default function GallerySection({ data }: GallerySectionProps) {
     if (!data || data.length === 0) return null;
 
     return (
-        <section className="relative flex min-h-[80vh] items-center bg-[#F5F2ED] px-4 py-24 md:px-12 lg:px-20 overflow-hidden">
-            <button
-                onClick={scrollPrev}
-                className="absolute left-4 z-30 flex h-12 w-12 items-center justify-center rounded-full bg-white/80 text-[#004D3C] transition-all hover:bg-[#004D3C] hover:text-white shadow-xl active:scale-90"
-            >
-                <ChevronLeft className="h-6 w-6" />
-            </button>
+        <section className="bg-[#efede7] py-6 md:py-10 px-4">
+            <div className="max-w-7xl mx-auto">
+                <div className="bg-[#FAF7F2] p-4 rounded-sm relative shadow-sm">
+                    <div className="relative group/arrows">
+                        <button
+                            onClick={scrollPrev}
+                            className="absolute -left-3 md:-left-15 top-[50%] -translate-y-1/2 bg-[#B59461] text-white w-8 h-8 md:w-12 md:h-12 rounded-full flex items-center justify-center z-20 hover:bg-[#967a4f] transition-all shadow-lg active:scale-90"
+                        >
+                            <ChevronLeft className="h-5 w-5 md:h-6 md:w-6" />
+                        </button>
 
-            <motion.div
-                className="mx-auto w-full max-w-7xl overflow-hidden cursor-grab active:cursor-grabbing"
-                ref={emblaRef}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.1 }}
-                variants={{
-                    visible: { transition: { staggerChildren: 0.2 } },
-                }}
-            >
-                <div className="flex -ml-4">
-                    {data.map((image, index) => (
-                        <GalleryCard
-                            key={index}
-                            src={image.url}
-                            title={image.title}
-                            label={image.label}
-                        />
-                    ))}
+                        <button
+                            onClick={scrollNext}
+                            className="absolute -right-3 md:-right-15 top-[50%] -translate-y-1/2 bg-[#B59461] text-white w-8 h-8 md:w-12 md:h-12 rounded-full flex items-center justify-center z-20 hover:bg-[#967a4f] transition-all shadow-lg active:scale-90"
+                        >
+                            <ChevronRight className="h-5 w-5 md:h-6 md:w-6" />
+                        </button>
+
+                        <motion.div
+                            className="overflow-hidden cursor-grab active:cursor-grabbing px-2"
+                            ref={emblaRef}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true, amount: 0.1 }}
+                            variants={{
+                                visible: {
+                                    transition: { staggerChildren: 0.2 },
+                                },
+                            }}
+                        >
+                            <div className="flex -ml-4">
+                                {data.map((image, index) => (
+                                    <GalleryCard
+                                        key={index}
+                                        src={image.url}
+                                        title={image.title}
+                                        label={image.label}
+                                    />
+                                ))}
+                            </div>
+                        </motion.div>
+                    </div>
                 </div>
-            </motion.div>
-
-            <button
-                onClick={scrollNext}
-                className="absolute right-4 z-30 transition-all hover:scale-110 active:scale-90"
-            >
-                <ChevronsRight className="h-12 w-12 md:h-20 md:w-20 text-[#004D3C] opacity-70" />
-            </button>
+            </div>
         </section>
     );
 }
