@@ -57,8 +57,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({
                 }
 
                 .rp-title {
-                  font-family: 'Higuen', serif;
-                  font-size: clamp(2.5rem, 7vw, 5.5rem);
+                  font-family: 'Beautifully Delicious', sans-serif;
+                  font-size: 56px;
                   font-weight: 600;
                   color: #c9a84c;
                   line-height: 1.08;
@@ -71,8 +71,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
 
                 .rp-subtitle {
                   font-family: 'Beautifully Delicious', sans-serif;
-                  font-style: italic;
-                  font-size: clamp(1rem, 2.5vw, 1.5rem);
+                  font-size: 17px;
                   font-weight: 400;
                   color: #ffffff;
                   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6); 
@@ -83,30 +82,9 @@ const HeroSection: React.FC<HeroSectionProps> = ({
                   text-align: center;
                 }
 
-                .rp-btn {
-                  font-family: 'Beautifully Delicious', sans-serif;
-                  font-size: 0.78rem;
-                  letter-spacing: 0.22em;
-                  text-transform: uppercase;
-                  color: #ffffff;
-                  background: transparent;
-                  border: 1.5px solid rgba(255,255,255,0.75);
-                  padding: 0.85rem 2.4rem;
-                  border-radius: 3px;
-                  cursor: pointer;
-                  transition: background 0.25s, border-color 0.25s, color 0.25s;
-                  animation: fadeUp 1s ease both;
-                  animation-delay: 0.7s;
-                  text-decoration: none;
-                  display: inline-block;
-                }
-                .rp-btn:hover {
-                  background: rgba(255,255,255,0.15);
-                  border-color: #ffffff;
-                }
-
                 @media (max-width: 850px) {
                   .hero-container { min-height: 50vh !important; }
+                  .rp-title { font-size: 40px; }
                 }
             `}</style>
 
@@ -194,12 +172,13 @@ const HeroSection: React.FC<HeroSectionProps> = ({
                     <h1 className="rp-title">{dynamicData.title}</h1>
                     <p className="rp-subtitle">{dynamicData.subtitle}</p>
 
-                    <Link
-                        href="#experiences"
-                        className="rp-btn"
-                        onClick={onLearnMore}
-                    >
-                        LEARN MORE
+                    <Link href={"/contact"}>
+                        <button
+                            className="px-10 py-3 border border-white/60 text-white text-xs tracking-[0.3em] uppercase transition-all duration-500 hover:bg-white hover:text-black hover:border-white"
+                            style={{ fontFamily: "'Higuen', serif" }}
+                        >
+                            Contact us
+                        </button>
                     </Link>
                 </div>
             </section>
