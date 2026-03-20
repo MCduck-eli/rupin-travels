@@ -21,7 +21,7 @@ interface FormData {
 
 export default function ContactSection() {
     const [data, setData] = useState<ContactData>({
-        address: "209 Condari Ave",
+        address: "209 Condari Ave.",
         email: "info@RupinTravels.com",
         phone: "+1-309-310-4360",
         description:
