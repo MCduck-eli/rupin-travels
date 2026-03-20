@@ -69,7 +69,7 @@ export default function ContactSection() {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     ...formData,
-                    to: "eldorabdukhalikov90@gmail.com",
+                    to: "info@RupinTravels.com",
                 }),
             });
 
@@ -226,7 +226,20 @@ export default function ContactSection() {
                     className="w-full md:w-2/3 min-h-[500px] flex flex-col justify-center"
                 >
                     <AnimatePresence mode="wait">
-                        {!isSubmitted ? (
+                        {isSubmitting ? (
+                            <motion.div
+                                key="loader"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                className="flex flex-col items-center justify-center space-y-4 py-20"
+                            >
+                                <div className="w-12 h-12 border-4 border-[#a68258]/20 border-t-[#a68258] rounded-full animate-spin"></div>
+                                <p className="text-[#a68258] font-light tracking-widest animate-pulse">
+                                    PROCESSING INQUIRY...
+                                </p>
+                            </motion.div>
+                        ) : !isSubmitted ? (
                             <motion.div
                                 key="form"
                                 initial={{ opacity: 0 }}
@@ -346,9 +359,7 @@ export default function ContactSection() {
                                             }
                                             className={`px-12 py-4 rounded-md text-lg transition-all ${isFormValid && !isSubmitting ? "bg-[#a68258] text-white hover:bg-[#8e6d46]" : "bg-gray-300 text-gray-500 cursor-not-allowed"}`}
                                         >
-                                            {isSubmitting
-                                                ? "Sending..."
-                                                : "Send Inquiry"}
+                                            Send Inquiry
                                         </button>
                                     </div>
                                 </form>
