@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+@font-face {
+    font-family: "Higuen";
+    src: url("/fonts/Higuen-Serif.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
 :root {
     --background: #ffffff;
     --foreground: #171717;
@@ -8,8 +16,6 @@
 @theme inline {
     --color-background: var(--background);
     --color-foreground: var(--foreground);
-    --font-sans: var(--font-geist-sans);
-    --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,25 +25,23 @@
     }
 }
 
-h1,
-h2,
-h3 {
-    font-family: "Beautifully Delicious", sans-serif;
-}
-
-p,
-span,
-div,
-li,
-a,
-button,
-input,
-textarea {
-    font-family: "Higuen Elegant Serif", serif;
+* {
+    font-family: "Higuen", serif !important;
 }
 
 body {
     background: var(--background);
     color: var(--foreground);
-    font-family: "Higuen Elegant Serif", serif;
+    font-family: "Higuen", serif;
+    font-size: 16px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Higuen", serif !important;
+    font-weight: 600;
 }

@@ -18,15 +18,18 @@
     "motion": "^12.34.3",
     "next": "16.1.6",
     "next-auth": "^4.24.13",
+    "nodemailer": "^7.0.13",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-hook-form": "^7.71.2",
+    "react-phone-input-2": "^2.15.1",
     "uploadthing": "^7.7.4",
     "zod": "^4.3.6"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
+    "@types/nodemailer": "^7.0.11",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19",
     "eslint": "^9",
