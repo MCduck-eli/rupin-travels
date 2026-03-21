@@ -24,8 +24,7 @@ export default function ContactSection() {
         address: "209 Condari Ave.",
         email: "info@RupinTravels.com",
         phone: "+1-309-310-4360",
-        description:
-            "A boutique tour company offering completely customized, bespoke trips to India & Southeast Asia.",
+        description: "Travel that Transforms.",
     });
 
     const [formData, setFormData] = useState<FormData>({
@@ -92,18 +91,31 @@ export default function ContactSection() {
         }
     };
 
+    const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email);
+    const isNameValid = formData.fullName.trim().length >= 3;
+    const isPhoneValid = formData.phone.trim().length >= 10;
+    const isMessageValid = formData.message.trim().length >= 5;
+
     const isFormValid =
-        formData.fullName.trim() !== "" &&
-        formData.email.trim() !== "" &&
-        formData.phone.trim().length > 5 &&
-        formData.message.trim() !== "";
+        isNameValid && isEmailValid && isPhoneValid && isMessageValid;
 
     const renderError = (field: keyof FormData) => {
-        if (touched[field] && !formData[field].trim()) {
+        if (!touched[field]) return null;
+
+        let error = "";
+        if (field === "fullName" && !isNameValid)
+            error = "Name must be at least 3 characters";
+        if (field === "email" && !isEmailValid)
+            error = "Please enter a valid email address";
+        if (field === "phone" && !isPhoneValid)
+            error = "Please enter a valid phone number";
+        if (field === "message" && !isMessageValid)
+            error = "Message must be at least 5 characters";
+
+        if (error) {
             return (
                 <span className="text-red-500 text-xs mt-1 animate-pulse">
-                    Please enter your{" "}
-                    {field === "fullName" ? "full name" : field}!
+                    {error}
                 </span>
             );
         }
@@ -121,7 +133,7 @@ export default function ContactSection() {
                 >
                     <div>
                         <h2 className="text-5xl text-[#59493b] mb-4 font-normal">
-                            Bout India
+                            Rupin Travels
                         </h2>
                         <p className="text-gray-500 leading-relaxed font-light">
                             {data.description}
@@ -180,29 +192,6 @@ export default function ContactSection() {
                             <div className="space-y-2">
                                 <div className="flex items-center gap-2">
                                     <img
-                                        src="https://flagcdn.com/w20/in.png"
-                                        alt="India"
-                                        className="w-5 h-auto"
-                                    />
-                                    <p className="text-xs font-bold text-gray-800 uppercase tracking-widest">
-                                        India
-                                    </p>
-                                </div>
-                                <p className="text-sm text-gray-500 leading-snug font-light max-w-[280px]">
-                                    {data.address}
-                                </p>
-                            </div>
-                        </div>
-
-                        <div className="flex items-start gap-4">
-                            <img
-                                src="https://cdn-icons-png.flaticon.com/512/484/484167.png"
-                                alt="location"
-                                className="w-6 h-6 opacity-60 mt-1"
-                            />
-                            <div className="space-y-2">
-                                <div className="flex items-center gap-2">
-                                    <img
                                         src="https://flagcdn.com/w20/us.png"
                                         alt="USA"
                                         className="w-5 h-auto"
@@ -212,7 +201,8 @@ export default function ContactSection() {
                                     </p>
                                 </div>
                                 <p className="text-sm text-gray-500 leading-snug font-light">
-                                    Torrance, CA, USA-90502
+                                    209 Condari Ave, Torrance, <br />{" "}
+                                    California, USA - 90502
                                 </p>
                             </div>
                         </div>
@@ -223,7 +213,7 @@ export default function ContactSection() {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="w-full md:w-2/3 min-h-[500px] flex flex-col justify-center"
+                    className="w-full md:w-2/3 min-h-125 flex flex-col justify-center"
                 >
                     <AnimatePresence mode="wait">
                         {isSubmitting ? (
@@ -250,8 +240,11 @@ export default function ContactSection() {
                                     Contact Us
                                 </h2>
                                 <p className="text-gray-500 mb-8 font-light">
-                                    Get in touch with us for your personalized
-                                    travel experience.
+                                    Please share your contact details along with
+                                    a convenient time for you, so we can
+                                    schedule a 30-minute video call to better
+                                    understand your requirements and explore how
+                                    we can best support you.
                                 </p>
 
                                 <form
@@ -269,7 +262,7 @@ export default function ContactSection() {
                                             <input
                                                 type="text"
                                                 required
-                                                className={`w-full p-3 border rounded-md focus:outline-[#a68258] ${touched.fullName && !formData.fullName ? "border-red-500" : "border-gray-200"}`}
+                                                className={`w-full p-3 border rounded-md focus:outline-[#a68258] ${touched.fullName && !isNameValid ? "border-red-500" : "border-gray-200"}`}
                                                 value={formData.fullName}
                                                 onBlur={() =>
                                                     handleBlur("fullName")
@@ -291,7 +284,7 @@ export default function ContactSection() {
                                             <input
                                                 type="email"
                                                 required
-                                                className={`w-full p-3 border rounded-md focus:outline-[#a68258] ${touched.email && !formData.email ? "border-red-500" : "border-gray-200"}`}
+                                                className={`w-full p-3 border rounded-md focus:outline-[#a68258] ${touched.email && !isEmailValid ? "border-red-500" : "border-gray-200"}`}
                                                 value={formData.email}
                                                 onBlur={() =>
                                                     handleBlur("email")
@@ -326,6 +319,11 @@ export default function ContactSection() {
                                                 height: "50px",
                                                 color: "black",
                                                 borderRadius: "6px",
+                                                border:
+                                                    touched.phone &&
+                                                    !isPhoneValid
+                                                        ? "1px solid #ef4444"
+                                                        : "1px solid #e5e7eb",
                                             }}
                                         />
                                         {renderError("phone")}
@@ -338,7 +336,7 @@ export default function ContactSection() {
                                         <textarea
                                             rows={5}
                                             required
-                                            className={`w-full p-3 border rounded-md focus:outline-[#a68258] ${touched.message && !formData.message ? "border-red-500" : "border-gray-200"}`}
+                                            className={`w-full p-3 border rounded-md focus:outline-[#a68258] ${touched.message && !isMessageValid ? "border-red-500" : "border-gray-200"}`}
                                             value={formData.message}
                                             onBlur={() => handleBlur("message")}
                                             onChange={(e) =>
@@ -351,7 +349,13 @@ export default function ContactSection() {
                                         {renderError("message")}
                                     </div>
 
-                                    <div className="flex justify-center">
+                                    <div className="flex flex-col items-center gap-4">
+                                        {!isFormValid && !isSubmitting && (
+                                            <p className="text-orange-600 text-sm font-light">
+                                                Please enter all information
+                                                before you can submit
+                                            </p>
+                                        )}
                                         <button
                                             type="submit"
                                             disabled={
