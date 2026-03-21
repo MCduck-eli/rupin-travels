@@ -262,7 +262,7 @@ export default function ContactSection() {
                                             <input
                                                 type="text"
                                                 required
-                                                className={`w-full p-3 border rounded-md focus:outline-[#a68258] ${touched.fullName && !isNameValid ? "border-red-500" : "border-gray-200"}`}
+                                                className={`w-full p-3 border rounded-md focus:outline-[#a68258] bg-white ${touched.fullName && !isNameValid ? "border-red-500" : "border-gray-200"}`}
                                                 value={formData.fullName}
                                                 onBlur={() =>
                                                     handleBlur("fullName")
@@ -284,7 +284,7 @@ export default function ContactSection() {
                                             <input
                                                 type="email"
                                                 required
-                                                className={`w-full p-3 border rounded-md focus:outline-[#a68258] ${touched.email && !isEmailValid ? "border-red-500" : "border-gray-200"}`}
+                                                className={`w-full p-3 border rounded-md focus:outline-[#a68258] bg-white ${touched.email && !isEmailValid ? "border-red-500" : "border-gray-200"}`}
                                                 value={formData.email}
                                                 onBlur={() =>
                                                     handleBlur("email")
@@ -319,6 +319,7 @@ export default function ContactSection() {
                                                 height: "50px",
                                                 color: "black",
                                                 borderRadius: "6px",
+                                                backgroundColor: "white",
                                                 border:
                                                     touched.phone &&
                                                     !isPhoneValid
@@ -336,7 +337,7 @@ export default function ContactSection() {
                                         <textarea
                                             rows={5}
                                             required
-                                            className={`w-full p-3 border rounded-md focus:outline-[#a68258] ${touched.message && !isMessageValid ? "border-red-500" : "border-gray-200"}`}
+                                            className={`w-full p-3 border rounded-md focus:outline-[#a68258] bg-white ${touched.message && !isMessageValid ? "border-red-500" : "border-gray-200"}`}
                                             value={formData.message}
                                             onBlur={() => handleBlur("message")}
                                             onChange={(e) =>
