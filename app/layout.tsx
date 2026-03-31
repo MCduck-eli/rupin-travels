@@ -20,6 +20,9 @@ export const metadata: Metadata = {
         default: "Rupin Travels | Unforgettable trips across USA",
         template: "%s | Rupin Travels",
     },
+    verification: {
+        google: "xuh_Bj1w4NoxQDiNuuG1yIVzivjk60L0GcwNe0LKVf8",
+    },
     description:
         "Travel to the most beautiful parts of USA with Rupin Travels. Premium hotels, convenient tours and 24/7 customer support.",
     keywords: [
