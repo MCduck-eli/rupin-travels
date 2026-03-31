@@ -34,6 +34,12 @@ export default async function Index() {
 
     return (
         <>
+            <HeroSection
+                videoSrc={data?.heroVideoUrl || "/herobg.mp4"}
+                title={data?.heroTitle}
+                subtitle={data?.heroSubtitle}
+            />
+
             <PhilosophySection
                 tagline={data?.philosophyTagline}
                 title={data?.philosophyTitle}
