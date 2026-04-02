@@ -8,6 +8,7 @@ import EditHomeButton from "../home/components/edit-home";
 import EditTestimonialsButton from "../home/components/edit-testimonials";
 import EditAboutButton from "../home/components/edit-about";
 import EditContactButton from "../home/components/edit-contact";
+import EditBlogs from "../home/components/edit-blogs";
 
 export default function AdminTripsList() {
     const [trips, setTrips] = useState<ITrip[]>([]);
@@ -59,12 +60,13 @@ export default function AdminTripsList() {
                     </p>
                 </div>
 
-                {/* Tugmalar qatori */}
                 <div className="flex items-center gap-3">
                     <EditHomeButton />
                     <EditTestimonialsButton />
                     <EditAboutButton />
                     <EditContactButton />
+
+                    <EditBlogs />
 
                     <Link
                         href="/admin/trips/new"

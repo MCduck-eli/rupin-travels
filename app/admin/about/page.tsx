@@ -65,7 +65,6 @@ export default function AdminAbout() {
     return (
         <div className="p-8 bg-[#F7F5F2] min-h-screen text-[#1a1a1a]">
             <div className="max-w-5xl mx-auto space-y-8">
-                {/* Header */}
                 <div className="flex justify-between items-center bg-white p-6 rounded-3xl shadow-sm border">
                     <h1 className="text-3xl font-serif text-[#004D3C] flex items-center gap-3">
                         <Info /> Edit About Page

@@ -82,10 +82,22 @@ const Navbar: React.FC = () => {
                     display: flex;
                     align-items: center;
                     height: 100%;
+                    gap: 4px;
                 }
 
                 .nav-item-container:last-child .rp-nav-link { border-right: none; }
                 .rp-nav-link:hover { color: #b8933a; }
+
+                .dropdown-icon {
+                    width: 8px;
+                    height: 8px;
+                    transition: transform 0.3s ease;
+                }
+
+                .nav-item-container:hover .dropdown-icon {
+                    transform: rotate(180deg);
+                    color: #b8933a;
+                }
 
                 .dropdown-menu {
                     position: absolute;
@@ -210,7 +222,18 @@ const Navbar: React.FC = () => {
                     </div>
 
                     <div className="nav-item-container">
-                        <span className="rp-nav-link">Experiences</span>
+                        <span className="rp-nav-link">
+                            Experiences
+                            <svg
+                                className="dropdown-icon"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="3"
+                            >
+                                <path d="M6 9l6 6 6-6" />
+                            </svg>
+                        </span>
                         {trips.length > 0 && (
                             <div className="dropdown-menu">
                                 {trips.map((trip) => (
@@ -238,23 +261,48 @@ const Navbar: React.FC = () => {
                     </div>
 
                     <div className="nav-item-container">
-                        <Link
-                            href="/about"
-                            className="rp-nav-link"
-                            onClick={() => setIsMenuOpen(false)}
-                        >
-                            About Us
-                        </Link>
-                    </div>
-
-                    <div className="nav-item-container">
-                        <Link
-                            href="/contact"
-                            className="rp-nav-link"
-                            onClick={() => setIsMenuOpen(false)}
-                        >
-                            Contact Us
-                        </Link>
+                        <span className="rp-nav-link">
+                            Company
+                            <svg
+                                className="dropdown-icon"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="3"
+                            >
+                                <path d="M6 9l6 6 6-6" />
+                            </svg>
+                        </span>
+                        <div className="dropdown-menu">
+                            <Link
+                                href="/about"
+                                className="dropdown-link"
+                                onClick={() => setIsMenuOpen(false)}
+                            >
+                                About Us
+                            </Link>
+                            <Link
+                                href="/contact"
+                                className="dropdown-link"
+                                onClick={() => setIsMenuOpen(false)}
+                            >
+                                Contact Us
+                            </Link>
+                            <Link
+                                href="/faqs"
+                                className="dropdown-link"
+                                onClick={() => setIsMenuOpen(false)}
+                            >
+                                FAQs
+                            </Link>
+                            <Link
+                                href="/blog/first-time-in-india"
+                                className="dropdown-link"
+                                onClick={() => setIsMenuOpen(false)}
+                            >
+                                Blog
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </div>

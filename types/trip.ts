@@ -43,3 +43,10 @@ export interface ITrip {
     accommodation: string;
     prices: string;
 }
+
+export interface IBlog {
+    _id?: string;
+    title: string;
+    slug: string;
+    createdAt?: string;
+}

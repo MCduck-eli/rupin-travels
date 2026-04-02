@@ -76,7 +76,6 @@ export default function AdminTestimonials() {
     return (
         <div className="p-8 bg-[#F7F5F2] min-h-screen text-[#1a1a1a]">
             <div className="max-w-6xl mx-auto">
-                {/* Header */}
                 <div className="flex justify-between items-center mb-10">
                     <div>
                         <h1 className="text-3xl font-serif text-[#004D3C] flex items-center gap-3">
