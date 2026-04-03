@@ -9,6 +9,8 @@ import ExpectationEditor from "../../components/expectation-editor";
 import AwardsImageEditor from "../../components/awards-image-editor";
 import FoodGuideEditor from "../../components/food-guide-editor";
 import SafetyTipsEditor from "../../components/safety-tips-editor";
+import CulturalTipsEditor from "../../components/cultural-tips-editor";
+import WhyVisitIndiaEditor from "../../components/why-visitIndia-editor";
 
 export default function MainBlogEditor() {
     const [formData, setFormData] = useState<any>(null);
@@ -36,28 +38,22 @@ export default function MainBlogEditor() {
         proTip: "Embrace the chaos—it's part of the experience.",
     };
 
-    const DEFAULT_AWARDS = {
-        imageUrl: "/images/default-awards-photo.jpg",
-        awardsText: "XI GLOBAL PHOTOGRAPHY AWARDS",
-    };
-
     const DEFAULT_FOOD_GUIDE = {
         mainTitle: "Indian Food Guide for First-Time Visitors",
-        introText:
-            "Indian cuisine is as diverse as its culture. From spicy curries to sweet desserts, there is something for everyone.",
+        introText: "Indian cuisine is as diverse as its culture...",
         listTitle: "Must-Try Dishes",
         foodItems: [
-            "Butter Chicken (Murgh Makhani)",
-            "Masala Dosa with Chutney",
+            "Butter Chicken",
+            "Masala Dosa",
             "Paneer Tikka",
             "Chole Bhature",
         ],
         safetyTitle: "Food Safety Tips",
         safetyTips: [
-            "Only drink bottled or filtered water.",
-            "Eat at busy places with high turnover.",
-            "Avoid raw vegetables and peeled fruits.",
-            "Wash your hands frequently before eating.",
+            "Drink bottled water",
+            "Eat at busy places",
+            "Avoid raw veg",
+            "Wash hands",
         ],
     };
 
@@ -72,25 +68,56 @@ export default function MainBlogEditor() {
         ],
     };
 
+    const DEFAULT_CULTURAL = {
+        mainTitle: "Cultural Etiquette in India",
+        introText:
+            "Respecting local traditions will make your trip much smoother:",
+        tipsList: [
+            "Cover your shoulders and knees in religious sites",
+            "Ask for permission before taking photos of people",
+            "Remove your shoes before entering someone's home",
+            "Greeting with a 'Namaste' is always appreciated",
+        ],
+        challengesTitle: "Common Travel Challenges",
+        challenges: [
+            {
+                emoji: "🚕",
+                title: "Navigation",
+                description: "Streets can be confusing.",
+            },
+            {
+                emoji: "🍛",
+                title: "Spicy Food",
+                description: "Always ask for 'no spicy'.",
+            },
+            {
+                emoji: "⏳",
+                title: "Indian Stretchable Time",
+                description: "Be flexible.",
+            },
+        ],
+    };
+
+    const DEFAULT_WHY_VISIT = {
+        title: "Why You Should Visit India at Least Once",
+        subtitle:
+            "India is more than just a destination; it's a life-changing experience because of:",
+        reasons: [
+            "Unrivaled spiritual and yoga retreats",
+            "The incredible hospitality of the Indian people",
+            "World-famous architecture like the Taj Mahal",
+        ],
+        closingText:
+            "Your first trip may challenge your comfort zone—but it will undoubtedly expand your perspective on the world.",
+    };
+
     useEffect(() => {
         setLoading(true);
-
-        fetch("/api/blogs", {
-            cache: "no-store",
-            headers: {
-                "Cache-Control": "no-cache",
-                Pragma: "no-cache",
-            },
-        })
+        fetch("/api/blogs", { cache: "no-store" })
             .then((res) => res.json())
             .then((data) => {
-                if (!data.success || !data.data) {
-                    console.error("Ma'lumot topilmadi");
-                    return;
-                }
-
+                if (!data.success || !data.data) return;
                 const main = data.data.find((b: any) => b.slug === SLUG);
-
                 if (main) {
                     setFormData({
                         ...main,
@@ -120,31 +147,13 @@ export default function MainBlogEditor() {
                                 main.expectations?.proTip ||
                                 DEFAULT_EXPECTATIONS.proTip,
                         },
-                        awards: {
-                            imageUrl:
-                                main.awards?.imageUrl ||
-                                DEFAULT_AWARDS.imageUrl,
-                            awardsText:
-                                main.awards?.awardsText ||
-                                DEFAULT_AWARDS.awardsText,
-                        },
                         foodGuide: {
-                            mainTitle:
-                                main.foodGuide?.mainTitle ||
-                                DEFAULT_FOOD_GUIDE.mainTitle,
-                            introText:
-                                main.foodGuide?.introText ||
-                                DEFAULT_FOOD_GUIDE.introText,
-                            listTitle:
-                                main.foodGuide?.listTitle ||
-                                DEFAULT_FOOD_GUIDE.listTitle,
+                            ...DEFAULT_FOOD_GUIDE,
+                            ...main.foodGuide,
                             foodItems:
                                 main.foodGuide?.foodItems?.length > 0
                                     ? main.foodGuide.foodItems
                                     : DEFAULT_FOOD_GUIDE.foodItems,
-                            safetyTitle:
-                                main.foodGuide?.safetyTitle ||
-                                DEFAULT_FOOD_GUIDE.safetyTitle,
                             safetyTips:
                                 main.foodGuide?.safetyTips?.length > 0
                                     ? main.foodGuide.safetyTips
@@ -160,40 +169,62 @@ export default function MainBlogEditor() {
                                     ? main.safety.tips
                                     : DEFAULT_SAFETY.tips,
                         },
+                        culturalTips: {
+                            mainTitle:
+                                main.culturalTips?.mainTitle ||
+                                DEFAULT_CULTURAL.mainTitle,
+                            introText:
+                                main.culturalTips?.introText ||
+                                DEFAULT_CULTURAL.introText,
+                            tipsList:
+                                main.culturalTips?.tipsList?.length > 0
+                                    ? main.culturalTips.tipsList
+                                    : DEFAULT_CULTURAL.tipsList,
+                            challengesTitle:
+                                main.culturalTips?.challengesTitle ||
+                                DEFAULT_CULTURAL.challengesTitle,
+                            challenges:
+                                main.culturalTips?.challenges?.length > 0
+                                    ? main.culturalTips.challenges
+                                    : DEFAULT_CULTURAL.challenges,
+                        },
+                        whyVisit: {
+                            title:
+                                main.whyVisit?.title || DEFAULT_WHY_VISIT.title,
+                            subtitle:
+                                main.whyVisit?.subtitle ||
+                                DEFAULT_WHY_VISIT.subtitle,
+                            reasons:
+                                main.whyVisit?.reasons?.length > 0
+                                    ? main.whyVisit.reasons
+                                    : DEFAULT_WHY_VISIT.reasons,
+                            closingText:
+                                main.whyVisit?.closingText ||
+                                DEFAULT_WHY_VISIT.closingText,
+                        },
                     });
                 }
             })
-            .catch((err) => {
-                console.error("Data loading error:", err);
-            })
-            .finally(() => {
-                setLoading(false);
-            });
+            .catch((err) => console.error(err))
+            .finally(() => setLoading(false));
     }, [SLUG]);
 
     const handleSave = async () => {
         if (!formData) return;
         setSaving(true);
-
         try {
-            const isUpdate = formData._id ? true : false;
-            const method = isUpdate ? "PUT" : "POST";
-            const url = isUpdate ? `/api/blogs/${formData._id}` : "/api/blogs";
-
+            const url = formData._id
+                ? `/api/blogs/${formData._id}`
+                : "/api/blogs";
             const res = await fetch(url, {
-                method,
+                method: formData._id ? "PUT" : "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(formData),
             });
-
-            if (res.ok) {
-                alert("Successfully saved!");
-            } else {
-                alert("Failed to save!");
-            }
+            if (res.ok) alert("Saved!");
+            else alert("Error!");
         } catch (err) {
-            console.error("Save error:", err);
-            alert("Network error occurred!");
+            alert("Network Error!");
         } finally {
             setSaving(false);
         }
@@ -207,14 +238,14 @@ export default function MainBlogEditor() {
         );
 
     return (
-        <div className="w-full min-h-screen bg-white text-black font-sans">
-            <div className="max-w-5xl mx-auto px-4 py-10 pb-40">
+        <div className="w-full min-h-screen bg-white text-black font-sans pb-40">
+            <div className="max-w-5xl mx-auto px-4 py-10">
                 <div className="mb-8">
                     <Link
                         href="/admin/blog"
                         className="flex items-center gap-2 text-gray-500 hover:text-black transition w-fit"
                     >
-                        <ArrowLeft size={20} /> Back to Dashboard
+                        <ArrowLeft size={20} /> Dashboard
                     </Link>
                 </div>
 
@@ -230,7 +261,7 @@ export default function MainBlogEditor() {
                     <button
                         onClick={handleSave}
                         disabled={saving}
-                        className="mt-4 md:mt-0 bg-[#004D3C] text-white px-10 py-4 rounded-2xl flex items-center gap-2 hover:bg-[#003d2a] transition-all shadow-xl active:scale-95 disabled:opacity-50"
+                        className="mt-4 md:mt-0 bg-[#004D3C] text-white px-10 py-4 rounded-2xl flex items-center gap-2 hover:bg-[#003d2a] transition-all shadow-xl disabled:opacity-50"
                     >
                         {saving ? (
                             <Loader2 className="animate-spin" size={20} />
@@ -246,96 +277,87 @@ export default function MainBlogEditor() {
                         title={formData.title}
                         imageUrl={formData.mainImage}
                         onTitleChange={(val) =>
-                            setFormData((prev: any) => ({
-                                ...prev,
-                                title: val,
-                            }))
+                            setFormData((p: any) => ({ ...p, title: val }))
                         }
                         onImageChange={(val) =>
-                            setFormData((prev: any) => ({
-                                ...prev,
-                                mainImage: val,
-                            }))
+                            setFormData((p: any) => ({ ...p, mainImage: val }))
                         }
                     />
 
                     <IntroEditor
-                        question={formData.intro?.question}
-                        description1={formData.intro?.description1}
-                        description2={formData.intro?.description2}
-                        highlightText={formData.intro?.highlightText}
-                        onUpdate={(field, value) => {
-                            setFormData((prev: any) => ({
-                                ...prev,
-                                intro: { ...prev.intro, [field]: value },
-                            }));
-                        }}
+                        {...formData.intro}
+                        onUpdate={(field, value) =>
+                            setFormData((p: any) => ({
+                                ...p,
+                                intro: { ...p.intro, [field]: value },
+                            }))
+                        }
                     />
 
                     <ExpectationEditor
-                        title={formData.expectations?.title}
-                        subtitle={formData.expectations?.subtitle}
-                        items={formData.expectations?.items}
-                        proTip={formData.expectations?.proTip}
-                        onUpdate={(field: string, value: any) => {
-                            setFormData((prev: any) => ({
-                                ...prev,
+                        {...formData.expectations}
+                        onUpdate={(field, value) =>
+                            setFormData((p: any) => ({
+                                ...p,
                                 expectations: {
-                                    ...(prev.expectations || {}),
+                                    ...p.expectations,
                                     [field]: value,
                                 },
-                            }));
-                        }}
+                            }))
+                        }
                     />
 
                     <AwardsImageEditor
-                        imageUrl={formData.awards?.imageUrl || ""}
-                        awardsText={formData.awards?.awardsText || ""}
-                        onUpdate={(field, value) => {
-                            setFormData((prev: any) => ({
-                                ...prev,
-                                awards: {
-                                    ...(prev.awards || {}),
-                                    [field]: value,
-                                },
-                            }));
-                        }}
+                        imageUrl={formData.awards?.imageUrl}
+                        awardsText={formData.awards?.awardsText}
+                        onUpdate={(field, value) =>
+                            setFormData((p: any) => ({
+                                ...p,
+                                awards: { ...p.awards, [field]: value },
+                            }))
+                        }
                     />
 
                     <FoodGuideEditor
-                        data={{
-                            mainTitle: formData?.foodGuide?.mainTitle || "",
-                            introText: formData?.foodGuide?.introText || "",
-                            listTitle: formData?.foodGuide?.listTitle || "",
-                            foodItems: formData?.foodGuide?.foodItems || [],
-                            safetyTitle: formData?.foodGuide?.safetyTitle || "",
-                            safetyTips: formData?.foodGuide?.safetyTips || [],
-                        }}
-                        onUpdate={(field, value) => {
-                            setFormData((prev: any) => ({
-                                ...prev,
-                                foodGuide: {
-                                    ...(prev?.foodGuide || {}),
-                                    [field]: value,
-                                },
-                            }));
-                        }}
+                        data={formData.foodGuide}
+                        onUpdate={(field, value) =>
+                            setFormData((p: any) => ({
+                                ...p,
+                                foodGuide: { ...p.foodGuide, [field]: value },
+                            }))
+                        }
                     />
+
                     <SafetyTipsEditor
-                        data={{
-                            title: formData?.safety?.title || "",
-                            subtitle: formData?.safety?.subtitle || "",
-                            tips: formData?.safety?.tips || [],
-                        }}
-                        onUpdate={(field, value) => {
-                            setFormData((prev: any) => ({
-                                ...prev,
-                                safety: {
-                                    ...(prev?.safety || {}),
+                        data={formData.safety}
+                        onUpdate={(field, value) =>
+                            setFormData((p: any) => ({
+                                ...p,
+                                safety: { ...p.safety, [field]: value },
+                            }))
+                        }
+                    />
+
+                    <CulturalTipsEditor
+                        data={formData.culturalTips}
+                        onUpdate={(field, value) =>
+                            setFormData((p: any) => ({
+                                ...p,
+                                culturalTips: {
+                                    ...p.culturalTips,
                                     [field]: value,
                                 },
-                            }));
-                        }}
+                            }))
+                        }
+                    />
+                    <WhyVisitIndiaEditor
+                        data={formData.whyVisit}
+                        onUpdate={(field, value) =>
+                            setFormData((p: any) => ({
+                                ...p,
+                                whyVisit: { ...p.whyVisit, [field]: value },
+                            }))
+                        }
                     />
                 </div>
             </div>
